@@ -10,7 +10,6 @@ public:
 	void GoToJail();
 	void SLC();
 	void NH();
-	void Nesting();
 }
 
 #endif
