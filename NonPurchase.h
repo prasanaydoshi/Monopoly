@@ -1,8 +1,10 @@
 #ifndef NONPURCHASE
 #define NONPURCHASE
-
+#include "player.h"
 class NonPurchase {
+	Player *cur;
 public:
+	NonPurchase(Player *cur);
 	void TuitionPay();
 	void CoopFee();
 	void OSAPcol();

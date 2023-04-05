@@ -1,5 +1,6 @@
+NonPurchase::NonPurchase(Player *cur): cur{cur} {} 
 void NonPurchase::TuitionPay() {
-
+ 
 };
 
 void NonPurchase::CoopFee() {

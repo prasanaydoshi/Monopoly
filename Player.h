@@ -6,6 +6,7 @@
 #include "Property.h"
 
 class Player {
+	std::string name;
 	int posn;
 	int balance;
 	std::vector<Property> owned;
