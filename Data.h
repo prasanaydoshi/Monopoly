@@ -10,7 +10,7 @@ class Data {
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
-	std::map<Property*, int> board;
+	std::map<Property*, <int> board;
 	std::vector<Player*> dropout;
 
 };
