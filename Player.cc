@@ -1,3 +1,7 @@
+void Player::nextposn() {
+    if ()
+};
+
 void Player::changeposn() {
 
 };

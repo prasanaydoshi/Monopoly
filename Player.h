@@ -11,7 +11,21 @@ class Player {
 	std::vector<Property> owned;
 	
 	public:
-	void changeposn();
+	// accessors
+	int get_balance() const {return balance;}
+	int get_posn() const {return posn;}
+
+	// mutators
+	void nextposn() {
+		if(posn < 40) {
+			++posn;
+		} else {
+			posn = 0;
+		};
+	}
+	void changeposn(int a) {
+		posn = a;
+	};
 	int get_balance();
 	std::string get_properties();
 };
