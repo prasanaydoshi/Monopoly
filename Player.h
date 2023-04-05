@@ -9,6 +9,7 @@ class Player {
 	int posn;
 	int balance;
 	std::vector<Property> owned;
+	std::vector<int> rent;
 //doesnt this require more fields??
 	public:
 	void changeposn();
