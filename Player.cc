@@ -1,15 +1,10 @@
 void Player::nextposn() {
-    if ()
-};
-
-void Player::changeposn() {
-
-};
-
-int Player::get_balance() {
-
-};
-
+	if(posn < 40) {
+		++posn;
+        } else {
+                posn = 0;
+        };
+}
 std::string Player::get_properties() {
 
 }

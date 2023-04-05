@@ -6,27 +6,23 @@
 #include "Property.h"
 
 class Player {
+	std::string name;
 	int posn;
 	int balance;
-	std::vector<Property> owned;
+	std::map<std::string, int> owned_properties;   // subject to change
+//	std::vector<Property*> owned;
 	
-	public:
+public:
 	// accessors
-	int get_balance() const {return balance;}
-	int get_posn() const {return posn;}
+	int get_balance() const {return balance;};
+	int get_posn() const {return posn;};
+	std::string get_name() const {return name;};
 
 	// mutators
-	void nextposn() {
-		if(posn < 40) {
-			++posn;
-		} else {
-			posn = 0;
-		};
-	}
-	void changeposn(int a) {
+	void JumpTo_posn(int a) {
 		posn = a;
 	};
-	int get_balance();
+	void nextposn();
 	std::string get_properties();
 };
 
