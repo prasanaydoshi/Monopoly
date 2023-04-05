@@ -9,8 +9,8 @@ class Commands{
 	 void next() const;
 	 void trade (std::string name, std::string give, std::string receive);
 	 void improve(std::string property, bool buy);
-	 void mortage(std::string);
-	 void unmortage(std::string);
+	 void mortage(std::string property);
+	 void unmortage(std::string property);                                            
 	 bool bankrupt();
 	 void assets();
 	 void all();
