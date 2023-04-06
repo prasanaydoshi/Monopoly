@@ -17,5 +17,5 @@ class Commands{
 	 void all();
 };
 
-#endif _commands_h_
+#endif
 

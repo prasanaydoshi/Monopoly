@@ -1,6 +1,6 @@
 #ifndef NONPURCHASE
 #define NONPURCHASE
-#include "player.h"
+#include "Player.h"
 class NonPurchase {
 	Player *cur;
 public:
@@ -12,6 +12,6 @@ public:
 	void GoToJail();
 	void SLC();
 	void NH();
-}
+};
 
 #endif

@@ -3,14 +3,14 @@
 
 #include <vector>
 #include <string>
-#include "Property.h"
+//#include "Property.h"
 
 class Player {
 	std::string name;
 	int posn;
 	int balance;
-	std::vector<Property> owned;
-	std::vector<int> rent;
+	std::vector<int> owned;
+int timsCups;	
 //doesnt this require more fields??
 	public:
 	void changeposn();

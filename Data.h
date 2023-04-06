@@ -10,9 +10,13 @@ class Data {
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
-	std::map<Property*, <int> board;
+	//std::map<Property*, <int> board;
+	std::vector<string> properties;
+	std::vector<int> improvement;
 	std::vector<Player*> dropout;
-
+	public:
+	Data(Player *current, Player *bank, std::vector<Player*> players, std::vector<Player*> dropout);
+	Player *curPlayer();
 };
 
 #endif
