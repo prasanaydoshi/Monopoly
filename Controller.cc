@@ -2,52 +2,38 @@
 #include "Data.h"
 #include "command.h"
 
-void Controller::imp_buy() {
-
+//making improvements
+void Controller::imp_buy(Player *cur, Property) {
+};
+void Controller::imp_sell(Player *cur, Property) {
 };
 
-void Controller::imp_sell() {
-
-};
-
+//changing player/related
 void Controller::next_turn() {
-	
+};
+int Controller::roll_func() {
+};
+int Controller::roll() {
+};
+int Controller::test_roll() {
 };
 
-void Controller::roll_func() {
-
+//trading
+void Controller::trade(Player *cur, std::string target) {
+};
+void Controller::trade_offer(Player *cur) {
 };
 
-void Controller::roll() {
-
-};
-
-void Controller::test_roll() {
-
-};
-
-void Controller::trade() {
-
-};
-
-void Controller::trade_offer() {
-
-};
-
+//mortgaging
 void Controller::mortgage() {
-
 };
-
 void Controller::unmortgage() {
-
 };
 
-void Controller::owned_properties() {
-
+//showing assets
+std::ostream& Controller::owned_properties() {
 };
-
-void Controller::all() {
-
+std::ostream& Controller::all() {
 };
 
 void Controller::decl_bankrupt() {

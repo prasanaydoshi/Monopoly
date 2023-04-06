@@ -1,4 +1,9 @@
 
+//constructor
+Data::Data() { };  //needs finishing
+
+
+//non-purchasable tile methods
 void Data::TuitionPay() {
 		
 };

@@ -5,28 +5,28 @@ class Controller {
 public:
 
 	//buy and sell improvements
-	void imp_buy();
-	void imp_sell();
+	void imp_buy(Player*, Property);
+	void imp_sell(Player*, Property);
 
 	// changes to next player in line
 	void next_turn();
 
 	// related to rolling dice
-	void roll_func();
-	void roll();
-	void test_roll();
+	int roll_func();
+	int roll();
+	int test_roll();
 
 	// trade related
-	void trade();
-	void trade_offer();
+	void trade(Player*, std::string);
+	void trade_offer(Player*);
 
 	// mortgage related
 	void mortgage();
 	void unmortgage();
 
 	// showing stuff owned by players
-	void owned_properties();
-	void all();
+	std::ostream& owned_properties();
+	std::ostream& all();
 	
 	// declaring bankruptcy
 	void decl_bankrupt();

@@ -9,7 +9,9 @@ class Player {
 	std::string name;
 	int posn;
 	int balance;
+	int timsCups;
 	std::map<std::string, int> owned_properties;   // subject to change
+//	std::vector<int> owned;
 //	std::vector<Property*> owned;
 	
 public:

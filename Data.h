@@ -14,6 +14,13 @@ class Data {
 	std::vector<Player*> dropout;
 
 public:
+	//constructors
+	Data();
+
+	//accessor
+	Player *curPlayer();
+
+	//non-purchasable tile methods
 	void TuitionPay();
 	void OSAPcollect();
 	void CoopFee();
