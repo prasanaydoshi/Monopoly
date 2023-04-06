@@ -19,9 +19,9 @@ public:
 	std::string get_name() const {return name;};
 
 	// mutators
-	void JumpTo_posn(int a) {
-		posn = a;
-	};
+	void JumpTo_posn(int a) { posn = a; };
+	void change_balance(int b) { balance += b; }
+	
 	void nextposn();
 	std::string get_properties();
 };

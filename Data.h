@@ -13,6 +13,15 @@ class Data {
 	std::map<Property*, <int> board;
 	std::vector<Player*> dropout;
 
+public:
+	void TuitionPay();
+	void OSAPcollect();
+	void CoopFee();
+	void OSAPcol();
+	void TimsJail();
+	void GoToJail();
+	void SLC();
+	void NH();
 };
 
 #endif
