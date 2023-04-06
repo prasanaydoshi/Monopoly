@@ -1,14 +1,14 @@
 #include "Data.h"
 #include <iostream>
 
-class Textview {
+class TextView {
 public:
-	ostream& PrintBoard();
-	ostream& commands();
-	ostream& DisplayNames();
-	ostream& ShowInfo();
-	ostream& prog_messages();
-	ostream& menu();
-	ostream& MakeAction();
-};
+	std::ostream& PrintBoard();
+	std::ostream& commands();
+	std::ostream& DisplayNames();
+	std::ostream& ShowInfo();
+	std::ostream& prog_messages();
+	std::ostream& menu();
+	std::ostream& MakeAction();
+;
 
