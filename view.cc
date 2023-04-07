@@ -31,18 +31,8 @@ int main () {
 			//void construct_board_players(vector <Player *> players);
 			//
 		}
-		cout << "_________________________________________________________________________________________" << endl;
-		cout << "|Goose  |"; 
-		property_house(improvements[14]);
-		cout << "NEEDLES|";
-		property_house(improvements[15]);
-		property_house(improvements[16]);
-		cout << "V1     |";
-		property_house(improvements[17]);
-		property_house(improvements[18]);
-		cout << "CIF    |";
-		property_house(improvements[19]);
-		cout << "GO TO  |" << endl;
+		cout << "_________________________________________________________________________________________" << endl; 
+		cout << "|Goose  |"; property_house(improvements[14]); cout << "NEEDLES|"; property_house(improvements[15]); property_house(improvements[16]); cout << "V1     |"; property_house(improvements[17]); property_house(improvements[18]); cout << "CIF    |"; property_house(improvements[19]); cout << "GO TO  |" << endl;
 		cout << "|Nesting|-------|HALL   |-------|-------|       |-------|-------|       |-------|TIMS   |" << endl;
 		cout << "|       |EV1    |       |EV2    |EV3    |       |PHYS   |B1     |       |B2     |       |" << endl;
 		cout << "|       |       |       |       |       |       |       |       |       |       |       |" << endl;
