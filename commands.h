@@ -2,6 +2,7 @@
 #define _commands_h_
 #include <iostream>
 #include <string>
+#include "board.h"
 
 class Commands{
  public:
