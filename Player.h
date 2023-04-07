@@ -7,6 +7,7 @@
 
 class Player {
 	std::string name;
+	char piece;        // Piece representing player on board (G, B, D, P, S, $, L, T)
 	int posn;
 	int balance;
 	int timsCups;
@@ -16,9 +17,11 @@ class Player {
 	
 public:
 	// accessors
-	int get_balance() const {return balance;};
-	int get_posn() const {return posn;};
-	std::string get_name() const {return name;};
+	std::string get_name() const { return name; };
+	char get_piece() const { return piece; };
+	int get_posn() const { return posn; };
+	int get_balance() const { return balance; };
+	int get_timsCups() const { return timsCups; };
 
 	// mutators
 	void JumpTo_posn(int a) { posn = a; };
