@@ -1,22 +1,21 @@
-#ifndef _board_h_
-#define _board_h_
+#ifndef BOARD_H
+#define BOARD_H
 #include <iostream>
 #include <string>
 #include <vector>
-#include "commands.h"
 
 class BoardTiles{
 
 	std::string name;
-	std::string owner;
 	int purchaseCost;
 	std::string block;
 	bool purchasable;
+	std::string owner;
 
 public:
 
 	//normal constructor
-	BoardTiles(std::string name, std::string owner = "bank", int purchaseCost = 0, bool purchasable = true);
+	BoardTiles(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, std::string owner = "bank");
 	//copy and move constructors
 
 	//virtual BoardTiles(const BoardTiles &other);
@@ -36,7 +35,7 @@ public:
 	std::string getBlock();
 	bool isPurchasable();
 
-	virtual int getTuition();
+	virtual int getTuition() = 0;
 };
 
 class AcademicBuilding : public BoardTiles{
@@ -48,7 +47,7 @@ class AcademicBuilding : public BoardTiles{
 
 public:
 	//normal constructor
-	AcademicBuilding(std::vector<int> tutitionCost, bool mortgage, int impLevel);
+	AcademicBuilding(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, std::string owner = "bank", std::vector<int> tutitionCost = {0, 0, 0, 0, 0}, bool mortgage = 0, int impLevel = 0);
 	//copy and move constructors
 
 	//virtual AcademicBuilding(const AcademicBuilding &other) override;
@@ -63,7 +62,7 @@ public:
 	int getTuition() override;
 	void improve();
 	void unimprove();
-	void changeMortage(bool current);
+	void changeMortage();
 	int getImprovements();
 };
 
