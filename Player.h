@@ -6,11 +6,11 @@
 #include "Property.h"
 
 class Player {
-	std::string name;
-	char piece;        // Piece representing player on board (G, B, D, P, S, $, L, T)
-	int posn;
-	int balance;
-	int timsCups;
+	std::string name; 		//name of player
+	char piece;        		// Piece representing player on board (G, B, D, P, S, $, L, T)
+	int posn;			// current posn of player
+	int balance;			// money owned by player
+	int timsCups;			// no. of tims cups player owns
 	std::map<std::string, int> owned_properties;   // subject to change
 //	std::vector<int> owned;
 //	std::vector<Property*> owned;
