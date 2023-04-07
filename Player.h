@@ -35,6 +35,8 @@ public:
 	void nextposn();                // moves player to next position this is a method 
 					// and not a mutator, as after posn = 40, it resets to 0
 	std::string get_properties();   // shows properties player owns
+					// might later move this property to class owning player
+					// as this is the only field causing need of Big5
 };
 
 #endif
