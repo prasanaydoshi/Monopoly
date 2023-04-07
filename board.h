@@ -8,8 +8,8 @@
 class BoardTiles{
 
 	std::string name;
-	int purchaseCost;
 	std::string owner;
+	int purchaseCost;
 	std::string block;
 	bool purchasable;
 
@@ -18,11 +18,11 @@ public:
 	//normal constructor
 	BoardTiles(std::string name, std::string owner = "bank", int purchaseCost = 0, bool purchasable = true);
 	//copy and move constructors
-	virtual BoardTiles(const BoardTiles &other);
-	virtual BoardTiles(BoardTiles &&other);
+	//virtual BoardTiles(const BoardTiles &other);
+	//virtual BoardTiles(BoardTiles &&other);
 	//copy and move constructors
-	virtual BoardTiles&operator=(const BoardTiles &other);
-	virtual BoardTiles&operator=(BoardTiles &&other);
+	//virtual BoardTiles&operator=(const BoardTiles &other);
+	//virtual BoardTiles&operator=(BoardTiles &&other);
 
 	//destructors
 	virtual ~BoardTiles();
@@ -33,7 +33,6 @@ public:
 	void setOwner(std::string ownerName);
 	int getPurcahseCost();
 	std::string getBlock();
-	void setPurchasable();
 	bool isPurchasable();
 
 	virtual int getTuition();
@@ -50,11 +49,11 @@ public:
 	//normal constructor
 	AcademicBuilding(std::vector<int> tutitionCost, bool mortgage, int impLevel);
 	//copy and move constructors
-	virtual AcademicBuilding(const AcademicBuilding &other) override;
-	vritual AcademicBuilding(AcademicBuilding &&other) override;
+	//virtual AcademicBuilding(const AcademicBuilding &other) override;
+	//virtual AcademicBuilding(AcademicBuilding &&other) override;
 	//copy and move assignment operators
-	virtual AcademicBuilding&operator=(const AcademicBuilding &other) const;
-	virtual AcademicBuilding&operator=(AcademicBuilding &&other) const;
+	//virtual AcademicBuilding&operator=(const AcademicBuilding &other) const;
+	//virtual AcademicBuilding&operator=(AcademicBuilding &&other) const;
 
 	//destructors
 	virtual ~AcademicBuilding();
