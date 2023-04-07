@@ -10,7 +10,7 @@ class Data {
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
-	std::map<BoardTiles*, <int>> board;
+	std::map<BoardTiles*, int> board;
 	std::vector<Player*> dropout;
 
 public:
@@ -18,7 +18,7 @@ public:
 	Data();
 
 	//accessor
-//	Player *curPlayer();
+	Player *curPlayer();
 
 	//nested accessors
 	std::string get_namePlayer(int i);
