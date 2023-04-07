@@ -6,14 +6,17 @@
 #include "commands.h"
 
 class BoardTiles{
+
 	std::string name;
 	int purchaseCost;
 	std::string owner;
 	std::string block;
+	bool purchasable;
 
 public:
+
 	//normal constructor
-	BoardTiles(std::string name, std::string owner = "bank", int purchaseCost = 0);
+	BoardTiles(std::string name, std::string owner = "bank", int purchaseCost = 0, bool purchasable = true);
 	//copy and move constructors
 	virtual BoardTiles(const BoardTiles &other);
 	virtual BoardTiles(BoardTiles &&other);
@@ -26,39 +29,51 @@ public:
 
 	//accessors and mutators for some of the fields
 	std::string getName();
-	void setName(std::string propertyName);
 	std::string getOwner();
 	void setOwner(std::string ownerName);
 	int getPurcahseCost();
-	void setPurchaseCost(int cost);
 	std::string getBlock();
-	void setBlock(std::string blockName);
+	void setPurchasable();
+	bool isPurchasable();
 
-	virtual bool purchasable();
+	virtual int getTuition();
 };
 
 class AcademicBuilding : public BoardTiles{
 
-	std::vector<int*> tuitionCost;
+	std::vector<int> tuitionCost;
+	int impCost;
 	bool mortgage;
 	int impLevel;
 
 public:
 	//normal constructor
-	AcademicBuilding(int purchaseCost, int improveCost, std::)
-	
+	AcademicBuilding(std::vector<int> tutitionCost, bool mortgage, int impLevel);
+	//copy and move constructors
+	virtual AcademicBuilding(const AcademicBuilding &other) override;
+	vritual AcademicBuilding(AcademicBuilding &&other) override;
+	//copy and move assignment operators
+	virtual AcademicBuilding&operator=(const AcademicBuilding &other) const;
+	virtual AcademicBuilding&operator=(AcademicBuilding &&other) const;
 
-	std::string getBlock();
-	int getPurchaseCost();
-	int getTution(int level);
+	//destructors
+	virtual ~AcademicBuilding();
+
+	int getTuition() override;
 	void improve();
 	void unimprove();
 	void changeMortage(bool current);
-	std::string getOwner();
 	int getImprovements();
 };
 
+class Gym : public BoardTiles{
+public:
+	int getTuition() override;
+};
 
-
+class Residences : public BoardTiles{
+public:
+	int getTuition() override;
+};
 
 #endif

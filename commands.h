@@ -8,8 +8,8 @@ class Commands{
  public:
 	 int roll() const;
 	 void next() const;
-	 void trade (std::string name, std::string give, std::string receive);//note name refers to another player...whats your way of finding the right player?not sure if string 
-is the right data type maybe we should passs a player??
+	 void trade (std::string name, std::string give, std::string receive);
+	 //note name refers to another player...whats your way of finding the right player?not sure if string is the right data type maybe we should passs a player??
 
 	 void improve(std::string property, bool buy);
 	 void mortage(std::string property);
