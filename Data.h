@@ -18,7 +18,7 @@ public:
 	Data();
 
 	//accessor
-	Player *curPlayer();
+//	Player *curPlayer();
 
 	//nested accessors
 	std::string get_namePlayer(int i);

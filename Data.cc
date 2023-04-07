@@ -3,7 +3,7 @@
 
 
 //constructor
-Data::Data() { };  //needs finishing
+Data::Data(): current{nullptr}, bank{nullptr} { }; //default
 
 //nested accessors
 std::string get_namePlayer(int i) { return *(players[i]).get_name(); };
