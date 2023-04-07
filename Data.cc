@@ -1,4 +1,6 @@
 #include "Data.h"
+#include <random>
+
 
 //constructor
 Data::Data() { };  //needs finishing
@@ -41,7 +43,10 @@ void Data::GoToJail() {
 
 void Data::SLC() {
 	if ( ( (*current).get_posn() == 13) || ( (*current).get_posn() == 13) ){
-		int num_pick = rando();			// REQUIRES RANDOM PICKING WITH %CHANCE
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::discrete_distribution<> d({1/8, 1/6, 1/6, 1/8, 1/6, 1/6, 1/24, 1/24})
+		int num_pick = d(gen);			// REQUIRES RANDOM PICKING WITH %CHANCE
 		switch(num_pick) {
 			case 0:
 				(*current).MovePosn_by(-3);		// back3
@@ -73,7 +78,10 @@ void Data::SLC() {
 
 void Data::NH() {
 	if (( (*current).get_posn() == 2) || ( (*current).get_posn() == 16) ){
-	int num_pick = rando();				// REQUIRES RANDOM PICKING WITH %CHANCE
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::discrete_distribution<> d({1/18, 1/9, 1/6, 1/3, 1/6, 1/9, 1/18})
+		int num_pick = d(gen);	
 		switch(num_pick) {
 			case 0:
 				(*current).change_balance(-200);	 
