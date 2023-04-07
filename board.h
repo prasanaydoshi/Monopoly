@@ -18,6 +18,7 @@ public:
 	//normal constructor
 	BoardTiles(std::string name, std::string owner = "bank", int purchaseCost = 0, bool purchasable = true);
 	//copy and move constructors
+
 	//virtual BoardTiles(const BoardTiles &other);
 	//virtual BoardTiles(BoardTiles &&other);
 	//copy and move constructors
@@ -49,6 +50,7 @@ public:
 	//normal constructor
 	AcademicBuilding(std::vector<int> tutitionCost, bool mortgage, int impLevel);
 	//copy and move constructors
+
 	//virtual AcademicBuilding(const AcademicBuilding &other) override;
 	//virtual AcademicBuilding(AcademicBuilding &&other) override;
 	//copy and move assignment operators
