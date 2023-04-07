@@ -29,6 +29,7 @@ public:
 
 	// mutators
 	void JumpTo_posn(int a) { posn = a; };
+	void MovePosn_By(int a) { posn += a; };
 	void change_balance(int b) { balance += b; }
 	
 	//methods
