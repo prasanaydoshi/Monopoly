@@ -10,10 +10,26 @@ std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }
 char Data::get_piecePlayer(int i) { return *(players[i]).get_piece(); }
 int Data::get_posPlayer(int i) { return *(players[i]).get_posn(); }
 
+//other methods
+int Data::get_NetWorth() {
+	int total_val = (*current).get_balance();		// current cash balance of player
+	for (const auto& property : owned_properties) {		// going through list of owned properites
+		int tileNo = property.second;			//sets tileno to be that being looked at
+		total_val += (board[tileNo].first).NetVal();	// adds netval of that property
+	}
+	return total_val;
+}
+
 //non-purchasable tile methods
-void Data::TuitionPay() {			
-	//REQUIRES TRANSFER OF PROPERTIES OR TOTAL NETWORTH VAL
+void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
+								// to pay 300 or 10% of netval	
 	if ( (*current).get_posn() == 24) {
+		if (Pay300 == true) {
+			(*current).change_balance(-300);
+		} else {
+			int net = get_NetWorth();
+			(*current).change_balance(net);
+		}
 	}
 }
 

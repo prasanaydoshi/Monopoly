@@ -14,6 +14,8 @@ void Player::nextposn() {
         }
 }
 
+//int calc_NetWorth() {}
+
 std::string Player::get_properties() {
 	// TODO: implement this method
 	return "";

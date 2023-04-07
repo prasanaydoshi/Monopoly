@@ -25,6 +25,8 @@ public:
 	char get_piecePlayer(int i);
 	int get_posPlayer(int i);
 
+	//additional methods
+	int get_NetWorth();
 
 	//non-purchasable tile methods
 	void TuitionPay();

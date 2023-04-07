@@ -35,6 +35,10 @@ public:
 	//methods
 	void nextposn();                // moves player to next position this is a method 
 					// and not a mutator, as after posn = 40, it resets to 0
+					//
+	//needs tile info, so moved higher, into data for now
+//	int calc_NetWorth();		// Looks at balance and property values(including immprovements)
+					// and calculates the net worth of the player
 	std::string get_properties();   // shows properties player owns
 					// might later move this property to class owning player
 					// as this is the only field causing need of Big5
