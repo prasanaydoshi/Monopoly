@@ -1,7 +1,7 @@
 #ifndef PLAYER
 #define PLAYER
 
-#include <vector>
+#include <map>
 #include <string>
 #include "Property.h"
 
@@ -16,6 +16,10 @@ class Player {
 //	std::vector<Property*> owned;
 	
 public:
+	// constructor
+	Player(std::string, char);      // player name, piece are entered during player construction
+					// at start, posn = 0, balance = 1500, timsCups = 0;
+	
 	// accessors
 	std::string get_name() const { return name; };
 	char get_piece() const { return piece; };
@@ -27,8 +31,10 @@ public:
 	void JumpTo_posn(int a) { posn = a; };
 	void change_balance(int b) { balance += b; }
 	
-	void nextposn();
-	std::string get_properties();
+	//methods
+	void nextposn();                // moves player to next position this is a method 
+					// and not a mutator, as after posn = 40, it resets to 0
+	std::string get_properties();   // shows properties player owns
 };
 
 #endif
