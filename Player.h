@@ -21,15 +21,15 @@ public:
 					// at start, posn = 0, balance = 1500, timsCups = 0;
 	
 	// accessors
-	std::string get_name() const { return name; };
-	char get_piece() const { return piece; };
-	int get_posn() const { return posn; };
-	int get_balance() const { return balance; };
-	int get_timsCups() const { return timsCups; };
+	std::string get_name() const { return name; }
+	char get_piece() const { return piece; }
+	int get_posn() const { return posn; }
+	int get_balance() const { return balance; }
+	int get_timsCups() const { return timsCups; }
 
 	// mutators
-	void JumpTo_posn(int a) { posn = a; };
-	void MovePosn_By(int a) { posn += a; };
+	void JumpTo_posn(int a) { posn = a; }
+	void MovePosn_By(int a) { posn += a; }
 	void change_balance(int b) { balance += b; }
 	
 	//methods
