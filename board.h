@@ -22,7 +22,7 @@ public:
 	virtual BoardTiles&operator=(BoardTiles &&other);
 
 	//destructors
-	vitual ~BoardTiles();
+	virtual ~BoardTiles();
 
 	//accessors and mutators for some of the fields
 	std::string getName();
