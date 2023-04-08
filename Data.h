@@ -1,21 +1,24 @@
 #ifndef DATA
 #define DATA
 
+#include <iostream>
 #include <vector>
 #include <map>
+#include <memory>
 #include "Player.h"
+#include "BoardTiles.h"
 
 class Data {
-
-	Player *current;
-	Player *bank;
-	std::vector<Player*> players;
-	std::vector<BoardTiles*> board;
-	std::vector<Player*> dropout;
+	std::unique_ptr<Player> current;
+	std::unique_ptr<Player> bank;
+	std::vector<std::unique_ptr<Player>> players;
+	std::vector<std::unique_ptr<BoardTiles>> board;
+	std::vector<std::unique_ptr<Player>> dropout;
 
 public:
 	//constructors
 	Data();
+	Data(std::istream& is); //loading constructor
 
 	//accessor
 	Player *curPlayer();
@@ -30,12 +33,11 @@ public:
 	std::sring owned_assets(int i);
 
 	//non-purchasable tile methods
-	void TuitionPay();
-	void OSAPcollect();
-	void CoopFee();
-	void OSAPcol();
-	void TimsJail();
+	void payTuition();
+	void collectOSAP();
+	void payCoopFee();
 	void GoToJail();
+	void TimsJail();
 	void SLC();
 	void NH();
 };

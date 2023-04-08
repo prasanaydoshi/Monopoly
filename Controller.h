@@ -32,7 +32,7 @@ public:
 	void decl_bankrupt();
 
 	// loading a file containing the state of a game of watopoly
-	void load_game();
+	void load(const std::string& fileName, Data& data);
 
 	// saving current state of game to a file
 	void save();

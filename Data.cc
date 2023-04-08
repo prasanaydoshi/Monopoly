@@ -3,7 +3,28 @@
 
 
 //constructor
-Data::Data() : current{nullptr}, bank{nullptr} { }; //default
+Data::Data() : current{nullptr}, bank{nullptr} { }; 		//default
+
+Data::Data(std::istream& is) {					// for loading savefile
+	int numPlayers;
+	is >> numPlayers;
+	for (int i = 0; i < numPlayers; ++i) {
+		std::string name;
+		char piece;
+		int timsCups;
+		int money;
+		int position;
+		is >> name >> piece >> timsCups >> money >> position;
+		players.emplace_back(std::make_unique<Player>(name, piece, timsCups, money, poisition));
+	}
+	std::string tile;
+	std::string owner
+	int improvLevel;
+	while (!is.eof()) {
+		iss >> tile >> owner >> improvLevel;
+		board.emplace_back(std::make_unique<BoardTiles>(tile, owner, improvLevel);
+	}
+}
 
 //nested accessors
 std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }

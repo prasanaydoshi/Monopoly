@@ -40,8 +40,13 @@ void Controller::decl_bankrupt() {
 
 };
 
-void Controller::load_game(string filein) {
-
+void Controller::load(const std::string& fileName, Data& data) {
+	std::ifstream file(filename);
+	if(!file) {
+		std::cerr << "Failed to open file: " << fileName << '\n';
+		return;
+	}
+	data = Data(file);
 };
 
 void Controller::save(string fileout) {
