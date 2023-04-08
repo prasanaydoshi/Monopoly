@@ -11,7 +11,7 @@ class Data {
 	Player *bank;
 	std::vector<Player*> players;
 	//std::map<Property*, <int> board;
-	std::vector<string> properties;
+	std::vector<std::string> properties;
 	std::vector<int> improvement;
 	std::vector<Player*> dropout;
 	public:
