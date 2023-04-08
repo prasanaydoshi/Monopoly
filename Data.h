@@ -10,7 +10,7 @@ class Data {
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
-	std::map<Property*, <int> board;
+	std::map<BoardTiles*, int> board;
 	std::vector<Player*> dropout;
 
 public:
@@ -19,6 +19,14 @@ public:
 
 	//accessor
 	Player *curPlayer();
+
+	//nested accessors
+	std::string get_namePlayer(int i);
+	char get_piecePlayer(int i);
+	int get_posPlayer(int i);
+
+	//additional methods
+	int get_NetWorth();
 
 	//non-purchasable tile methods
 	void TuitionPay();
