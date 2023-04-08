@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <string>
 #include <stdlib.h>
+#include <ctime>
 #include <cstdlib>
 #include <time.h>
 #include <vector>
@@ -9,81 +10,88 @@
 #include "Player.h"
 #include "Data.h"
 using namespace std;
+int getPosn(int x) {
+	srand(time(0));
+	return rand() % 40;
+}
+int getNoPlay() {
+	return 6;
+}
+char charRep(int x) {
+	if(x == 0) {
+		return 'G'; } else if (x == 1) {return 'B';} else if (x == 2) {return 'D';} else if (x == 3) {return 'P';} 
+	else if (x==4) {return 'S';} else {return '$';} 
+}
+void add_spaces(std::vector <std::string> coord_spaces) {
+	for (int it = 0; it < coord_spaces.size(); ++it) {
+		if (coord_spaces[it].length() < 8) {
+			for (int i = 0; i < 8; i++) {
+				string tmp;
+				tmp = coord_spaces[it];
+				tmp.append(" ");
+				coord_spaces[it] = tmp;
+			}
+		}
+	}
+}
+void join(int start, int end, std::vector <std::string> coord_join) {
+	string joint = "";
+	if (start > end) {
+		for (int i = end; i <= start; i--) {
+			joint.append(coord_join[i]);
+		}
+	}
+	else {
+		for (int i = start; i <= end; i++) {
+			joint.append(coord_join[i]);
+		}
+	}
+	cout << joint << "|" << endl;
+}
+//void semi_main(std::vector <std::string> properties,std::vector <std::string> tiles) {
+//
+//}
 int main () {
-	
 	std::vector <std::string> properties = {"AL","ML","ECH","PAS","HH","RCH","DWE","CPH","LHI","BMH","OPT","EV1","EV2","EV3","PHYS","B1","B2","EIT","ESC","C2","MC","DC"};
 	std::vector <std::string> tiles = {"COLLECT OSAP","AL","SLC","ML","TUTION","MKV","ECH","NEEDLES HALL","PAS","HH","DC TIMS LINE","RCH","PAC","DWE","CPH","UWP","LHI","SLC","BMH","OPT","GOOSE NESTING","EV1","NEEDLES HALL","EV2","EV3","V1","PHYS","B1","CIF","B2","GO TO TIMS","EIT","ESC","SLC","C2","REV","NEEDLES HALL","MC","COOP FEE","DC"};
 	std::vector <std::string> coord(40, "|");
-	std::vector <std::string> imp_coord(40, "|");
-	//int noPlay = getNoPlay();
-	int noPlay;
+	std::vector <std::string> imp_coord(22, "|");
+	int noPlay = getNoPlay();
 	//std::vector <int> pos(noPlay-1);
-	//std::vector <std::string> strRep("", noPlay-1);
-	//std::vector <int> imp (properties.size());
-	//for(int i = 0; i < noPlay; i++) {
-	//  string tmp;
-	//  string tmp_char;
-	//  int pos = getPosn(i);
-	//  tmp_char = charRep(i);
-	//  pos.emplace_back(pos);
-	//  strRep.emplace_back(tmp_char);
-        //  tmp = coord[player.pos];
-        //  tmp.append(player.char);
-        //  coord[i] = tmp;
-	//  }
-	//
-	//for(int i = 0; i < properties.size(); i++) {
-	// string tmp;
-        // tmp = imp_coord[i];
-	// for (int i = 0; i < imp[i]; i++) {
-	// if(imp[i] == 4) {
-        // tmp.append("C");
-        // }
-	// else {
-	// tmp.append("^");
-	// }
-	// }
-	// imp_coord[i] = tmp;
-	//}
-	//
-	//void add_spaces(std::vector <std::string> coord_spaces) {
-	//  for (auto it = std::begin(coord_spaces); it != std::end(coord_spaces); ++it) {
-	//	if (coord_spaces[i].length() < 8) {
-	//	for (int i = 0; i < 8; i++) {
-	//	 str tmp;
-        //       tmp = coord_spaces[i];
-        //       tmp.append(" ");
-	//       coord_spaces[i] = tmp;
-	//	}
-	//	}
-	//	str tmp;
-        //      tmp = coord_spaces[i];
-        //     
-        //      coord_spaces[i] = tmp;
-	//  }
-	//}
-	//
+	//std::vector <std::string> strRep(noPlay-1, "");
+	std::vector <int> imp (properties.size());
+	for(int i = 0; i < noPlay; i++) {
+		string tmp;
+		string tmp_char;
+		int pos = getPosn(i);
+		tmp_char = charRep(i);
+		//pos.emplace_back(pos);
+		//strRep.emplace_back(tmp_char);
+		tmp = coord[pos];
+		tmp.append(tmp_char);
+		coord[i] = tmp;
+	}
+	for(int i = 0; i < properties.size(); i++) {
+		string tmp;
+		tmp = imp_coord[i];
+		for (int i = 0; i < imp[i]; i++) {
+			if(imp[i] == 4) {
+				tmp.append("C");
+			}
+			else {
+				tmp.append("^");
+			}
+		}
+		imp_coord[i] = tmp;
+	}
+
 	//add_spaces(coord);
 	//add_spaces(imp_coord);
-	// void join(int start, int end) {
-	// string joint = "";
-	// if (start > end) {
-	// for (int i = end; i <= start; i--) {
-        //  joint.append(coord[i]);
-        //  }
-	// }
-	// else {
-	// for (int i = start; i <= end; i++) {
-	//  joint.append(coord[i]);
-	//  }
-	//  }
-	// cout << joint << "|" << endl;
-	//}
 	//cout << "_________________________________________________________________________________________" << endl;
 	//cout << "|Goose  "<< imp_coord[11] << "NEEDLES" << imp_coord[12] << imp_coord[13] << "V1     " << imp_coord[14] << imp_coord[15] << "CIF    " << imp_coord[16] << "GO TO  |" << endl;
 	//cout << "|Nesting|-------|HALL   |-------|-------|       |-------|-------|       |-------|TIMS   |" << endl;
 	//cout << "|       |EV1    |       |EV2    |EV3    |       |PHYS   |B1     |       |B2     |       |" << endl;
-	//join(20,30);
+	//join(20,30, coord);
 	//cout << "|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|" << endl;
 	//cout << imp_coord[10]<< "|" << "                                                                       " << imp_coord[17] << "|" << endl;
 	//cout << "|-------|                                                                       |-------|" << endl;
