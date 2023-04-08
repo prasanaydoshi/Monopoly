@@ -60,7 +60,7 @@ ostream& TextView::MakeAction() {
 
 // shows assets of current player
 std::ostream& cur_assets(std::ostream& os) {
-	os << Game_data.get_dataCurr();
+	Game_data.cur_assets(os) << "\n";
 	return os;
 };
 
@@ -69,7 +69,8 @@ std::ostream& all_assets(std::ostream& os) {
 	int players = Game_data.get_noPlayers();
 	os << "Assets of Currenlty Active players:\n";
 	for (int i = 0; i <= players; ++i) {
-		os << "Playerno. " << i << " : " << Game_data.get_dataPlayer(i);
+		os << "Playerno. " << i << " : ";
+		Game_data.owned_assets(i, os) << "/n";	
 	}
 	return os;
 };

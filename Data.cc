@@ -20,6 +20,20 @@ int Data::get_NetWorth() {
 	return total_val;
 }
 
+std::ostream& Data::cur_assets(int i, std::ostream& out) {
+	out << "Player Name: " << *current.get_name();
+	out << "\nPlayer Balance: " << *current.get_balance();
+	out << "\nPlayer Properties:\n	";
+	int owned = *current.No_ownedProperties();
+	int tileNo = 0;
+	for (int propNo = 0; propNo <= owned; ++propNo) {
+		tileNo = *current.get_tileNo(propNo);
+		out << *current.get_name() << "     with improvements: ";
+		out << *current.get_impLevel() << "\n";
+	}
+	return out;
+}
+
 std::ostream& Data::owned_assets(int i, std::ostream& out) {
 	out << "Player Name: " << *(players[i]).get_name();
 	out << "\nPlayer Balance: " << *(players[i]).get_balance();
