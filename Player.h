@@ -1,9 +1,8 @@
-#ifndef PLAYER
-#define PLAYER
-
+#ifndef _PLAYER_H
+#define _PLAYER_H
+#include <
 #include <map>
 #include <string>
-#include "Property.h"
 
 class Player {
 	std::string name; 		//name of player
@@ -11,13 +10,13 @@ class Player {
 	int posn;			// current posn of player
 	int balance;			// money owned by player
 	int timsCups;			// no. of tims cups player owns
-	std::map<std::string, int> owned_properties;   // subject to change
-//	std::vector<int> owned;
+	//std::map<std::string, int> owned_properties;   // subject to change
+	std::vector<int> owned;
 //	std::vector<Property*> owned;
 	
 public:
 	// constructor
-	Player(std::string, char);      // player name, piece are entered during player construction
+	Player(std::string name, char piece);      // player name, piece are entered during player construction
 					// at start, posn = 0, balance = 1500, timsCups = 0;
 	
 	// accessors

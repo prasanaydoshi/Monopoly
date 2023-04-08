@@ -1,5 +1,5 @@
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef _BOARD_H
+#define _BOARD_H
 #include <iostream>
 #include <string>
 #include <vector>
@@ -62,18 +62,26 @@ public:
 	int getTuition() override;
 	void improve();
 	void unimprove();
-	void changeMortage();
+	bool changeMortage();
 	int getImprovements();
 };
 
 class Gym : public BoardTiles{
 public:
+	Gym(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
 	int getTuition() override;
 };
 
 class Residence : public BoardTiles{
 public:
+	Residence(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
 	int getTuition() override;
+};
+
+class Notpurchasable : public BoardTiles{
+public:
+	Notpurchasable(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
+	
 };
 
 #endif

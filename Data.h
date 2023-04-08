@@ -1,38 +1,24 @@
-#ifndef DATA
-#define DATA
+#ifndef _DATA_H
+#define _DATA_H
 
 #include <vector>
 #include <map>
 #include <random>
 #include "Player.h"
-#include  "board.h"
+#include "board.h"
 
 class Data {
-
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
 	std::map<BoardTiles*, int> board;
 	std::vector<Player*> dropout;
 
-	std::vector<AcademicBuilding*> Arts1;
-	std::vector<AcademicBuilding*> Arts2;
-	std::vector<AcademicBuilding*> Eng;
-	std::vector<AcademicBuilding*> Health;
-	std::vector<AcademicBuilding*> Env;
-	std::vector<AcademicBuilding*> Sci1;
-	std::vector<AcademicBuilding*> Sci2;
-	std::vector<AcademicBuilding*> Math;
+	std::vector<AcademicBuilding*> Buildings;
 	std::vector<Gym*> Gyms;
-	std::vector<Residences*> Residences;
-	std::vector<string> blockName;
-	for(int i = 0; i < Art1.length(); ++i){
-		if(Art1[i].getOwner() != Brad){
-			return false;
-		}
-	}
-
-	
+	std::vector<Residence*> Residences;
+	std::vector<Notpurchasable*> Notpurchasables;
+	std::vector<std::string> blockName;
 
 	std::vector<BoardTiles*> Tiles;
 

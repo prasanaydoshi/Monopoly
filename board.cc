@@ -2,7 +2,7 @@
 
 BoardTiles::BoardTiles(std::string name, std::string block, int purchaseCost, bool purchasable)
     : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}{
-}
+} 
 
 BoardTiles::~BoardTiles(){
 
@@ -42,7 +42,7 @@ AcademicBuilding::~AcademicBuilding(){
 }
 
 int AcademicBuilding::getTuition(){
-
+    return tuitionCost[impLevel];
 }
 
 void AcademicBuilding::improve(){
@@ -57,20 +57,28 @@ void AcademicBuilding::unimprove(){
     }
 }
 
-void AcademicBuilding::changeMortage(){
+bool AcademicBuilding::changeMortage(){
     if(mortgage == false){
         mortgage = true;
+        return mortgage;
     }
     mortgage = false;
+    return mortgage;
 }
 
 int AcademicBuilding::getImprovements(){
     return impLevel;
 }
 
+Gym::Gym(std::string name, std::string block, int purchaseCost, bool purchasable)
+    :BoardTiles{name, block, purchaseCost, purchasable}{}
+
 int Gym::getTuition(){
     return 0;
 }
+
+Residence::Residence(std::string name, std::string block, int purchaseCost, bool purchasable)
+    :BoardTiles{name, block, purchaseCost, purchasable}{}
 
 int Residence::getTuition(){
     return 0;
