@@ -1,22 +1,25 @@
-#ifndef _commands_h_
-#define _commands_h_
+#ifndef _COMMANDS_H
+#define _COMMANDS_H
+
 #include <iostream>
 #include <string>
-#include "board.h"
+#include "Data.h"
 
 class Commands{
+	Data *data;
  public:
-	 int roll() const;
-	 void next() const;
-	 void trade (std::string name, std::string give, std::string receive);
-	 //note name refers to another player...whats your way of finding the right player?not sure if string is the right data type maybe we should passs a player??
+	Commands::Commands();
+	int roll() const;
+	void next() const;
+	void trade (std::string name, std::string give, std::string receive);
+	//note name refers to another player...whats your way of finding the right player?not sure if string is the right data type maybe we should passs a player??
 
-	 void improve(std::string property, bool buy);
-	 void mortage(std::string property);
-	 void unmortage(std::string property);                                            
-	 bool bankrupt();
-	 void assets();
-	 void all();
+	void improve(std::string property, bool buy);
+	void mortgage(std::string property);
+	void unmortgage(std::string property);                                            
+	bool bankrupt();
+	void assets();
+	void all();
 };
 
-#endif _commands_h_
+#endif

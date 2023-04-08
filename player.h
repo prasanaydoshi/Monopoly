@@ -1,6 +1,7 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
-#include <
+#include <iostream>
+#include <vector>
 #include <map>
 #include <string>
 

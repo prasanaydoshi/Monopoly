@@ -7,6 +7,8 @@ using namespace std;
 
 int main(){
 
-	Data *test
+	Data *test;
+
+	test->getPlaceName(10, "Soumik");
 
 }

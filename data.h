@@ -1,6 +1,7 @@
 #ifndef _DATA_H
 #define _DATA_H
 
+#include <iostream>
 #include <vector>
 #include <map>
 #include <random>
@@ -28,6 +29,8 @@ public:
 
 	//accessor
 	Player *curPlayer();
+
+	std::string getPlaceName(int i, std::string owner);
 
 	//nested accessors
 	std::string get_namePlayer(int i);
