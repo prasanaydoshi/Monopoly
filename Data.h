@@ -3,15 +3,29 @@
 
 #include <vector>
 #include <map>
+#include <random>
 #include "Player.h"
+#include  "board.h"
 
 class Data {
 
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
+	std::vector<BoardTiles*> Tiles;
 	std::map<BoardTiles*, int> board;
 	std::vector<Player*> dropout;
+
+	std::vector<AcademicBuilding*> Arts1;
+	std::vector<AcademicBuilding*> Arts2;
+	std::vector<AcademicBuilding*> Eng;
+	std::vector<AcademicBuilding*> Health;
+	std::vector<AcademicBuilding*> Env;
+	std::vector<AcademicBuilding*> Sci1;
+	std::vector<AcademicBuilding*> Sci2;
+	std::vector<AcademicBuilding*> Math;
+	std::vector<Gym*> Gyms;
+	std::vector<Residences*> Residences;
 
 public:
 	//constructors

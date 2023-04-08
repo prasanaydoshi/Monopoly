@@ -15,7 +15,7 @@ class BoardTiles{
 public:
 
 	//normal constructor
-	BoardTiles(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, std::string owner = "bank");
+	BoardTiles(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
 	//copy and move constructors
 
 	//virtual BoardTiles(const BoardTiles &other);
@@ -47,7 +47,7 @@ class AcademicBuilding : public BoardTiles{
 
 public:
 	//normal constructor
-	AcademicBuilding(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, std::string owner = "bank", std::vector<int> tutitionCost = {0, 0, 0, 0, 0}, bool mortgage = 0, int impLevel = 0);
+	AcademicBuilding(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, int impLevel = 0, std::vector<int> tutitionCost = {0, 0, 0, 0, 0});
 	//copy and move constructors
 
 	//virtual AcademicBuilding(const AcademicBuilding &other) override;
@@ -71,7 +71,7 @@ public:
 	int getTuition() override;
 };
 
-class Residences : public BoardTiles{
+class Residence : public BoardTiles{
 public:
 	int getTuition() override;
 };

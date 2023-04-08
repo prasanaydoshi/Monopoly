@@ -1,9 +1,18 @@
 #include "Data.h"
-#include <random>
-
 
 //constructor
-Data::Data() : current{nullptr}, bank{nullptr} { }; //default
+Data::Data() 
+	:current{nullptr}, bank{nullptr}, 
+	Arts1{AcademicBuilding *AL{AL, Arts1, 40, true, 50, {2, 10, 30, 90, 160, 250}}, AcademicBuilding *ML{ML, Arts1, 60, true, 50, {4, 20, 60, 180, 320, 450}}}, 
+	Arts2{AcademicBuilding *ECH{ECH, Arts2, 100, true, 50, {6, 30, 90, 270, 400, 550}}, AcademicBuilding *PAS{PAS, Arts2, 100, true, 50, {6, 30, 90, 270, 400, 550}}, AcademicBuilding *HH{HH, Arts2, 60, true, 50, {8, 40, 100, 300, 450, 600}}}, 
+	Eng{AcademicBuilding *RCH{RCH, ENG, 140, true, 100, {10, 50, 150, 450, 625, 750}}, AcademicBuilding *DWE{DWE, ENG, 140, true, 100, {10, 50, 150, 450, 625, 750}}, AcademicBuilding *CPH{CPH, ENG, 160, true, 100, {12, 60, 150, 450, 625, 750}}}, 
+	Health{AcademicBuilding *LHI{}, AcademicBuilding *BMH{}, AcademicBuilding *OPT{}}, 
+	Env{AcademicBuilding *EV1{}, AcademicBuilding *EV2{}, AcademicBuilding *Ev3{}}, 
+	Sci1{AcademicBuilding *PHYS{}, AcademicBuilding *B1{}, AcademicBuilding *B2{}}, 
+	Sci2{AcademicBuilding *EIT{}, AcademicBuilding *ESC{}, AcademicBuilding *C2{}}, 
+	Math{AcademicBuilding *MC{}, AcademicBuilding *DC{}}{
+
+}; //default
 
 //nested accessors
 std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }

@@ -1,7 +1,7 @@
 #include "board.h"
 
-BoardTiles::BoardTiles(std::string name, std::string block, int purchaseCost, bool purchasable, std::string owner)
-    : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}, owner{owner}{
+BoardTiles::BoardTiles(std::string name, std::string block, int purchaseCost, bool purchasable)
+    : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}{
 }
 
 BoardTiles::~BoardTiles(){
@@ -32,8 +32,8 @@ bool BoardTiles::isPurchasable(){
     return purchasable;
 }
 
-AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, bool purchasable, std::string owner, std::vector<int> tuitionCost, bool mortgage, int impLevel)
-    :BoardTiles{name, block, purchaseCost, purchasable}, tuitionCost{tuitionCost}, mortgage{false}, impLevel{0}{
+AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, bool purchasable, int impLevel, std::vector<int> tuitionCost)
+    :BoardTiles{name, block, purchaseCost, purchasable}, impCost{impCost}, tuitionCost{tuitionCost}, mortgage{false}, impLevel{0}{
 
 }
 
@@ -72,6 +72,6 @@ int Gym::getTuition(){
     return 0;
 }
 
-int Residences::getTuition(){
+int Residence::getTuition(){
     return 0;
 }
