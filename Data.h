@@ -12,7 +12,6 @@ class Data {
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
-	std::vector<BoardTiles*> Tiles;
 	std::map<BoardTiles*, int> board;
 	std::vector<Player*> dropout;
 
@@ -26,6 +25,16 @@ class Data {
 	std::vector<AcademicBuilding*> Math;
 	std::vector<Gym*> Gyms;
 	std::vector<Residences*> Residences;
+	std::vector<string> blockName;
+	for(int i = 0; i < Art1.length(); ++i){
+		if(Art1[i].getOwner() != Brad){
+			return false;
+		}
+	}
+
+	
+
+	std::vector<BoardTiles*> Tiles;
 
 public:
 	//constructors

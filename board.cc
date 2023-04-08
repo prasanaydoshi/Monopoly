@@ -32,7 +32,7 @@ bool BoardTiles::isPurchasable(){
     return purchasable;
 }
 
-AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, bool purchasable, int impLevel, std::vector<int> tuitionCost)
+AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, bool purchasable, int impCost, std::vector<int> tuitionCost)
     :BoardTiles{name, block, purchaseCost, purchasable}, impCost{impCost}, tuitionCost{tuitionCost}, mortgage{false}, impLevel{0}{
 
 }

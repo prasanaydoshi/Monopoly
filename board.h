@@ -47,7 +47,7 @@ class AcademicBuilding : public BoardTiles{
 
 public:
 	//normal constructor
-	AcademicBuilding(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, int impLevel = 0, std::vector<int> tutitionCost = {0, 0, 0, 0, 0});
+	AcademicBuilding(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true, int impCost = 0, std::vector<int> tutitionCost = {0, 0, 0, 0, 0});
 	//copy and move constructors
 
 	//virtual AcademicBuilding(const AcademicBuilding &other) override;
