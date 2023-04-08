@@ -81,6 +81,7 @@ public:
 class Notpurchasable : public BoardTiles{
 public:
 	Notpurchasable(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
+	
 };
 
 #endif

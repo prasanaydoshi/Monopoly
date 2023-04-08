@@ -4,6 +4,10 @@
 Player::Player(std::string name, char piece): name{name}, piece{piece},
         posn{0}, balance{1500}, timsCups{0}{}
 
+std::string Player::get_name(){
+        
+}
+
 
 //other methods
 void Player::nextposn() {

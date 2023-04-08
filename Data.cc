@@ -49,15 +49,6 @@ std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }
 char Data::get_piecePlayer(int i) { return *(players[i]).get_piece(); }
 int Data::get_posPlayer(int i) { return *(players[i]).get_posn(); }
 
-std::string Data::getPlaceName(int i, std::string owner){
-	std::cout << Tiles[0]->getName() << std::endl;
-	std::cout << Tiles[0]->getBlock() << std::endl;
-	std::cout << Tiles[0]->getPurcahseCost() << std::endl;
-	std::cout << Tiles[0]->isPurchasable() << std::endl;
-	Tiles[0]->setOwner(owner);
-	std::cout << Tiles[0]->getOwner() << std::endl;
-}
-
 //other methods
 int Data::get_NetWorth() {
 	int total_val = (*current).get_balance();		// current cash balance of player
