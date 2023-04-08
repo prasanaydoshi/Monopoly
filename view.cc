@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Data.h"
 using namespace std;
+
 int getPosn(int x) {
 	srand(time(0));
 	return rand() % 40;
