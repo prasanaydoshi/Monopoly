@@ -10,7 +10,7 @@ class Data {
 	Player *current;
 	Player *bank;
 	std::vector<Player*> players;
-	std::map<BoardTiles*, int> board;
+	std::vector<BoardTiles*> board;
 	std::vector<Player*> dropout;
 
 public:
@@ -27,6 +27,7 @@ public:
 
 	//additional methods
 	int get_NetWorth();
+	std::sring owned_assets(int i);
 
 	//non-purchasable tile methods
 	void TuitionPay();

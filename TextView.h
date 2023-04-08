@@ -17,5 +17,12 @@ public:
 	std::ostream& menu(std::ostream&);
 	// 
 	std::ostream& MakeAction(std::ostream&);
+
+
+	// shows assets of current player
+	std::ostream& cur_assets(std::ostream&);
+	//shows assets of all players
+	std::ostream& all_assets(std::ostream&);
+
 };
 

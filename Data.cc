@@ -20,6 +20,20 @@ int Data::get_NetWorth() {
 	return total_val;
 }
 
+std::ostream& Data::owned_assets(int i, std::ostream& out) {
+	out << "Player Name: " << *(players[i]).get_name();
+	out << "\nPlayer Balance: " << *(players[i]).get_balance();
+	out << "\nPlayer Properties:\n	";
+	int owned = *(players[i]).No_ownedProperties();
+	int tileNo = 0;
+	for (int propNo = 0; propNo <= owned; ++propNo) {
+		tileNo = *(players[i]).get_tileNo(propNo);
+		out << *(board[tileNo]).get_name() << "     with improvements: ";
+		out << *(board[tileNo]).get_impLevel() << "\n";
+	}
+	return out;
+}
+
 //non-purchasable tile methods
 void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
 								// to pay 300 or 10% of netval	

@@ -11,8 +11,8 @@ class Player {
 	int posn;			// current posn of player
 	int balance;			// money owned by player
 	int timsCups;			// no. of tims cups player owns
-	std::map<std::string, int> owned_properties;   // subject to change
-//	std::vector<int> owned;
+//	std::map<std::string, int> owned_properties;   // subject to change
+	std::vector<int> owned;
 //	std::vector<Property*> owned;
 	
 public:
@@ -26,6 +26,8 @@ public:
 	int get_posn() const { return posn; }
 	int get_balance() const { return balance; }
 	int get_timsCups() const { return timsCups; }
+	int No_ownedProperties() const { return owned.size(); }
+	int get_TileNo(int i) const { return owned[i]; }
 
 	// mutators
 	void JumpTo_posn(int a) { posn = a; }
