@@ -49,7 +49,13 @@ void Controller::load(const std::string& fileName, Data& data) {
 	data = Data(file);
 };
 
-void Controller::save(string fileout) {
-	
+void Controller::save(const std::string& fileName, const Data& data) {
+	std::ofstream file(fileName);
+	if (!file) {
+		std::cerr << "Failed to open file: " << fileName << '\n';
+		return;
+	}
+	data.save(file);
+	file.close();
 };
 

@@ -1,6 +1,9 @@
 #ifndef _CONTROLLER_H_
 #define _CONTROLLER_H_
 
+#include "Data.h"
+
+
 class Controller {
 public:
 
@@ -35,7 +38,7 @@ public:
 	void load(const std::string& fileName, Data& data);
 
 	// saving current state of game to a file
-	void save();
+	void save(const std::string& fileName, const Data& data);
 };
 
 #endif

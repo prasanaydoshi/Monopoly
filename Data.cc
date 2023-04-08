@@ -69,6 +69,14 @@ std::ostream& Data::owned_assets(int i, std::ostream& out) {
 	return out;
 }
 
+void Data::save(std::ostream& os) const {
+	os << players.size() << '\n';
+	for (const auto& player : players) {
+		os << player->getName() << player->getPiece() << ' ' << player->getTimsCups();
+	        os << ' ' << player->getMoney() << ' ' << player->getPosition() << '\n';
+	}
+
+
 //non-purchasable tile methods
 void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
 								// to pay 300 or 10% of netval	
