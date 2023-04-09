@@ -21,19 +21,15 @@ public:
 	Data();
 	Data(std::istream& is); //loading constructor
 
-	//destructor
-	~Data();
+	//destructor not needed due to smart pointers
+	//	~Data();
 
 	//accessor
 	Player *curPlayer();
 
 	//MISSING
-	bool Data::playerInJail() const;		// returns whether player is in jail or not rn
-	bool buy(int i);				// purchases a building
 	bool auction(int i);				// auctions a buliding 
 	void getRent(int i) const;			// get rent of cur tile, removes from cur balance
-	void setCurPlayer(int i);			// changes current player
-	void setPlayers(std::string name, char piece);	// pushes back a new player 
 
 	//why is this needed?
 	void printBlock();				//? prints name of every tile in board
@@ -56,6 +52,11 @@ public:
 	int get_NetWorth();
 	std::string owned_assets(int i);
 	void save(std::ostream& os) const;
+	bool playerInJail() const;		// returns whether player is in jail or not rn
+	bool buy(int i);				// purchases a building
+	void setCurPlayer(int i);			// changes current player
+	void setPlayers(std::string name, char piece);	// pushes back a new player 
+
 
 	//non-purchasable tile methods
 	void payTuition();

@@ -155,6 +155,29 @@ void Data::save(std::ostream& os) const {
 	os.close();
 }
 
+bool Data::playerInJail() const{
+	return current->isInJail();
+}
+
+bool Data::buy(){
+	if((current->get_balance()-Tiles[current->get_posn()]->getPurcahseCost()) < 0){
+		std::cout << "Balance to low. Can't buy." << std::endl;
+		return false;
+	}
+	Tiles[current->get_posn()]->setOwner(current->get_name());
+	current->subMoney(Tiles[current->get_posn()]->getPurcahseCost());
+	current->addProperty(current->get_posn());
+	return true;
+}
+
+void Data::setCurPlayer(int i){
+	current = players[i];
+	curPlayer = i;
+}
+
+void Data::setPlayers(std::string name, char piece){
+	players.push_back(std::make_unique<Player>(name, piece));
+}
 
 //non-purchasable tile methods
 void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
