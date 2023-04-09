@@ -21,18 +21,19 @@ public:
 					// at start, posn = 0, balance = 1500, timsCups = 0;
 	
 	// accessors
-	std::string get_name() const { return name; }
-	char get_piece() const { return piece; }
-	int get_posn() const { return posn; }
-	int get_balance() const { return balance; }
-	int get_timsCups() const { return timsCups; }
-	int No_ownedProperties() const { return owned.size(); }
-	int get_TileNo(int i) const { return owned[i]; }
+	std::string get_name() const;
+	char get_piece() const;
+	int get_posn() const;
+	int get_balance() const;
+	int get_timsCups() const;
+	int No_ownedProperties() const;
+	int get_TileNo(int i) const;
 
 	// mutators
-	void JumpTo_posn(int a) { posn = a; }
-	void MovePosn_By(int a) { posn += a; }
-	void change_balance(int b) { balance += b; }
+	void JumpTo_posn(int a);
+	void MovePosn_By(int a);
+
+	void change_balance(int b);
 	
 	//methods
 	void nextposn();                // moves player to next position this is a method 
