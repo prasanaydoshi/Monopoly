@@ -28,6 +28,10 @@ public:
 	char get_piecePlayer(int i);
 	int get_posPlayer(int i);
 
+	std::string get_TileName(i);		// must be implemented
+	std::string get_TileOwner(i);		//
+	int get_TileImpLevel(i);		//
+
 	//additional methods
 	int get_NetWorth();
 	std::sring owned_assets(int i);

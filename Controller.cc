@@ -56,6 +56,5 @@ void Controller::save(const std::string& fileName, const Data& data) {
 		return;
 	}
 	data.save(file);
-	file.close();
 };
 

@@ -72,9 +72,15 @@ std::ostream& Data::owned_assets(int i, std::ostream& out) {
 void Data::save(std::ostream& os) const {
 	os << players.size() << '\n';
 	for (const auto& player : players) {
-		os << player->getName() << player->getPiece() << ' ' << player->getTimsCups();
-	        os << ' ' << player->getMoney() << ' ' << player->getPosition() << '\n';
+		os << player->get_name() << player->get_piece() << ' ' << player->get_timscups();
+	        os << ' ' << player->get_balance() << ' ' << player->get_posn() << '\n';
 	}
+	for (int i = 0; i <= 39; ++i) {
+		os << get_TileName(i) << " " << get_TileOwner(i);
+		os << " " << get_TileImpLevel(i) << "\n";
+	}
+	os.close();
+}
 
 
 //non-purchasable tile methods
