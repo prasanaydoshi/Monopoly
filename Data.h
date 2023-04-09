@@ -54,7 +54,7 @@ public:
 
 	//additional methods
 	int get_NetWorth();
-	std::sring owned_assets(int i);
+	std::string owned_assets(int i);
 	void save(std::ostream& os) const;
 
 	//non-purchasable tile methods
