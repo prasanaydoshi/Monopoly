@@ -22,6 +22,14 @@ void Player::MovePosn_By(int a) {
         }
 }
 
+void Player::pay(int a) {
+	balance += a;
+}
+
+void Player::buy(int a) {
+	balance -= a;
+}
+
 //other methods
 void Player::nextposn() {
 	if (posn < 40) {
@@ -29,10 +37,6 @@ void Player::nextposn() {
         } else {
                 posn = 0;
         }
-}
-
-void change_balance(int b) { 
-	balance += b; 
 }
 
 //int calc_NetWorth() {}

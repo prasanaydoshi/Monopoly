@@ -13,6 +13,7 @@ class Player {
 	int timsCups;			// no. of tims cups player owns
 //	std::map<std::string, int> owned_properties;   // subject to change
 	std::vector<int> owned;
+	bool inJail;
 //	std::vector<Property*> owned;
 	
 public:
@@ -32,8 +33,8 @@ public:
 	// mutators
 	void JumpTo_posn(int a);
 	void MovePosn_By(int a);
-
-	void change_balance(int b);
+	void pay(int a);
+	void buy(int a);
 	
 	//methods
 	void nextposn();                // moves player to next position this is a method 
