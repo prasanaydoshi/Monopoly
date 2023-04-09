@@ -57,7 +57,7 @@ public:
 	//virtual AcademicBuilding&operator=(AcademicBuilding &&other) const;
 
 	//destructors
-	virtual ~AcademicBuilding();
+	~AcademicBuilding() override;
 
 	int getTuition() override;
 	void improve();
@@ -69,19 +69,22 @@ public:
 class Gym : public BoardTiles{
 public:
 	Gym(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
+	~Gym() override;
 	int getTuition() override;
 };
 
 class Residence : public BoardTiles{
 public:
 	Residence(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
+	~Residence() override;
 	int getTuition() override;
 };
 
 class Notpurchasable : public BoardTiles{
 public:
-	Notpurchasable(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
-	
+	Notpurchasable(std::string name, std::string block, int purchaseCost = 0, bool purchasable = false);
+	~Notpurchasable() override;
+	int getTuition();
 };
 
 #endif

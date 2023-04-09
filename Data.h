@@ -1,30 +1,30 @@
 #ifndef _DATA_H
 #define _DATA_H
 
+#include <iostream>
 #include <vector>
 #include <map>
 #include <random>
-#include "Player.h"
+//#include "Player.h"
 #include "board.h"
 
 class Data {
-	Player *current;
-	Player *bank;
-	std::vector<Player*> players;
-	std::map<BoardTiles*, int> board;
-	std::vector<Player*> dropout;
-
-	std::vector<AcademicBuilding*> Buildings;
-	std::vector<Gym*> Gyms;
-	std::vector<Residence*> Residences;
-	std::vector<Notpurchasable*> Notpurchasables;
-	std::vector<std::string> blockName;
+	//Player *current;
+	//Player *bank;
+	//std::vector<Player*> players;
+	//std::map<BoardTiles*, int> board;
+	//std::vector<Player*> dropout;
 
 	std::vector<BoardTiles*> Tiles;
 
 public:
 	//constructors
 	Data();
+
+	//destructors
+	~Data();
+
+	void printBlock();
 
 	//accessor
 	Player *curPlayer();
@@ -36,7 +36,8 @@ public:
 
 	//additional methods
 	int get_NetWorth();
-
+	
+	/*
 	//non-purchasable tile methods
 	void TuitionPay();
 	void OSAPcollect();
@@ -46,6 +47,7 @@ public:
 	void GoToJail();
 	void SLC();
 	void NH();
+	*/
 };
 
 #endif

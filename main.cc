@@ -7,6 +7,10 @@ using namespace std;
 
 int main(){
 
-	Data *test
+	Data *test = new Data;
+
+	test->printBlock();
+
+	delete test;
 
 }

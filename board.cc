@@ -4,9 +4,7 @@ BoardTiles::BoardTiles(std::string name, std::string block, int purchaseCost, bo
     : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}{
 } 
 
-BoardTiles::~BoardTiles(){
-
-}
+BoardTiles::~BoardTiles(){}
 
 std::string BoardTiles::getName(){
     return name;
@@ -73,13 +71,26 @@ int AcademicBuilding::getImprovements(){
 Gym::Gym(std::string name, std::string block, int purchaseCost, bool purchasable)
     :BoardTiles{name, block, purchaseCost, purchasable}{}
 
+Gym::~Gym(){}
+
 int Gym::getTuition(){
-    return 0;
+    return 10;
 }
 
 Residence::Residence(std::string name, std::string block, int purchaseCost, bool purchasable)
     :BoardTiles{name, block, purchaseCost, purchasable}{}
 
+Residence::~Residence(){}
+
 int Residence::getTuition(){
-    return 0;
+    return 5;
+}
+
+Notpurchasable::Notpurchasable(std::string name, std::string block, int purchaseCost, bool purchasable)
+    :BoardTiles{name, block, purchaseCost, purchasable}{}
+
+Notpurchasable::~Notpurchasable(){}
+
+int Notpurchasable::getTuition(){
+    return 11;
 }

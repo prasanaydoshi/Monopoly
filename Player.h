@@ -1,6 +1,6 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
-#include <
+#include <vector>
 #include <map>
 #include <string>
 
@@ -12,6 +12,7 @@ class Player {
 	int timsCups;			// no. of tims cups player owns
 	//std::map<std::string, int> owned_properties;   // subject to change
 	std::vector<int> owned;
+	bool inJail;
 //	std::vector<Property*> owned;
 	
 public:
@@ -20,16 +21,18 @@ public:
 					// at start, posn = 0, balance = 1500, timsCups = 0;
 	
 	// accessors
-	std::string get_name() const { return name; }
-	char get_piece() const { return piece; }
-	int get_posn() const { return posn; }
-	int get_balance() const { return balance; }
-	int get_timsCups() const { return timsCups; }
+	std::string get_name() const;
+	char get_piece() const;
+	int get_posn() const;
+	int get_balance() const;
+	int get_timsCups() const;
+	void get_properties() const;
 
 	// mutators
-	void JumpTo_posn(int a) { posn = a; }
-	void MovePosn_By(int a) { posn += a; }
-	void change_balance(int b) { balance += b; }
+	void JumpTo_posn(int a);
+	void MovePosn_By(int a);
+	void pay(int a);
+	void buy(int a);
 	
 	//methods
 	void nextposn();                // moves player to next position this is a method 
@@ -41,6 +44,7 @@ public:
 	std::string get_properties();   // shows properties player owns
 					// might later move this property to class owning player
 					// as this is the only field causing need of Big5
+	
 };
 
 #endif

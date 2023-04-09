@@ -2,10 +2,12 @@
 #define _commands_h_
 #include <iostream>
 #include <string>
-#include "board.h"
+#include "Data.h"
 
 class Commands{
+	Data *data = new Data;
  public:
+	~Commands();
 	 int roll() const;
 	 void next() const;
 	 void trade (std::string name, std::string give, std::string receive);
