@@ -4,8 +4,10 @@
 class Controller {
 	
 public:
-	Controller(Model& model, View& view);	// constructor 
 
+	// constructor used by main
+	Controller(Model& model, View& view);	// constructor 
+	// actual running program
 	void run();				// main running functrion
 
 private:
