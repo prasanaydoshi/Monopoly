@@ -36,6 +36,11 @@ public:
 	/*bool auction(int i);
 	void getRent(int i) const;*/
 
+	void goTimsJail();
+	bool leaveTimsJail(bool f);
+
+	void getCurPlayer();
+
 	//set Players
 	void setCurPlayer(int i);
 	void setPlayers(std::string name, char piece);
@@ -52,14 +57,13 @@ public:
 	//additional methods
 	//int get_NetWorth();
 
-	/*/
+	/*
 	
 	//non-purchasable tile methods
 	void TuitionPay();
 	void OSAPcollect();
 	void CoopFee();
 	void OSAPcol();
-	void TimsJail();
 	void GoToJail();
 	void SLC();
 	void NH();*/

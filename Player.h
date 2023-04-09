@@ -11,9 +11,10 @@ class Player {
 	int posn;			// current posn of player
 	int balance;			// money owned by player
 	int timsCups;			// no. of tims cups player owns
-	//std::map<std::string, int> owned_properties;   // subject to change
+	std::map<std::string, int> owned_properties;   // subject to change
 	std::vector<int> owned;
 	bool inJail;
+	int jailRolls;
 	
 public:
 	// constructor
@@ -28,6 +29,7 @@ public:
 	int get_timsCups() const;
 	void get_properties() const;
 	bool isInJail() const;
+	int jailRollsCount() const;
 
 	// mutators
 	void JumpTo_posn(int a);
@@ -36,6 +38,7 @@ public:
 	void addMoney(int a);
 	void addProperty(int a);
 	void setInJail();
+	bool setJailRolls();
 	
 	//methods
 	void nextposn();                // moves player to next position this is a method 

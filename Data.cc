@@ -34,7 +34,7 @@ Data::Data()
 		new AcademicBuilding{"B1", "Sci1", 260, true, 150, {22, 110, 330, 800, 975, 1150}},
 		new Gym{"CIF", "Gyms", 150, true},
 		new AcademicBuilding{"B2", "Sci1", 280, true, 150, {24, 120, 360, 850, 1025, 1200}},
-		new Residence{"GO TO TIMES", "Go To Tims", 0, false},
+		new Residence{"GO TO TIMS", "Go To Tims", 0, false},
 		new AcademicBuilding{"EIT", "Sci2", 300, true, 200, {26, 130, 390, 900, 1100, 1275}},
 		new AcademicBuilding{"ESC", "Sci2", 300, true, 200, {26, 130, 390, 900, 1100, 1275}},
 		new Notpurchasable{"SLC", "SLC", 0, false},	
@@ -67,7 +67,7 @@ bool Data::playerInJail() const{
 
 void Data::checkTile(int i){
 	current->MovePosn_By(i);
-
+	std::cout << "Current Tile: " << Tiles[current->get_posn()]->getName() << std::endl;
 	if(Tiles[current->get_posn()]->isPurchasable()){
 
 		if(Tiles[current->get_posn()]->getOwner() == "Bank"){
@@ -92,8 +92,10 @@ void Data::checkTile(int i){
 		} 
 
 	}else{
+		std::cout << "not purchasable tile" << std::endl;
 		if(Tiles[current->get_posn()]->getName() == "GO TO TIMS"){
-
+			std::cout << "going to jail" << std::endl;
+			goTimsJail();
 		}else if(Tiles[current->get_posn()]->getName() == "GOOSE NESTING"){
 
 		}else if(Tiles[current->get_posn()]->getName() == "TUITION"){
@@ -117,6 +119,33 @@ bool Data::buy(){
 	current->subMoney(Tiles[current->get_posn()]->getPurcahseCost());
 	current->addProperty(current->get_posn());
 	return true;
+}
+
+void Data::goTimsJail(){
+	current->JumpTo_posn(10);
+	current->setInJail();
+}
+
+bool Data::leaveTimsJail(bool f){
+	if(current->setJailRolls()){
+		std::cout << "Must exit jail. Pay 50." << std:: endl;
+		current->setInJail();
+		if((current->get_balance()-50) < 0){
+			std::cout << "Balance to low. Can't buy. Mortgage properties or declare bankruptcy." << std::endl;
+			//mortage and bankruptcy
+		}else{
+			current->subMoney(50);
+		}
+		return false;
+	}
+	if(f){
+		current->setInJail();
+	}
+	return true;
+}
+
+void Data::getCurPlayer(){
+	std::cout << current->get_name() << std::endl;
 }
 /*
 void Data::getRent(int i) const{
@@ -194,12 +223,6 @@ void Data::CoopFee() {
 void Data::OSAPcol() {
 	if ( (*current).get_posn() == 20) {
 		(*current).change_balance(200);
-	}
-}
-
-void Data::TimsJail() { 			
-	//REQUIRES ROLL FUNCTION
-	if ( (*current).get_posn() == 30) {
 	}
 }
 

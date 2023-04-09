@@ -2,7 +2,7 @@
 
 // constructor
 Player::Player(std::string name, char piece): name{name}, piece{piece},
-        posn{0}, balance{150}, timsCups{0}, inJail{false}{}
+        posn{0}, balance{150}, timsCups{0}, inJail{false}, jailRolls{1}{}
 
 //acessors
 std::string Player::get_name() const{
@@ -36,6 +36,10 @@ bool Player::isInJail() const{
         return inJail;
 }
 
+int Player::jailRollsCount() const{
+        return jailRolls;
+}
+
 //mutators
 void Player::JumpTo_posn(int a){
         posn = a;
@@ -60,9 +64,18 @@ void Player::addProperty(int a){
 void Player::setInJail(){
         if(inJail){
                 inJail = false;
+                jailRolls = 1;
         }else{
                 inJail =true;
         }
+}
+
+bool Player::setJailRolls(){
+        ++jailRolls;
+        if(jailRolls >= 3){
+                return true;
+        }
+        return false;
 }
 
 //other methods

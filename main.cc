@@ -18,6 +18,8 @@ int main(){
 			commands->roll(1);
 
 			//cout << "Rolled a " << i << "." << endl;
+		}else if(com == "next"){
+			commands->next();
 		}
 	}
 	delete commands;
