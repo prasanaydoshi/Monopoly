@@ -13,7 +13,6 @@ class Player {
 	//std::map<std::string, int> owned_properties;   // subject to change
 	std::vector<int> owned;
 	bool inJail;
-//	std::vector<Property*> owned;
 	
 public:
 	// constructor
