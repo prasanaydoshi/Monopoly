@@ -38,8 +38,7 @@ public:
 
 	void goTimsJail();
 	bool leaveTimsJail(bool f);
-
-	void getCurPlayer();
+	void OSAPcol();
 
 	//set Players
 	void setCurPlayer(int i);
@@ -63,7 +62,7 @@ public:
 	void TuitionPay();
 	void OSAPcollect();
 	void CoopFee();
-	void OSAPcol();
+	
 	void GoToJail();
 	void SLC();
 	void NH();*/

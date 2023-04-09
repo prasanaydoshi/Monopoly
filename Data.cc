@@ -67,6 +67,10 @@ bool Data::playerInJail() const{
 
 void Data::checkTile(int i){
 	current->MovePosn_By(i);
+	if(current->get_posn() > 39){
+		OSAPcol();
+		current->JumpTo_posn(current->get_posn() - 39);
+	}
 	std::cout << "Current Tile: " << Tiles[current->get_posn()]->getName() << std::endl;
 	if(Tiles[current->get_posn()]->isPurchasable()){
 
@@ -144,8 +148,8 @@ bool Data::leaveTimsJail(bool f){
 	return true;
 }
 
-void Data::getCurPlayer(){
-	std::cout << current->get_name() << std::endl;
+void Data::OSAPcol() {
+	(*current).addMoney(200);
 }
 /*
 void Data::getRent(int i) const{
@@ -167,6 +171,7 @@ bool Data::auction(int i) const{
 void Data::setCurPlayer(int i){
 	current = players[i];
 	curPlayer = i;
+	std::cout << players[i] << std::endl;
 }
 
 void Data::setPlayers(std::string name, char piece){
@@ -217,12 +222,6 @@ void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
 void Data::CoopFee() {
 	if ( (*current).get_posn() == 18) {
 		(*current).change_balance(-150);
-	}
-}
-
-void Data::OSAPcol() {
-	if ( (*current).get_posn() == 20) {
-		(*current).change_balance(200);
 	}
 }
 

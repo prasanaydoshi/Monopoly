@@ -37,7 +37,7 @@ public:
 
 	virtual int getTuition() = 0;
 };
-
+ 
 class AcademicBuilding : public BoardTiles{
 
 	std::vector<int> tuitionCost;

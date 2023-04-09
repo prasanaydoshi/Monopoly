@@ -11,13 +11,13 @@ Commands::~Commands(){
 void Commands::initializePlayers(int a){
     std::string name = "";
     char piece = 'a';
-    maxPlayer = 0;
+    maxPlayer = a;
     for(int i = 0; i < a; ++i){
         std::cin >> name;
         std::cin >> piece;
         data->setPlayers(name, piece);
     }
-    data->setCurPlayer(0);
+    data->setCurPlayer(player);
     data->getPlayerNames();
 }
 
@@ -43,10 +43,9 @@ void Commands::roll(int i){
             roll(++i);
         }else{
             if(data->leaveTimsJail(false)){
-
+                std::cout << "In jail, try again next turn." << std::endl;
             }
-            std::cout << "In jail, try again next turn." << std::endl;
-            data->leaveTimsJail(false);
+            rolled = true;
         }
     }else{
         if(die1 == die2){
@@ -68,15 +67,14 @@ void Commands::roll(int i){
 }
 
 void Commands::next(){
-    if(rolled == false){
-        rolled = true;
+    if(rolled == true){
+        rolled = false;
     }
     ++player;
-    if(player >= maxPlayer){
+    if(player == maxPlayer){
         player = 0;
     }
     data->setCurPlayer(player);
-    data->getCurPlayer();
 }
 
 void Commands::trade(std::string name, std::string give, std::string receive){
