@@ -11,8 +11,7 @@
 #include <iterator>
 #include <algorithm>    
 bool valid_property (std::string key, std::vector<std::string> properties) {
-        return (std::count(properties.begin(), properties.end(), key));
-        
+	return (std::count(properties.begin(), properties.end(), key);
     }
     
 int main () {
@@ -30,42 +29,48 @@ int main () {
         while(iss >> tmp)
         {
             if (tmp == "roll" && length == 4) {
-		 	   
+		 //roll(int i);  dk what int i does here need to ask soumik, 
                 }
             else if (tmp == "trade" && bString.size() == 4) {
-                if (valid_property(bString[2], properties) && valid_property(bString[3], properties)) {
-                        std::cout << "success";
-                        //check is player is valid 
-			//call trade function 
-                    } 
-                else {
-                        std::cout << "no";
-                    }
-                    //std::cout << "mole"<<std::endl << length << std::end;
+                if ( (valid_property(bString[2], properties) && valid_property(bString[3], properties)) || (isDigit(bString[2]) && valid_property[3]) || (isDigit(bString[3]) && isDigit(bString[2]))) {
+			for (int i = 0; i < player.size(); i++) {
+				if(get_name(i) == bString[1]) {
+					trade(bString[1], bString[2], bString[3]);
+					break;
+				}
+			}
+                   } 
             }
-	    else if (tmp == "next" && length == 4) {}
+	    else if (tmp == "next" && length == 4) {
+		    next();
+	    }
 	    else if (tmp == "improve") {
 		    if (valid_property(bString[1], properties) && (bString[2] =="true" ||bString[2] =="false" )) {
-			    //call improve function
+			    	improve(bString[1],bString[2]);
 		    }
 	    }
 	    else if (tmp == "mortage") {
 	    	if (valid_property(bString[1], properties)) {
-			//call mortgage function
+			mortgage(bString[1]);
 		}
 	    }
 	    else if (tmp == "unmortgage") {
 		    if (valid_property(bString[1], properties)) {
-                        //call unmortgage function
+                        unmortgage(bString[1]);
                 }
 	    }
 	    else if (tmp == "bankrupt" && length == 8) {
+		    bankrupt();
 		    // call bankrupt check if player is valid and if player has more money owed than they have in cash
 	    }
 	    else if (tmp == "assets" && length == 6) {
+		    
+		    assets();
 		    //call assets
 	    }
 	    else if (tmp == "all" && length == 3) {
+		    
+		    all();
 		    //call all
 	    }
 	    else {
