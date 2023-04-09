@@ -1,5 +1,5 @@
-Test: main.o board.o Data.o Player.o
-	g++ main.o board.o Data.o Player.o -g -o Test
+Test: main.o board.o Data.o Player.o commands.o
+	g++ main.o board.o Data.o Player.o commands.o -g -o Test
 
 main.o: main.cc board.h
 	g++ -std=c++14 -c main.cc
@@ -12,3 +12,6 @@ Data.o: Data.cc Data.h
 
 Player.o: Player.cc Player.h
 	g++ -std=c++14 -c Player.cc
+
+commands.o: commands.cc commands.h
+	g++ -std=c++14 -c commands.cc

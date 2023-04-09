@@ -7,8 +7,8 @@
 class BoardTiles{
 
 	std::string name;
-	int purchaseCost;
 	std::string block;
+	int purchaseCost;
 	bool purchasable;
 	std::string owner;
 

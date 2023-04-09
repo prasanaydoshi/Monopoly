@@ -2,7 +2,7 @@
 
 //constructor
 Data::Data() 
-	://current{nullptr}, bank{nullptr},
+	:current{nullptr}, bank{nullptr},
 	Tiles{
 		new Notpurchasable{"COLLECT OSAP", "Collect OSAP", 0, false},
 		new AcademicBuilding{"AL", "Arts1", 40, true, 50, {2, 10, 30, 90, 160, 250}},
@@ -49,6 +49,9 @@ Data::~Data(){
 	for (int i = 0; i < 40; ++i){
 		delete Tiles[i];
 	}
+	for(int i = 0; i < players.size(); ++i){
+		delete players[i];
+	}
 }
 
 void Data::printBlock(){
@@ -58,11 +61,68 @@ void Data::printBlock(){
 	}
 }
 
+bool Data::playerInJail() const{
+	return current->isInJail();
+}
 
+void Data::checkTile(int i) const{
+	int pos = get_posPlayer(cur) + i;
+
+	if(Tiles[pos]->isPurchasable()){
+		if(Tiles[pos]->getName == "Bank"){
+			//buy function and than auction function
+		}else{
+			//rent function
+		}      
+	}else{
+		if(Tiles[pos] == ""){
+
+		}
+	}
+}
+
+bool Data::buy(int i) const{
+
+}
+
+bool Data::auction(int i) const{
+	std::vector<std::string> playersInAuction;
+	std::vector<std::string> dropped;
+	for(int i = 0; i < players.size(); ++i){
+		playersInAuction.push_back(players[i]->get_name());
+	}
+	std::cout << Tiles[i]->getName() << "is up for auction. Highest bidder wins." << std::endl;
+	std::cout << "Enter your amount when your player piece shows up. Amount must be higher than " << Tiles[i]->getPurcahseCost() << "." << std::endl;
+	std::cout << "If you chose to withdraw. "
+}
+
+void Data::getRent(int i) const{
+
+}
+
+void Data::setCurPlayer(int i){
+	current = players[i];
+	cur = i;
+}
+
+void Data::setPlayers(std::string name, char piece){
+	players.push_back(new Player{name, piece});
+}
+
+void Data::getPlayerNames(){
+	for(int i = 0; i < players.size(); ++i){
+		std::cout << "Player Names: " << players[i]->get_name() << ", Piece:" << players[i]->get_piece() << std::endl;
+	}
+}
+
+/*
 //nested accessors
 std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }
 char Data::get_piecePlayer(int i) { return *(players[i]).get_piece(); }
-int Data::get_posPlayer(int i) { return *(players[i]).get_posn(); }
+*/
+int Data::get_posPlayer(int i) {
+	return players[i]->get_posn();
+}
 
 /*
 //other methods
@@ -73,8 +133,10 @@ int Data::get_NetWorth() {
 		total_val += (board[tileNo].first).NetVal();	// adds netval of that property
 	}
 	return total_val;
-}
+}*/
 
+
+/*
 //non-purchasable tile methods
 void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
 								// to pay 300 or 10% of netval	
@@ -154,7 +216,7 @@ void Data::NH() {
 		std::mt19937 gen(rd());
 		std::discrete_distribution<> d({1.0 / 18, 1.0 / 9, 1.0 / 6, 1.0 / 3,
 			       	1.0 / 6, 1.0 / 9, 1.0 / 18});
-		int num_pick = d(gen);	
+		int num_pick = d(gen);
 		switch(num_pick) {
 			case 0:
 				(*current).change_balance(-200);	 

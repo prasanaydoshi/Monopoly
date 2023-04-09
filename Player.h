@@ -26,12 +26,14 @@ public:
 	int get_balance() const;
 	int get_timsCups() const;
 	void get_properties() const;
+	bool inJail() const;
 
 	// mutators
 	void JumpTo_posn(int a);
 	void MovePosn_By(int a);
-	void pay(int a);
-	void buy(int a);
+	void subMoney(int a);
+	void addMoney(int a);
+	void setInJail();
 	
 	//methods
 	void nextposn();                // moves player to next position this is a method 
@@ -40,10 +42,7 @@ public:
 	//needs tile info, so moved higher, into data for now
 //	int calc_NetWorth();		// Looks at balance and property values(including immprovements)
 					// and calculates the net worth of the player
-	std::string get_properties();   // shows properties player owns
-					// might later move this property to class owning player
-					// as this is the only field causing need of Big5
-	
+
 };
 
 #endif

@@ -1,13 +1,17 @@
-#ifndef _commands_h_
-#define _commands_h_
+#ifndef COMMANDS_H
+#define COMMANDS_H
+
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Data.h"
 
 class Commands{
 	Data *data = new Data;
  public:
+	Commands();
 	~Commands();
+	void initializePlayers(int a);
 	 int roll() const;
 	 void next() const;
 	 void trade (std::string name, std::string give, std::string receive);
@@ -21,4 +25,4 @@ class Commands{
 	 void all();
 };
 
-#endif _commands_h_
+#endif

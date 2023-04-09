@@ -1,7 +1,7 @@
 #include "board.h"
 
 BoardTiles::BoardTiles(std::string name, std::string block, int purchaseCost, bool purchasable)
-    : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}{
+    : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}, owner{"Bank"}{
 } 
 
 BoardTiles::~BoardTiles(){}
