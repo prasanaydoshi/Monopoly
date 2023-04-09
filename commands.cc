@@ -20,15 +20,26 @@ void Commands::initializePlayers(int a){
     data->getPlayerNames();
 }
 
-int Commands::roll() const{
+void Commands::roll(int i){
     int die1 = 2;
-    int die2 = 3;
+    int die2 = 2;
+    std::cout << "Rolled a " << die1 << " & " << die2 << ". Total " << die1 + die2 << std::endl;
     if(data->playerInJail()){
         //check if they roll doubles or pay right
+        std::cout << "In jail" << std::endl;
     }else{
-        data->checkTile(die1 + die2);
+        if(die1 == die2){
+            if(i < 3){
+                std::cout << "You rolled doubles, roll again." << std::endl;
+                data->checkTile(die1 + die2);
+                roll(++i);
+            }else{
+                std::cout << "Rolled doubles three times. You are going to jail." << std::endl;
+            }
+        }else{
+            data->checkTile(die1 + die2);
+        }
     }
-    return 2;
 }
 
 void Commands::next() const{

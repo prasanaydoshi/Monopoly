@@ -1,5 +1,6 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
+#include <iostream>
 #include <vector>
 #include <map>
 #include <string>
@@ -26,13 +27,14 @@ public:
 	int get_balance() const;
 	int get_timsCups() const;
 	void get_properties() const;
-	bool inJail() const;
+	bool isInJail() const;
 
 	// mutators
 	void JumpTo_posn(int a);
 	void MovePosn_By(int a);
 	void subMoney(int a);
 	void addMoney(int a);
+	void addProperty(int a);
 	void setInJail();
 	
 	//methods

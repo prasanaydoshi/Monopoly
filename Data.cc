@@ -14,7 +14,7 @@ Data::Data()
 		new Notpurchasable{"NEEDLES HALL", "Needles Hall", 0, false},
 		new AcademicBuilding{"PAS", "Arts2", 100, true, 50, {6, 30, 90, 270, 400, 550}},
 		new AcademicBuilding{"HH", "Arts2", 120, true, 50, {8, 40, 100, 300, 450, 600}},
-		new Notpurchasable{"DC Tims Line", "DC Tims Line", 0, false},
+		new Notpurchasable{"DC TIMS LINE", "DC Tims Line", 0, false},
 		new AcademicBuilding{"RCH", "Eng", 140, true, 100, {10, 50, 150, 450, 625, 750}},
 		new Gym{"PAC", "Gyms", 150, true},
 		new AcademicBuilding{"DWE", "Eng", 140, true, 100, {10, 50, 150, 450, 625, 750}},
@@ -65,23 +65,61 @@ bool Data::playerInJail() const{
 	return current->isInJail();
 }
 
-void Data::checkTile(int i) const{
-	int pos = get_posPlayer(cur) + i;
+void Data::checkTile(int i){
+	current->MovePosn_By(i);
 
-	if(Tiles[pos]->isPurchasable()){
-		if(Tiles[pos]->getName == "Bank"){
-			//buy function and than auction function
+	if(Tiles[current->get_posn()]->isPurchasable()){
+
+		if(Tiles[current->get_posn()]->getOwner() == "Bank"){
+			std::cout << "Do you want to buy " << Tiles[current->get_posn()]->getName() << ". Yes/No" << std::endl;
+			std::string response;
+			std::cin >> response;
+			if(response == "Yes"){
+				if(buy()){	
+					std::cout << "Bought " << Tiles[current->get_posn()]->getName() << "." << std::endl;
+				}else{
+					std::cout << "Going for auction." << std::endl;
+					//auction();
+				}
+			}else{
+				//auction function
+			}
+
 		}else{
+
 			//rent function
-		}      
+
+		} 
+
 	}else{
-		if(Tiles[pos] == ""){
+		if(Tiles[current->get_posn()]->getName() == "GO TO TIMS"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "GOOSE NESTING"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "TUITION"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "COOP FEE"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "SLC"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "NEEDLES HALL"){
 
 		}
 	}
 }
 
-bool Data::buy(int i) const{
+bool Data::buy(){
+	if((current->get_balance()-Tiles[current->get_posn()]->getPurcahseCost()) < 0){
+		std::cout << "Balance to low. Can't buy." << std::endl;
+		return false;
+	}
+	Tiles[current->get_posn()]->setOwner(current->get_name());
+	current->subMoney(Tiles[current->get_posn()]->getPurcahseCost());
+	current->addProperty(current->get_posn());
+	return true;
+}
+/*
+void Data::getRent(int i) const{
 
 }
 
@@ -94,15 +132,12 @@ bool Data::auction(int i) const{
 	std::cout << Tiles[i]->getName() << "is up for auction. Highest bidder wins." << std::endl;
 	std::cout << "Enter your amount when your player piece shows up. Amount must be higher than " << Tiles[i]->getPurcahseCost() << "." << std::endl;
 	std::cout << "If you chose to withdraw. "
-}
-
-void Data::getRent(int i) const{
-
-}
+	return false;
+}*/
 
 void Data::setCurPlayer(int i){
 	current = players[i];
-	cur = i;
+	curPlayer = i;
 }
 
 void Data::setPlayers(std::string name, char piece){

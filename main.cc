@@ -12,5 +12,13 @@ int main(){
 	cin >> i;
 	cout << "Please name the players differently and pick from these pieces." << endl;
 	commands->initializePlayers(i);
+	std::string com;
+	while(cin >> com){
+		if(com == "roll"){
+			commands->roll(1);
+
+			//cout << "Rolled a " << i << "." << endl;
+		}
+	}
 	delete commands;
 }

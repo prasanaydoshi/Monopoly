@@ -10,7 +10,8 @@
 
 class Data {
 	Player *current;
-	int cur;
+	int curPlayer;
+	bool rolled;
 	Player *bank;
 	std::vector<Player*> players;
 	std::map<BoardTiles*, int> board;
@@ -28,12 +29,12 @@ public:
 	void printBlock();
 
 	//Player in jail
-	bool Data::playerInJail() const;
+	bool playerInJail() const;
 
-	void checkTile(int i) const;
-	bool buy(int i);
-	bool auction(int i);
-	void getRent(int i) const;
+	void checkTile(int i);
+	bool buy();
+	/*bool auction(int i);
+	void getRent(int i) const;*/
 
 	//set Players
 	void setCurPlayer(int i);
@@ -41,7 +42,7 @@ public:
 	void getPlayerNames();
 
 	//accessor
-	Player *curPlayer();
+	//Player *curPlayer();
 
 	//nested accessors
 	//std::string get_namePlayer(int i);

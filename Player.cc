@@ -2,7 +2,7 @@
 
 // constructor
 Player::Player(std::string name, char piece): name{name}, piece{piece},
-        posn{0}, balance{1500}, timsCups{0}, inJail{false}{}
+        posn{0}, balance{150}, timsCups{0}, inJail{false}{}
 
 //acessors
 std::string Player::get_name() const{
@@ -25,7 +25,14 @@ int Player::get_timsCups() const{
         return timsCups;
 }
 
-bool inJail(){
+void Player::get_properties() const{
+        for(int i = 0; i < owned.size(); ++i){
+                std::cout << owned[i] << std::endl;
+        }
+        std::cout << std::endl;
+}
+
+bool Player::isInJail() const{
         return inJail;
 }
 
@@ -39,11 +46,15 @@ void Player::MovePosn_By(int a){
 }
 
 void Player::subMoney(int a){
-        balance += a;
+        balance -= a;
 }
 
 void Player::addMoney(int a){
-        balance -= a;
+        balance += a;
+}
+
+void Player::addProperty(int a){
+        owned.push_back(a);
 }
 
 void Player::setInJail(){

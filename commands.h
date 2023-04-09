@@ -12,7 +12,7 @@ class Commands{
 	Commands();
 	~Commands();
 	void initializePlayers(int a);
-	 int roll() const;
+	void roll(int i);
 	 void next() const;
 	 void trade (std::string name, std::string give, std::string receive);
 	 //note name refers to another player...whats your way of finding the right player?not sure if string is the right data type maybe we should passs a player??
