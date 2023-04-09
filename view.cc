@@ -1,15 +1,13 @@
 #include <iostream>
-#include <iomanip>
 #include <string>
 #include <stdlib.h>
-#include <ctime>
 #include <cstdlib>
-#include <time.h>
 #include <vector>
 #include <cstring>
 #include "Player.h"
 #include "Data.h"
 #include "TextView.h"
+#include "view.h"
 using namespace std;
 int getNoPlay() {
 	return 6;
@@ -21,13 +19,11 @@ char charRep(int x) {
 }
 void add_spaces(std::vector <std::string>& coord_spaces) {
 	for (int it = 0; it < coord_spaces.size(); ++it) {
-		//cout << coord_spaces[it].length() << endl;
 		if (coord_spaces[it].length() < 8) {
 			for (int i = coord_spaces[it].length(); i < 8; i++) {
 				coord_spaces[it].append(" ");
 			}
 		}
-		//cout << coord_spaces[it] << coord_spaces[it].length() << endl; 
 	}
 }
 void join(int start, int end, std::vector <std::string> coord_join) {
@@ -37,7 +33,7 @@ void join(int start, int end, std::vector <std::string> coord_join) {
 			joint.append(coord_join[i]);
 		}
 	} else {	for (int i = start; i <= end; i++) {
-			joint.append(coord_join[i]);
+		joint.append(coord_join[i]);
 	}
 	}
 	cout << joint << "|" << endl;
@@ -50,26 +46,27 @@ void semi_main() {
 	int noPlay = getNoPlay();
 	std::vector <int> imp {1,1,0,0,0,0,0,1,0,0,5,2,3,4,5,1,0,0,0,1,2,3};
 	std::vector <int> get_pos {0,0,0,0,0,0};
-	std::vector <char> get_char {'G','B','D','P','S','$'};
+	//std::vector <char> get_char {'G','B','D','P','S','$'};
+
 	for(int i = 0; i < noPlay; i++) {
 		string tmp_char;
-		int pos = get_pos[i];//function called get_pos which return position given a int
-		tmp_char = charRep(i);
+		int pos = get_pos[i]; //function called get_posPlayer(i); which return position given a int
+		tmp_char = charRep(i); //should be get_piecePlayer(i);
 		coord[pos].append(tmp_char);
 	}
 	for(int i = 0; i < properties.size(); i++) {
-			if(imp[i] == 5) {
-				imp_coord[i].append("^^^^C");
-			} else if (imp[i] == 4) {
-				imp_coord[i].append("^^^^");
-			} else if(imp[i] == 3) {
-				imp_coord[i].append("^^^");
-			} else if (imp[i] == 2) {
-				imp_coord[i].append("^^");
-			} else if (imp[i] == 1) {
-				imp_coord[i].append("^");
-			} else {
-			}
+		if(imp[i] == 5) {
+			imp_coord[i].append("^^^^C");
+		} else if (imp[i] == 4) {
+			imp_coord[i].append("^^^^");
+		} else if(imp[i] == 3) {
+			imp_coord[i].append("^^^");
+		} else if (imp[i] == 2) {
+			imp_coord[i].append("^^");
+		} else if (imp[i] == 1) {
+			imp_coord[i].append("^");
+		} else {
+		}
 	}
 	add_spaces(coord);
 	add_spaces(imp_coord);
@@ -159,15 +156,20 @@ ostream& TextView::commands(ostream& os) {
 	os << "filename\n\n";
 	return os;
 }
-	
+
 void PrintBoard() {
 	semi_main();
-	
 }
 std::ostream& DisplayNames(ostream& os) {
+	//for (int i = 0; i < get_noPlayers(); i++) {
+	// os << get_namePlayer(i) << endl;
+	//}
 	return os;
 }
 std::ostream& ShowInfo(ostream& os) {
+	//for (int i = 0; i < get_noPlayer(); i ++) {
+	//os << "Player name: " << get_namePlayer(i) << " Player piece: " << get_piecePlayer(i) << " Position: " << get_posPlayer(i) << " Owned Properties: " << owned_assets(i) << " Balance: " << get_balPlayer(i)<< " No of tims cups: " << get_timscups(i) << " Is playe in jail?: " << get_inJail(i) << endl;
+	//
 	return os;
 }
 std::ostream& prog_messages(ostream& os) {
@@ -187,14 +189,14 @@ std::ostream& cur_assets(std::ostream& os) {
 //shows assets of all players
 std::ostream& all_assets(std::ostream& os) {
 	/*int players = Game_data.get_noPlayers();
-	os << "Assets of Currenlty Active players:\n";
-	for (int i = 0; i <= players; ++i) {
-		os << "Playerno. " << i << " : ";
-		Game_data.owned_assets(i, os) << "/n";	
-	}*/
+	  os << "Assets of Currenlty Active players:\n";
+	  for (int i = 0; i <= players; ++i) {
+	  os << "Playerno. " << i << " : ";
+	  Game_data.owned_assets(i, os) << "/n";	
+	  }*/
 	return os;
 }
-	
+
 
 int main() {
 	PrintBoard();
