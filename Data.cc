@@ -65,7 +65,7 @@ Data::Data(std::istream& is) {					// for loading savefile
 	int improvLevel;
 	while (!is.eof()) {
 		iss >> tile >> owner >> improvLevel;
-		board.emplace_back(std::make_unique<BoardTiles>(tile, owner, improvLevel);
+		board.emplace_back(std::make_unique<BoardTiles>(tile, owner, improvLevel));
 	}
 }
 
@@ -79,6 +79,8 @@ int Data::get_numPlayer() {
 	int num = players.size();
 	return num;
 }
+int Data::get_
+int Data::get_BalPlayer(int i) { return *(players[i]).get_balance(); }
 
 //other methods
 int Data::get_NetWorth() {

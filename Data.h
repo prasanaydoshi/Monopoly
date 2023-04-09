@@ -46,6 +46,7 @@ public:
 	char get_piecePlayer(int i);
 	int get_posPlayer(int i);
 	int get_numPlayer(int i);
+	int get_BalPlayer(int i);
 
 	std::string get_TileName(i);		// must be implemented
 	std::string get_TileOwner(i);		//
