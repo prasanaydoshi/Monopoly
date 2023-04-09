@@ -14,12 +14,16 @@ int Player::No_ownedProperties() const { return owned.size(); }
 int Player::get_TileNo(int i) const { return owned[i]; }
 
 // mutators
-void Player::JumpTo_posn(int a) { posn = a; }
+void Player::JumpTo_posn(int a) { posn = a; 
+//will mostly be need to be used with jail
+
+}
 void Player::MovePosn_By(int a) {
 	posn += a;
 	if (posn > 39) {
 		posn = posn % 39;
         }
+		//call go function and increment the player bal by 200
 }
 
 void Player::pay(int a) {
