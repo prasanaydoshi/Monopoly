@@ -62,14 +62,10 @@ void Data::printBoard(){
 	std::vector<int> impLevel;
 	for(int i = 0; i < Tiles.size(); ++i){
 		if(Tiles[i]->isPurchasable()){
-			if((Tiles[i]->getBlock() == "Gyms") || (Tiles[i]->getBlock() == "Residences")){
-				impLevel.push_back(0);
-			}else{
+			if(Tiles[i]->getBlock() != "Gyms" && Tiles[i]->getBlock() != "Residences"){
 				AcademicBuilding *t = dynamic_cast<AcademicBuilding*>(Tiles[i]);
 				impLevel.push_back(t->getImpLevel());
 			}
-		}else{
-			impLevel.push_back(0);
 		}
 	}
 	std::vector<int> pos;
@@ -80,7 +76,6 @@ void Data::printBoard(){
 	for(int i = 0; i < players.size(); ++i){
 		piece.push_back(players[i]->get_piece());
 	}
-	//add(2, 3);
 	semi_main(impLevel, pos, piece);
 }
 
