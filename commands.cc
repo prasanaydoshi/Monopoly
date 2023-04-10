@@ -8,6 +8,10 @@ Commands::~Commands(){
     delete data;
 }
 
+bool Commands::getRolled() {
+	return rolled;
+}
+
 void Commands::initializeGame(std::string fileName){
     std::ifstream file(fileName);
 	if(!file) {
@@ -19,10 +23,13 @@ void Commands::initializeGame(std::string fileName){
     data->getPlayerNames();
 }
 
-void Commands::saveGame(){
+void Commands::save(){
     std::string fileName;
+    std::cout << "Enter the filename: " << std::endl;
     std::cin >> fileName;
     std::ofstream file(fileName);
+    data->save(file);					//
+    file.close();
     /*if(!file){
         std::cerr << "Failed to save to file"
     }*/
@@ -43,17 +50,32 @@ void Commands::initializePlayers(int a){
     std::cout << "Switched Players." << std::endl;
 }
 
-void Commands::roll(int i){
-    if(rolled){
-        std::cout << "already rolled" << std::endl;
-        return;
-    }
-    std::cout << "enter die1" << std::endl;
-    int die1 = 15;
-    std::cin >> die1;
-    std::cout << "enter die2" << std::endl;
-    int die2 = 15;
-    std::cin >> die2;
+int Commands::dicethrow() {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(1, 6);
+
+	// Generate a random number between 1 and 6
+	int result = dis(gen);
+	return result;
+}
+
+void Commands::roll(bool test, int i){
+	int die1 = 0;
+	int die2 = 0;
+	if (test == true) {
+		std::cout << "enter die1" << std::endl;
+		std::cin >> die1;
+    		std::cout << "enter die2" << std::endl;
+		std::cin >> die2;
+	} else {
+		die1 = dicethrow();
+		die2 = dicethrow();
+	}
+    	if(rolled){
+        	std::cout << "already rolled" << std::endl;
+        	return;
+    	}
     std::cout << "Rolled a " << die1 << " & " << die2 << ". Total " << die1 + die2 << std::endl;
     if(data->playerInJail()){
         //check if they roll doubles or pay right
@@ -62,7 +84,7 @@ void Commands::roll(int i){
             data->leaveTimsJail(true);
             data->checkTile(die1 + die2);
             std::cout << "Rolling again." << std::endl;
-            roll(++i);
+            roll(test, ++i);
         }else{
             if(data->leaveTimsJail(false)){
                 std::cout << "In jail, try again next turn." << std::endl;
@@ -75,7 +97,7 @@ void Commands::roll(int i){
                 std::cout << "You rolled doubles!" << std::endl;
                 data->checkTile(die1 + die2);
                 std::cout << "Rolling again." << std::endl;
-                roll(++i);
+                roll(test, ++i);
             }else{
                 std::cout << "Rolled doubles three times. You are going to jail." << std::endl;
                 data->goTimsJail();
@@ -97,6 +119,7 @@ void Commands::next(){
         player = 0;
     }
     data->setCurPlayer(player);
+    std::cout << "switched to player: " << data->getName() << std::endl;
 }
 
 void Commands::trade(){
@@ -144,5 +167,5 @@ void Commands::assets(){
 }
 
 void Commands::all(){
-    
+
 }

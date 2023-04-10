@@ -31,8 +31,10 @@ public:
 
 	//set and save board
 	void loadOldGame(std::istream& is);
-	//void saveGame(std::ostream& os);
-
+	void save(std::ostream& os);
+	
+	int getNoPlayers();					//
+	int curPlayerNo();					//
 	//void printBlock();
 	void printBoard();
 
@@ -67,7 +69,7 @@ public:
 	//Player *curPlayer();
 
 	//nested accessors
-	//std::string get_namePlayer(int i);
+	std::string getName();
 	//char get_piecePlayer(int i);
 	int get_posPlayer(int i);
 
