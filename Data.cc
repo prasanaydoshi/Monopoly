@@ -4,7 +4,7 @@
 //constructor
 Data::Data() : 
 	current{nullptr}, bank{nullptr}, 
-	Tiles {
+	board {
 		std::make_unique<Notpurchasable>("COLLECT OSAP", "Collect OSAP", 0, false),
 		std::make_unique<AcademicBuilding>("AL", "Arts1", 40, true, 50, 
 			{2, 10, 30, 90, 160, 250}),
@@ -93,9 +93,9 @@ Data::Data(std::istream& is) {					// for loading savefile
 
 // 
 void Data::printBlock(){
-	//std::cout << Tiles.size() << std::endl;
+	//std::cout << board.size() << std::endl;
 	for(int i = 0; i < 40; ++i){
-		std::cout << Tiles[i]->getName() << std::endl;
+		std::cout << board[i]->getName() << std::endl;
 	}
 }
 
@@ -105,16 +105,16 @@ void Data::checkTile(int i){
 		OSAPcol();
 		current->JumpTo_posn(current->get_posn() - 39);
 	}
-	std::cout << "Current Tile: " << Tiles[current->get_posn()]->getName() << std::endl;
-	if(Tiles[current->get_posn()]->isPurchasable()){
+	std::cout << "Current Tile: " << board[current->get_posn()]->getName() << std::endl;
+	if(board[current->get_posn()]->isPurchasable()){
 
-		if(Tiles[current->get_posn()]->getOwner() == "Bank"){
-			std::cout << "Do you want to buy " << Tiles[current->get_posn()]->getName() << ". Yes/No" << std::endl;
+		if(board[current->get_posn()]->getOwner() == "Bank"){
+			std::cout << "Do you want to buy " << board[current->get_posn()]->getName() << ". Yes/No" << std::endl;
 			std::string response;
 			std::cin >> response;
 			if(response == "Yes"){
 				if(buy()){
-					std::cout << "Bought " << Tiles[current->get_posn()]->getName() << "." << std::endl;
+					std::cout << "Bought " << board[current->get_posn()]->getName() << "." << std::endl;
 				}else{
 					std::cout << "Going for auction." << std::endl;
 					//auction();
@@ -129,18 +129,18 @@ void Data::checkTile(int i){
 
 	}else{
 		std::cout << "not purchasable tile" << std::endl;
-		if(Tiles[current->get_posn()]->getName() == "GO TO TIMS"){
+		if(board[current->get_posn()]->getName() == "GO TO TIMS"){
 			std::cout << "going to jail" << std::endl;
 			goTimsJail();
-		}else if(Tiles[current->get_posn()]->getName() == "GOOSE NESTING"){
+		}else if(board[current->get_posn()]->getName() == "GOOSE NESTING"){
 
-		}else if(Tiles[current->get_posn()]->getName() == "TUITION"){
+		}else if(board[current->get_posn()]->getName() == "TUITION"){
 
-		}else if(Tiles[current->get_posn()]->getName() == "COOP FEE"){
+		}else if(board[current->get_posn()]->getName() == "COOP FEE"){
 
-		}else if(Tiles[current->get_posn()]->getName() == "SLC"){
+		}else if(board[current->get_posn()]->getName() == "SLC"){
 
-		}else if(Tiles[current->get_posn()]->getName() == "NEEDLES HALL"){
+		}else if(board[current->get_posn()]->getName() == "NEEDLES HALL"){
 
 		}
 	}
@@ -150,7 +150,7 @@ int Data::ownsProperty(std::string property){
 
 	std::vector<int> tmpOwned = current->getProperties();
 	for(int i = 0; i < tmpOwned.size(); ++i){
-		if((Tiles[tmpOwned[i]]->isPurchasable() != false) && (Tiles[tmpOwned[i]]->getName() == property)){
+		if((board[tmpOwned[i]]->isPurchasable() != false) && (board[tmpOwned[i]]->getName() == property)){
 			return tmpOwned[i];
 		}
 	}
@@ -193,7 +193,7 @@ void Data::improve(std::string property){
 void Data::unimprove(std::string property){
 	int index = ownsProperty(property);
 	if (index >= 0){
-		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(board[index]);
 		if(tmp->getImpLevel() != 0){
 			tmp->unimprove();
 			current->addMoney(tmp->getImpCost()/2);
@@ -278,12 +278,12 @@ bool Data::playerInJail() const{
 }
 
 bool Data::buy(){
-	if((current->get_balance()-Tiles[current->get_posn()]->getPurcahseCost()) < 0){
+	if((current->get_balance()-board[current->get_posn()]->getPurcahseCost()) < 0){
 		std::cout << "Balance to low. Can't buy." << std::endl;
 		return false;
 	}
-	Tiles[current->get_posn()]->setOwner(current->get_name());
-	current->subMoney(Tiles[current->get_posn()]->getPurcahseCost());
+	board[current->get_posn()]->setOwner(current->get_name());
+	current->subMoney(board[current->get_posn()]->getPurcahseCost());
 	current->addProperty(current->get_posn());
 	return true;
 }
