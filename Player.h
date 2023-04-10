@@ -1,40 +1,48 @@
 #ifndef PLAYER
 #define PLAYER
 
-#include <map>
+#include <iostream>
+#include <vector>
 #include <string>
 #include "Property.h"
 
 class Player {
+private:
 	std::string name; 		//name of player
 	char piece;        		// Piece representing player on board (G, B, D, P, S, $, L, T)
 	int posn;			// current posn of player
 	int balance;			// money owned by player
 	int timsCups;			// no. of tims cups player owns
-//	std::map<std::string, int> owned_properties;   // subject to change
 	std::vector<int> owned;
 	bool inJail;
-//	std::vector<Property*> owned;
+	int jailRolls;
 	
 public:
 	// constructor
-	Player(std::string, char);      // player name, piece are entered during player construction
+	Player(std::string name, char piece);      // player name, piece are entered during player construction
 					// at start, posn = 0, balance = 1500, timsCups = 0;
 	
 	// accessors
-	std::string get_name() const;
-	char get_piece() const;
-	int get_posn() const;
-	int get_balance() const;
-	int get_timsCups() const;
-	int No_ownedProperties() const;
-	int get_TileNo(int i) const;
+	std::string getName() const;
+	char getPiece() const;
+	int getPosn() const;
+	int getBalance() const;
+	int getTimsCups() const;
+	std::vector<int> getProperties() const;
+	bool isInJail() const;
+	int jailRollsCount() const;
+
+//	int No_ownedProperties() const;
+//	int get_TileNo(int i) const;
 
 	// mutators
-	void JumpTo_posn(int a);
-	void MovePosn_By(int a);
-	void pay(int a);
-	void buy(int a);
+	void jumpToPosn(int a);
+	void movePosnBy(int a);
+	void subMoney(int a);
+	void addMoney(int a);
+	void addProperty(int a);
+	void setInJail();
+	bool setJailRolls();
 	
 	//methods
 	void nextposn();                // moves player to next position this is a method 
@@ -43,7 +51,7 @@ public:
 	//needs tile info, so moved higher, into data for now
 //	int calc_NetWorth();		// Looks at balance and property values(including immprovements)
 					// and calculates the net worth of the player
-	std::string get_properties();   // shows properties player owns
+//	std::string get_properties();   // shows properties player owns
 					// might later move this property to class owning player
 					// as this is the only field causing need of Big5
 };
