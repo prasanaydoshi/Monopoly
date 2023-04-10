@@ -144,5 +144,5 @@ void Commands::assets(){
 }
 
 void Commands::all(){
-
+    
 }
