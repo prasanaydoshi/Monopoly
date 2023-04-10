@@ -1,5 +1,5 @@
-#ifndef _board_h_
-#define _board_h_
+#ifndef _BOARD_H_
+#define _BOARD_H_
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,7 +18,7 @@ public:
 	BoardTiles();
 
 	//normal constructor
-	BoardTiles(std::string, std::string, int purchaseCost = 0, bool purchasable = true);
+	BoardTiles(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
 	//copy and move constructors
 	//virtual BoardTiles(const BoardTiles &other);
 	//virtual BoardTiles(BoardTiles &&other);
@@ -50,31 +50,54 @@ public:
 	//default constructor
 	AcademicBuilding();
 	//constructor
-	AcademicBuilding(std::string, std::string, int purchaseCost = 0, 
+	AcademicBuilding(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true,
+		       	int impCost = 0, std::vector<int> tuitionCost = {0, 0, 0, 0, 0});
 	//copy and move constructors
-	virtual AcademicBuilding(const AcademicBuilding &other) override;
-	vritual AcademicBuilding(AcademicBuilding &&other) override;
+	//virtual AcademicBuilding(const AcademicBuilding &other) override;
+	//vritual AcademicBuilding(AcademicBuilding &&other) override;
 	//copy and move assignment operators
-	virtual AcademicBuilding&operator=(const AcademicBuilding &other) const;
-	virtual AcademicBuilding&operator=(AcademicBuilding &&other) const;
+	//virtual AcademicBuilding&operator=(const AcademicBuilding &other) const;
+	//virtual AcademicBuilding&operator=(AcademicBuilding &&other) const;
 
 	//destructors
-	virtual ~AcademicBuilding();
+	virtual ~AcademicBuilding() override;
+
+	int getImpLevel();
 
 	int getTuition() override;
 	void improve();
 	void unimprove();
-	void changeMortage(bool current);
-	int getImprovements();
+	void changeMortage();
+	int getImpCost();
 };
 
 class Gym : public BoardTiles{
 public:
+	//constructor
+	Gym(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
+	//destructor
+	virtual ~Gym() {}
+	//getTution function
 	int getTuition() override;
 };
 
 class Residences : public BoardTiles{
 public:
+	//constructor
+	Residence(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
+	//destructor
+	virtual ~Residence() { }
+	//getTution function
+	int getTuition() override;
+};
+
+class Notpurchasable : public BoardTiles{
+public:
+	//constructor
+	Notpurchasable(std::string name, std::string block);
+	//destructor
+	virtual ~Notpurchasable() {};
+	//getTuition function
 	int getTuition() override;
 };
 
