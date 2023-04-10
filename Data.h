@@ -26,7 +26,7 @@ public:
 	//	~Data();
 
 	//accessor
-	Player *curPlayer();
+	Player* curPlayer();
 
 	//MISSING
 	bool auction(int i);				// auctions a buliding 
@@ -39,7 +39,6 @@ public:
 	void getPlayerNames();				//? prints out all names of players
 	
 	//nested accessors
-	void printBlock();
 	bool playerInJail() const;
 	int ownsProperty(std::string property);
 
@@ -58,8 +57,8 @@ public:
 	void improve(std::string property);
 	void unimprove(std::string property);
 
-	int get_NetWorth();
-	std::string owned_assets(int i);
+	int getNetWorth();
+	std::string ownedAssets(int i);
 	void save(std::ostream& os) const;
 	bool playerInJail() const;		// returns whether player is in jail or not rn
 	bool buy(int i);				// purchases a building
