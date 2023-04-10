@@ -19,10 +19,13 @@ void Commands::initializeGame(std::string fileName){
     data->getPlayerNames();
 }
 
-void Commands::saveGame(){
+void Commands::save(){
     std::string fileName;
+    std::cout << "Enter the filename: " << std::endl;
     std::cin >> fileName;
     std::ofstream file(fileName);
+    data->save(file);					//
+    file.close();
     /*if(!file){
         std::cerr << "Failed to save to file"
     }*/

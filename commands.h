@@ -16,7 +16,7 @@ class Commands{
 	Commands();
 	~Commands();
 	void initializeGame(std::string fileName);
-	void saveGame();
+	void save();
 	void initializePlayers(int a);
 	void roll(int i);
 	 void next();

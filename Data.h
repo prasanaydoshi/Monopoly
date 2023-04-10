@@ -31,8 +31,10 @@ public:
 
 	//set and save board
 	void loadOldGame(std::istream& is);
-	//void saveGame(std::ostream& os);
-
+	void save(std::ostream& os);
+	
+	int getNoPlayers();					//
+	int curPlayerNo();					//
 	//void printBlock();
 	void printBoard();
 

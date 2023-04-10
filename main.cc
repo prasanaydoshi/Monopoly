@@ -23,28 +23,30 @@ int main(int argc, char* argv[]){
 		commands->initializePlayers(i);
 	}
 
-	std::string com;
+	std::string input;
 
-	while(cin >> com){
-		if(com == "roll"){
+	while(cin >> input){
+		if(input == "quit") {			//quits from game
+			break;
+		} else if(input == "roll"){		//rolls dice
 			commands->roll(1);
 			//cout << "Rolled a " << i << "." << endl;
-		}else if(com == "next"){
+		}else if(input == "next"){		//ends current players turn,swaps to next Player
 			commands->next();
-		}else if(com == "trade"){
+		}else if(input == "trade"){		//trading owned properties/cash
 			commands->trade();
-		}else if(com == "improve"){
+		}else if(input == "improve"){		//improve owned property
 			commands->improve();
-		}else if(com == "mortgage"){
+		}else if(input == "mortgage"){		//mortgage owned property
 			commands->mortage();
-		}else if(com == "unmortgage"){
+		}else if(input == "unmortgage"){	//unmortgage owned property
 			commands->unmortage();
-		}else if(com == "bankrupt"){
+		}else if(input == "bankrupt"){		//declare bankruptcy
 			commands->assets();
-		}else if(com == "assets"){
+		}else if(input == "assets"){		//show all assets
 			commands->all();
-		}else if(com == "save"){
-			commands->saveGame();
+		}else if(input == "save"){		//saves gamestate
+			commands->save();
 		}else{
 			std::cout << "Invalid Input" << std::endl;
 		}

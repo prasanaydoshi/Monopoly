@@ -11,7 +11,7 @@ char charRep(int x) {
 }*/
 
 void add_spaces(std::vector <std::string>& coord_spaces) {
-	for (int it = 0; it < coord_spaces.size(); ++it) {
+	for (int it = 0; it < static_cast<int>(coord_spaces.size()); ++it) {
 		if (coord_spaces[it].length() < 8) {
 			for (int i = coord_spaces[it].length(); i < 8; i++) {
 				coord_spaces[it].append(" ");
@@ -43,7 +43,7 @@ void semi_main(std::vector<int> imp, std::vector<int> getPos, std::vector<char> 
 	//std::vector <int> get_pos {0,0,0,0,0,0};
 	//std::vector <char> get_char {'G','B','D','P','S','$'};
 
-	for(int i = 0; i < getPos.size(); i++) {
+	for(int i = 0; i < static_cast<int>(getPos.size()); i++) {
 		std::string tmp_char;
 		//function called get_posPlayer(i)
 		//int pos = get_pos[i];
@@ -51,7 +51,7 @@ void semi_main(std::vector<int> imp, std::vector<int> getPos, std::vector<char> 
 		tmp_char = get_char[i]; //should be get_piecePlayer(i);
 		coord[getPos[i]].append(tmp_char);
 	}
-	for(int i = 0; i < properties.size(); i++) {
+	for(int i = 0; i < static_cast<int>(properties.size()); i++) {
 		if(imp[i] == 5) {
 			imp_coord[i].append("^^^^C");
 		} else if (imp[i] == 4) {
@@ -188,7 +188,7 @@ std::ostream& cur_assets(std::ostream& os) {
 
 //shows assets of all players
 std::ostream& all_assets(std::ostream& os) {
-	/*int players = Game_data.get_noPlayers();
+	*int players = Game_data.get_noPlayers();
 	  os << "Assets of Currenlty Active players:\n";
 	  for (int i = 0; i <= players; ++i) {
 	  os << "Playerno. " << i << " : ";

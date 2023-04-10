@@ -6,7 +6,7 @@
 #include <vector>
 
 class BoardTiles{
-
+private:					//
 	std::string name;
 	std::string block;
 	int purchaseCost;
@@ -43,7 +43,7 @@ public:
 };
  
 class AcademicBuilding : public BoardTiles{
-
+private:					//
 	std::vector<int> tuitionCost;
 	int impCost;
 	bool mortgage;
