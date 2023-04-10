@@ -50,8 +50,9 @@ void semi_main() {
 
 	for(int i = 0; i < noPlay; i++) {
 		string tmp_char;
-		int pos = get_pos[i]; //function called get_posPlayer(i); which return position given a int
-		tmp_char = charRep(i); //should be get_piecePlayer(i);
+		int pos = getPosPlayer(i); //function called get_posPlayer(i); 
+		//which return position given a int
+		tmp_char = getPiecePlayer(i); //should be get_piecePlayer(i);
 		coord[pos].append(tmp_char);
 	}
 	for(int i = 0; i < properties.size(); i++) {
