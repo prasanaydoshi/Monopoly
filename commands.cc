@@ -140,7 +140,7 @@ bool Commands::bankrupt(){
 }
 
 void Commands::assets(){
-
+    data->assets();
 }
 
 void Commands::all(){

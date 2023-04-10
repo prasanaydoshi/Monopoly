@@ -40,8 +40,10 @@ int main(int argc, char* argv[]){
 		}else if(com == "unmortgage"){
 			commands->unmortage();
 		}else if(com == "bankrupt"){
-			commands->assets();
+			commands->bankrupt();
 		}else if(com == "assets"){
+			commands->assets();
+		}else if(com == "all"){
 			commands->all();
 		}else if(com == "save"){
 			commands->saveGame();

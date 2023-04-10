@@ -45,6 +45,10 @@ public:
 	void mortgage(std::string property);
 	void unmortage(std::string property);
 	int ownsProperty(std::string property);
+	bool checksMonopoly(std::string property);
+	int getPropertyIndex(std::string property);
+	std::vector<int> propertiesOnMonopoly(std::string block);
+	void assets();
 
 	//Player in jail
 	bool playerInJail() const;
