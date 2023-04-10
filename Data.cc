@@ -153,6 +153,45 @@ void Data::unimprove(std::string property){
 	}
 }
 
+void Data::mortgage(std::string property){
+	int index = ownsProperty(property);
+	if(index >= 0){
+		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+		if(tmp->getMortgage() != true){
+			if(tmp->getImpLevel() > 0){
+				std::cout << "There are " << tmp->getImpLevel() << " improvements. Unimprove before mortgaging " << tmp->getName() << "." << std::endl;
+				return;
+			}
+			tmp->changeMortage();
+			std::cout << current->get_balance() << std::endl;
+			current->addMoney(tmp->getPurcahseCost()/2);
+			std::cout << tmp->getName() << " mortgaged." << " New balance is " << current->get_balance() << "." << std::endl;
+		}else{
+			std::cout << tmp->getName() << " already mortgaged." << std::endl;
+		}
+	}
+}
+
+void Data::unmortage(std::string property){
+	int index = ownsProperty(property);
+	if(index >= 0){
+		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+		if(tmp->getMortgage() != false){
+			if(current->get_balance() < (tmp->getPurcahseCost()/0.6)){
+				std::cout << "Don't have enough money. Need " << tmp->getPurcahseCost()/0.6 << std::endl;
+				return;
+			}
+			tmp->changeMortage();
+			std::cout << current->get_balance() << std::endl;
+			current->subMoney(tmp->getPurcahseCost()/0.6);
+			std::cout << current->get_balance() << std::endl;
+			std::cout << tmp->getName() << " unmortgaged." << " New balance is " << current->get_balance() << "." << std::endl;
+			}else{
+				std::cout << tmp->getName() << " already unmortgaged." << std::endl;
+			}
+	}
+}
+
 int Data::ownsProperty(std::string property){
 	
 	std::vector<int> tmpOwned = current->getProperties();
@@ -189,7 +228,9 @@ bool Data::leaveTimsJail(bool f){
 }
 
 void Data::OSAPcol() {
+	std::cout << "Passed go. " << current->get_balance() << " is the new balance." << std::endl;
 	(*current).addMoney(200);
+	std::cout << "Passed go. " << current->get_balance() << " is the new balance." << std::endl;
 }
 /*
 void Data::getRent(int i) const{

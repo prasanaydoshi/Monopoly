@@ -37,7 +37,10 @@ public:
 	void getRent(int i) const;*/
 	void improve(std::string property);
 	void unimprove(std::string property);
+	void mortgage(std::string property);
+	void unmortage(std::string property);
 	int ownsProperty(std::string property);
+	
 
 	void goTimsJail();
 	bool leaveTimsJail(bool f);

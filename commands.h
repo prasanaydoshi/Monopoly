@@ -21,8 +21,8 @@ class Commands{
 	 //note name refers to another player...whats your way of finding the right player?not sure if string is the right data type maybe we should passs a player??
 
 	 void improve();
-	 void mortage(std::string property);
-	 void unmortage(std::string property);                                            
+	 void mortage();
+	 void unmortage();                                            
 	 bool bankrupt();
 	 void assets();
 	 void all();

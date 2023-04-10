@@ -90,22 +90,19 @@ void Commands::improve(){
         data->improve(property);
     }else if(buy == "sell"){
         data->unimprove(property);
-    }/*
-    std::cout << property << std::endl;
-    int t = data->ownsProperty(property);
-    std::cout << t << std::endl;
-    /*
-    if( >= 0){
-        std::cout << "You do own it" << std::endl;
-    }*/
+    }
 }
 
-void Commands::mortage(std::string property){
-
+void Commands::mortage(){
+    std::string property;
+    std::cin >> property;
+    data->mortgage(property);
 }
 
-void Commands::unmortage(std::string property){
-
+void Commands::unmortage(){
+    std::string property;
+    std::cin >> property;
+    data->unmortage(property);
 }
 
 bool Commands::bankrupt(){

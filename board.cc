@@ -43,6 +43,10 @@ int AcademicBuilding::getImpLevel(){
     return impLevel;
 }
 
+bool AcademicBuilding::getMortgage(){
+    return mortgage;
+}
+
 int AcademicBuilding::getTuition(){
     return tuitionCost[impLevel];
 }
@@ -55,13 +59,12 @@ void AcademicBuilding::unimprove(){
     --impLevel;
 }
 
-bool AcademicBuilding::changeMortage(){
+void AcademicBuilding::changeMortage(){
     if(mortgage == false){
         mortgage = true;
-        return mortgage;
+        return;
     }
     mortgage = false;
-    return mortgage;
 }
 
 int AcademicBuilding::getImpCost(){

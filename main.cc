@@ -22,6 +22,10 @@ int main(){
 			commands->next();
 		}else if(com == "improve"){
 			commands->improve();
+		}else if(com == "mortgage"){
+			commands->mortage();
+		}else if(com == "unmortgage"){
+			commands->unmortage();
 		}
 	}
 	delete commands;

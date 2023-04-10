@@ -60,11 +60,12 @@ public:
 	~AcademicBuilding() override;
 
 	int getImpLevel();
+	bool getMortgage();
 
 	int getTuition() override;
 	void improve();
 	void unimprove();
-	bool changeMortage();
+	void changeMortage();
 	int getImpCost();
 };
 
