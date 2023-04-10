@@ -48,9 +48,9 @@ public:
 	int getNumPlayer(int i);
 	int getBalPlayer(int i);
 
-	std::string getTileName(i);		// must be implemented
-	std::string getTileOwner(i);		//
-	int getTileImpLevel(i);		//
+	std::string getTileName(int i);		// must be implemented
+	std::string getTileOwner(int i);		//
+	int getTileImpLevel(int i);		//
 
 	//additional methods
 	void checkTile(int i);
