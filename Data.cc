@@ -92,9 +92,127 @@ Data::Data(std::istream& is) {					// for loading savefile
 }
 
 // 
+void Data::printBlock(){
+	//std::cout << Tiles.size() << std::endl;
+	for(int i = 0; i < 40; ++i){
+		std::cout << Tiles[i]->getName() << std::endl;
+	}
+}
+
+void Data::checkTile(int i){
+	current->MovePosn_By(i);
+	if(current->get_posn() > 39){
+		OSAPcol();
+		current->JumpTo_posn(current->get_posn() - 39);
+	}
+	std::cout << "Current Tile: " << Tiles[current->get_posn()]->getName() << std::endl;
+	if(Tiles[current->get_posn()]->isPurchasable()){
+
+		if(Tiles[current->get_posn()]->getOwner() == "Bank"){
+			std::cout << "Do you want to buy " << Tiles[current->get_posn()]->getName() << ". Yes/No" << std::endl;
+			std::string response;
+			std::cin >> response;
+			if(response == "Yes"){
+				if(buy()){
+					std::cout << "Bought " << Tiles[current->get_posn()]->getName() << "." << std::endl;
+				}else{
+					std::cout << "Going for auction." << std::endl;
+					//auction();
+				}
+			}else{
+				//auction function
+			}
+
+		}else{
+
+		}
+
+	}else{
+		std::cout << "not purchasable tile" << std::endl;
+		if(Tiles[current->get_posn()]->getName() == "GO TO TIMS"){
+			std::cout << "going to jail" << std::endl;
+			goTimsJail();
+		}else if(Tiles[current->get_posn()]->getName() == "GOOSE NESTING"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "TUITION"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "COOP FEE"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "SLC"){
+
+		}else if(Tiles[current->get_posn()]->getName() == "NEEDLES HALL"){
+
+		}
+	}
+}
+
+int Data::ownsProperty(std::string property){
+
+	std::vector<int> tmpOwned = current->getProperties();
+	for(int i = 0; i < tmpOwned.size(); ++i){
+		if((Tiles[tmpOwned[i]]->isPurchasable() != false) && (Tiles[tmpOwned[i]]->getName() == property)){
+			return tmpOwned[i];
+		}
+	}
+	std::cout << "You don't own this property." << std::endl;
+	return -1;
+}
+
+bool Data::leaveTimsJail(bool f){
+	if(current->setJailRolls()){
+		std::cout << "Must exit jail. Pay 50." << std:: endl;
+		current->setInJail();
+		if((current->get_balance()-50) < 0){
+			std::cout << "Balance to low. Can't buy. Mortgage properties or declare bankruptcy." << std::endl;
+			//mortage and bankruptcy
+		}else{
+			current->subMoney(50);
+		}
+		return false;
+	}
+	if(f){
+		current->setInJail();
+	}
+	return true;
+}
+
+void Data::improve(std::string property){
+	int index = ownsProperty(property);
+	if (index >= 0){
+		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+		if((tmp->getImpLevel() < 5) && ((current->get_balance()-tmp->getImpCost()) > 0)){
+			tmp->improve();
+			current->subMoney(tmp->getImpCost());
+			std::cout << tmp->getName() << " has " << tmp->getImpLevel() << " improvements." << std::endl;
+		}else{
+			std::cout << tmp->getName() << " currently at improve level " << tmp->getImpLevel() << ". Can't improve it, either maxed out or not enough funds." << std::endl;
+		}
+	}
+}
+
+void Data::unimprove(std::string property){
+	int index = ownsProperty(property);
+	if (index >= 0){
+		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+		if(tmp->getImpLevel() != 0){
+			tmp->unimprove();
+			current->addMoney(tmp->getImpCost()/2);
+			std::cout << tmp->getName() << " has " << tmp->getImpLevel() << " improvements." << std::endl;
+		}else{
+			std::cout << tmp->getName() << " currently at improve level " << tmp->getImpLevel() << ". Can't unimprove it anymore." << std::endl;
+		}
+	}
+}
+
 
 //nested accessors
 std::string Data::get_namePlayer(int i) { return players[i]->get_name(); }
+void Data::getPlayerNames(){
+	for(int i = 0; i < players.size(); ++i){
+		std::cout << "Player Names: " << players[i]->get_name() << ", Piece:" << players[i]->get_piece() << std::endl;
+	}
+}
+
 char Data::get_piecePlayer(int i) { return players[i]->get_piece(); }
 int Data::get_posPlayer(int i) { return players[i]->get_posn(); }
 int Data::get_numPlayer() {
