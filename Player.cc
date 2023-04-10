@@ -21,10 +21,7 @@ void Player::jumpToPosn(int a) { posn = a; }
 }
 
 void Player::movePosnBy(int a) {
-	posn += a;
-	if (posn > 39) {
-		posn = posn % 39;
-        }
+	posn = (posn + a) % 39;
 		//call go function and increment the player bal by 200
 }
 
@@ -32,7 +29,7 @@ void Player::subMoney(int a) { balance -= a; }
 
 void Player::addMoney(int a) { balance += a; }
 
-void Player::addPropery(int a) { owned.push_back(a); }
+void Player::addProperty(int a) { owned.push_back(a); }
 
 void Player::setInJail() {
 	if (inJail) {
@@ -45,10 +42,7 @@ void Player::setInJail() {
 
 bool Player::setJailRolls() {
 	++jailRolls;
-	if (jailRolls >= 3) {
-		return true;
-	}
-	return false;
+	return (jailRolls >= 3);
 }
 
 //other methods
