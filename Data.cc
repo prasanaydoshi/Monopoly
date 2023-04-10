@@ -8,9 +8,9 @@ Data::Data() :
 		std::make_unique<Notpurchasable>("COLLECT OSAP", "Collect OSAP", 0, false),
 		std::make_unique<AcademicBuilding>("AL", "Arts1", 40, true, 50, 
 			{2, 10, 30, 90, 160, 250}),
-		std::make_unique<Notpurchasable>("SLC", "SLC", 0, false);
+		std::make_unique<Notpurchasable>("SLC", "SLC", 0, false),
 		std::make_unique<AcademicBuilding>("ML", "Arts1", 60, true, 50, 
-			{4, 20, 60, 180, 320, 450});
+			{4, 20, 60, 180, 320, 450}),
 		std::make_unique<Notpurchasable>("TUITION", "Tuition", 0, false);
 		std::make_unique<Residence>("MKV", "Residences", 200, true),
 		std::make_unique<AcademicBuilding>("ECH", "Arts2", 100, true, 50, 
@@ -80,13 +80,13 @@ Data::Data(std::istream& is) {					// for loading savefile
 		int money;
 		int position;
 		is >> name >> piece >> timsCups >> money >> position;
-		players.emplace_back(std::make_unique<Player>(name, piece, timsCups, money, poisition));
+		players.emplace_back(std::make_unique<Player>(name, piece, timsCups, money, position));
 	}
 	std::string tile;
-	std::string owner
+	std::string owner;
 	int improvLevel;
 	while (!is.eof()) {
-		iss >> tile >> owner >> improvLevel;
+		is >> tile >> owner >> improvLevel;
 		board.emplace_back(std::make_unique<BoardTiles>(tile, owner, improvLevel));
 	}
 }
