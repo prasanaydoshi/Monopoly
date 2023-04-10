@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -g -Wall -MMD -Werror=vla
-OBJECTS = Data.o commands.o Player.o board.o main.o
+OBJECTS = Data.o commands.o Player.o board.o view.o main.o
 DEPENDS = ${OBJECTS:.o=.d}
 EXEC = WatopolyA5
 

@@ -80,8 +80,8 @@ void Data::printBoard(){
 	for(int i = 0; i < players.size(); ++i){
 		piece.push_back(players[i]->get_piece());
 	}
-	add(2, 3);
-	//semi_main(impLevel, pos, piece);
+	//add(2, 3);
+	semi_main(impLevel, pos, piece);
 }
 
 void Data::loadOldGame(std::istream& is){
@@ -151,8 +151,7 @@ void Data::checkTile(int i){
 	}
 	std::cout << "Current Tile: " << Tiles[current->get_posn()]->getName() << std::endl;
 	if(Tiles[current->get_posn()]->isPurchasable()){
-
-		if(Tiles[current->get_posn()]->getOwner() == "Bank"){
+		if(Tiles[current->get_posn()]->getOwner() == "BANK"){
 			std::cout << "Do you want to buy " << Tiles[current->get_posn()]->getName() << ". Yes/No" << std::endl;
 			std::string response;
 			std::cin >> response;

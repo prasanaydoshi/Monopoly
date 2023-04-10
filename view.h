@@ -10,7 +10,7 @@
 
 //int getNoPlay();
 //char charRep(int x);
-int add(int a, int b){ return a + b;}
+//int add(int a, int b){ return a + b;}
 void add_spaces(std::vector <std::string>& coord_spaces);
 void join(int start, int end, std::vector <std::string> coord_join);
 void semi_main(std::vector<int> imp, std::vector<int> getPos, std::vector<char> get_char);
