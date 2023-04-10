@@ -100,21 +100,20 @@ void Data::printBlock(){
 }
 
 void Data::checkTile(int i){
-	current->MovePosn_By(i);
-	if(current->get_posn() > 39){
-		OSAPcol();
-		current->JumpTo_posn(current->get_posn() - 39);
+	current->movePosnBy(i);		//moves current players position by i
+	if(current->getPosn() > 39){	//checks if cur player's posn exceeds 39
+		collectOSAP();		//collects OSAP
+		current->jumpToPosn(current->getPosn() - 39);	//player goes around board
 	}
-	std::cout << "Current Tile: " << board[current->get_posn()]->getName() << std::endl;
-	if(board[current->get_posn()]->isPurchasable()){
-
-		if(board[current->get_posn()]->getOwner() == "Bank"){
-			std::cout << "Do you want to buy " << board[current->get_posn()]->getName() << ". Yes/No" << std::endl;
+	std::cout << "Current Tile: " << board[current->getPosn()]->getName() << std::endl; //prints name of tile cur palyer is on
+	if(board[current->getPosn()]->isPurchasable()){	//checks if tile cur player is on is purchasable
+		if(board[current->getPosn()]->getOwner() == "Bank"){	//check if tile is owned by bank
+			std::cout << "Do you want to buy " << board[current->getPosn()]->getName() << ". Yes/No" << std::endl;
 			std::string response;
 			std::cin >> response;
 			if(response == "Yes"){
 				if(buy()){
-					std::cout << "Bought " << board[current->get_posn()]->getName() << "." << std::endl;
+					std::cout << "Bought " << board[current->getPosn()]->getName() << "." << std::endl;
 				}else{
 					std::cout << "Going for auction." << std::endl;
 					//auction();
@@ -124,24 +123,25 @@ void Data::checkTile(int i){
 			}
 
 		}else{
-
+			//must handle when tile is owned by another player
 		}
 
 	}else{
 		std::cout << "not purchasable tile" << std::endl;
-		if(board[current->get_posn()]->getName() == "GO TO TIMS"){
+		//handle non_purchasable tiles
+		if(board[current->getPosn()]->getName() == "GO TO TIMS"){
 			std::cout << "going to jail" << std::endl;
-			goTimsJail();
-		}else if(board[current->get_posn()]->getName() == "GOOSE NESTING"){
-
-		}else if(board[current->get_posn()]->getName() == "TUITION"){
-
-		}else if(board[current->get_posn()]->getName() == "COOP FEE"){
-
-		}else if(board[current->get_posn()]->getName() == "SLC"){
-
-		}else if(board[current->get_posn()]->getName() == "NEEDLES HALL"){
-
+			goToJail();
+		}else if(board[current->getPosn()]->getName() == "GOOSE NESTING"){
+			// handles what happens at gooseNesting tile
+		}else if(board[current->getPosn()]->getName() == "TUITION"){
+			//handles what happens at Tuition tile
+		}else if(board[current->getPosn()]->getName() == "COOP FEE"){
+			//handles what happens on COOP Fee tile
+		}else if(board[current->getPosn()]->getName() == "SLC"){
+			// handles what happens on SLC tile
+		}else if(board[current->getPosn()]->getName() == "NEEDLES HALL"){
+			// handles what happens on NEEDLES HALL tile
 		}
 	}
 }

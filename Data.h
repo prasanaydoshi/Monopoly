@@ -61,7 +61,7 @@ public:
 	std::string ownedAssets(int i);
 	void save(std::ostream& os) const;
 	bool playerInJail() const;		// returns whether player is in jail or not rn
-	bool buy(int i);				// purchases a building
+	bool buy();				// purchases a building
 	void setCurPlayer(int i);			// changes current player
 	void setPlayers(std::string name, char piece);	// pushes back a new player 
 
