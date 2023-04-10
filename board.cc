@@ -42,8 +42,10 @@ void BoardTiles::changeMortage(){
     mortgage = false;
 }
 
-AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, bool purchasable, int impCost, std::vector<int> tuitionCost)
-    :BoardTiles{name, block, purchaseCost, purchasable}, impCost{impCost}, tuitionCost{tuitionCost}, mortgage{false}, impLevel{0}{
+AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, 
+		bool purchasable, int impCost, std::vector<int> tuitionCost)
+    :BoardTiles{name, block, purchaseCost, purchasable}, impCost{impCost}, 
+    tuitionCost{tuitionCost}, mortgage{false}, impLevel{0}{
 
 }
 

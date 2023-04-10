@@ -42,6 +42,8 @@ public:
 	bool setJailRolls();
 	
 	//methods
+	std::string printPlayer();	//
+
 	void nextposn();                // moves player to next position this is a method 
 					// and not a mutator, as after posn = 40, it resets to 0
 					//

@@ -45,22 +45,38 @@ Data::Data()
 		new Notpurchasable{"COOP FEE", "Coop Fee", 0, false},
 		new AcademicBuilding{"DC", "Math", 400, true, 200, {50, 200, 600, 1400, 1700, 2000}}}{}
 
+int Data::getNoPlayers() { return static_cast<int>(players.size()); } 	//
+
+std::string Data::getName() { return current->get_name(); }
+
 Data::~Data(){
-	for (int i = 0; i < Tiles.size(); ++i){
+	for (int i = 0; i < 40; ++i){
 		delete Tiles[i];
 	}
-	for(int i = 0; i < players.size(); ++i){
+	for(int i = 0; i < getNoPlayers(); ++i){
 		delete players[i];
 	}
 }
 /*
 void Data::printBlock(){
-	//std::cout << Tiles.size() << std::endl;
+	//std::cout << 40 << std::endl;
 }*/
+
+int Data::curPlayerNo() { 					// got an element for this, could remove
+	std::string Name = current->get_name();
+	for (int i = 0; i < getNoPlayers(); ++i) {
+		if (players[i]->get_name() == Name) {
+			return i;
+		}
+	}
+	return 0;
+}
+	
+
 
 void Data::printBoard(){
 	std::vector<int> impLevel;
-	for(int i = 0; i < Tiles.size(); ++i){
+	for(int i = 0; i < 40; ++i){
 		if(Tiles[i]->isPurchasable()){
 			if(Tiles[i]->getBlock() != "Gyms" && Tiles[i]->getBlock() != "Residences"){
 				AcademicBuilding *t = dynamic_cast<AcademicBuilding*>(Tiles[i]);
@@ -69,11 +85,11 @@ void Data::printBoard(){
 		}
 	}
 	std::vector<int> pos;
-	for(int i = 0; i < players.size(); ++i){
+	for(int i = 0; i < getNoPlayers(); ++i){
 		pos.push_back(players[i]->get_posn());
 	}
 	std::vector<char> piece;
-	for(int i = 0; i < players.size(); ++i){
+	for(int i = 0; i < getNoPlayers(); ++i){
 		piece.push_back(players[i]->get_piece());
 	}
 	semi_main(impLevel, pos, piece);
@@ -99,6 +115,18 @@ void Data::loadOldGame(std::istream& is){
 		}
 		players.push_back(new Player{name, piece, position, money, timsCups, inJail, jailTurns});
 	}
+	/*for(int i = 0; i < getNoPlayers(); ++i){
+		setCurPlayer(i);
+		std::cout << current->get_name() << " " << current->get_piece() << " " << current->get_timsCups() << " " << current->get_balance() << " " << current->get_posn() << " ";
+		if(current->get_posn() == 10){
+			if(current->isInJail()){
+				std::cout << current->isInJail() << " " << current->jailRollsCount();
+			}else{
+				std::cout << current->isInJail();	
+			}
+		}
+		std::cout << std::endl;
+	}*/
 	for(int i = 0; i < Tiles.size(); ++i){
 		std::string name;
 		std::string owner;
@@ -117,14 +145,38 @@ void Data::loadOldGame(std::istream& is){
 		}
 	}
 }
-/*
-void Data::saveGame(std::ostream& os){
-	os << players.size() << "\n";
-	int i;
-	for(int i = 0; i < players.size(); ++i){
-		players[i]
+
+void Data::save(std::ostream& os){
+	os << static_cast<int>(getNoPlayers()) << "\n";
+	os << current->printPlayer() << "\n";
+	int finalPlayer = getNoPlayers() - 1;
+	int nowPlayer = curPlayerNo();
+	int i = nowPlayer + 1;
+	//starts at curplayer, prints till last in vector, goes to front of vector,
+	//	prints till curplayer
+	while(true) {
+		if (i == nowPlayer) {
+			break;
+		} else if (i <= finalPlayer) {
+			os << players[i]->printPlayer() << "\n";
+			if (i == finalPlayer) { i = 0;
+			} else { ++i;}
+		}
 	}
-}*/
+	for (int i = 0; i <= 39; ++i) {
+		os << Tiles[i]->getName() << " ";
+		if(Tiles[i]->isPurchasable()) {
+			os << Tiles[i]->getOwner();
+	                if((Tiles[i]->getBlock() != "Gyms") &&(Tiles[i]->getBlock() != "Residences")){
+			        os << " " << dynamic_cast<AcademicBuilding*>(Tiles[i])->getImpLevel();
+			}
+				//Tiles[i]->getImpLevel();
+		} else {
+			os << "BANK";
+		}
+		os << '\n';
+	}
+}
 
 void Data::checkTile(int i){
 	current->MovePosn_By(i);
@@ -232,6 +284,9 @@ void Data::unimprove(std::string property){
 
 void Data::mortgage(std::string property){
 	int index = ownsProperty(property);
+	if(index == -1){
+		return;
+	}
 	if(Tiles[index]->getBlock() != "Gyms" && Tiles[index]->getBlock() != "Residences"){
 		if(checksMonopoly(property)){
 			std::vector<int> tmp = propertiesOnMonopoly(Tiles[index]->getBlock());
@@ -288,7 +343,7 @@ void Data::unmortage(std::string property){
 int Data::ownsProperty(std::string property){
 	
 	std::vector<int> tmpOwned = current->getProperties();
-	for(int i = 0; i < tmpOwned.size(); ++i){
+	for(int i = 0; i < static_cast<int>(tmpOwned.size()); ++i){
 		if((Tiles[tmpOwned[i]]->isPurchasable() != false) && (Tiles[tmpOwned[i]]->getName() == property)){
 			return tmpOwned[i];
 		}
@@ -470,7 +525,7 @@ void Data::getRent(int i) const{
 bool Data::auction(int i) const{
 	std::vector<std::string> playersInAuction;
 	std::vector<std::string> dropped;
-	for(int i = 0; i < players.size(); ++i){
+	for(int i = 0; i < getNoPlayers(); ++i){
 		playersInAuction.push_back(players[i]->get_name());
 	}
 	std::cout << Tiles[i]->getName() << "is up for auction. Highest bidder wins." << std::endl;
@@ -489,7 +544,7 @@ void Data::setPlayers(std::string name, char piece){
 }
 
 void Data::getPlayerNames(){
-	for(int i = 0; i < players.size(); ++i){
+	for(int i = 0; i < getNoPlayers(); ++i){
 		std::cout << "Player Names: " << players[i]->get_name() << ", Piece:" << players[i]->get_piece() << std::endl;
 	}
 }

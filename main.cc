@@ -7,6 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 	Commands *commands = new Commands;
+	bool testing = false; 		// use later, for implementing -testing command line arg
 
 	if(argc > 1){
 		cout << "Loading Game!" << std::endl;
@@ -23,30 +24,32 @@ int main(int argc, char* argv[]){
 		commands->initializePlayers(i);
 	}
 
-	std::string com;
+	std::string input;
 
-	while(cin >> com){
-		if(com == "roll"){
-			commands->roll(1);
+	while(cin >> input){
+		if(input == "quit") {			//quits from game
+			break;
+		} else if(input == "roll"){		//rolls dice
+			commands->roll(testing, 1);
 			//cout << "Rolled a " << i << "." << endl;
-		}else if(com == "next"){
+		}else if(input == "next"){		//ends current players turn,swaps to next Player
 			commands->next();
-		}else if(com == "trade"){
+		}else if(input == "trade"){		//trading owned properties/cash
 			commands->trade();
-		}else if(com == "improve"){
+		}else if(input == "improve"){		//improve owned property
 			commands->improve();
-		}else if(com == "mortgage"){
+		}else if(input == "mortgage"){		//mortgage owned property
 			commands->mortage();
-		}else if(com == "unmortgage"){
+		}else if(input == "unmortgage"){	//unmortgage owned property
 			commands->unmortage();
-		}else if(com == "bankrupt"){
+		}else if(input == "bankrupt"){
 			commands->bankrupt();
-		}else if(com == "assets"){
+		}else if(input == "assets"){
 			commands->assets();
-		}else if(com == "all"){
+		}else if(input == "all"){
 			commands->all();
-		}else if(com == "save"){
-			commands->saveGame();
+		}else if(input == "save"){		//saves gamestate
+			commands->save();
 		}else{
 			std::cout << "Invalid Input" << std::endl;
 		}
