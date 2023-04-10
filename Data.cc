@@ -53,12 +53,35 @@ Data::~Data(){
 		delete players[i];
 	}
 }
-
+/*
 void Data::printBlock(){
 	//std::cout << Tiles.size() << std::endl;
-	for(int i = 0; i < 40; ++i){
-		std::cout << Tiles[i]->getName() << std::endl;
+}*/
+
+void Data::printBoard(){
+	std::vector<int> impLevel;
+	for(int i = 0; i < Tiles.size(); ++i){
+		if(Tiles[i]->isPurchasable()){
+			if((Tiles[i]->getBlock() == "Gyms") || (Tiles[i]->getBlock() == "Residences")){
+				impLevel.push_back(0);
+			}else{
+				AcademicBuilding *t = dynamic_cast<AcademicBuilding*>(Tiles[i]);
+				impLevel.push_back(t->getImpLevel());
+			}
+		}else{
+			impLevel.push_back(0);
+		}
 	}
+	std::vector<int> pos;
+	for(int i = 0; i < players.size(); ++i){
+		pos.push_back(players[i]->get_posn());
+	}
+	std::vector<char> piece;
+	for(int i = 0; i < players.size(); ++i){
+		piece.push_back(players[i]->get_piece());
+	}
+	add(2, 3);
+	//semi_main(impLevel, pos, piece);
 }
 
 void Data::loadOldGame(std::istream& is){
@@ -120,10 +143,6 @@ void Data::saveGame(std::ostream& os){
 	}
 }*/
 
-bool Data::playerInJail() const{
-	return current->isInJail();
-}
-
 void Data::checkTile(int i){
 	current->MovePosn_By(i);
 	if(current->get_posn() > 39){
@@ -169,6 +188,7 @@ void Data::checkTile(int i){
 			
 		}
 	}
+	printBoard();
 }
 
 bool Data::buy(){
@@ -268,6 +288,10 @@ int Data::ownsProperty(std::string property){
 	}
 	std::cout << "You don't own this property." << std::endl;
 	return -1;
+}
+
+bool Data::playerInJail() const{
+	return current->isInJail();
 }
 
 void Data::goTimsJail(){

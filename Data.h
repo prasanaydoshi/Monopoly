@@ -7,6 +7,7 @@
 #include <random>
 #include "Player.h"
 #include "board.h"
+#include "view.h"
 
 class Data {
 	Player *current;
@@ -32,10 +33,8 @@ public:
 	void loadOldGame(std::istream& is);
 	//void saveGame(std::ostream& os);
 
-	void printBlock();
-
-	//Player in jail
-	bool playerInJail() const;
+	//void printBlock();
+	void printBoard();
 
 	void checkTile(int i);
 	bool buy();
@@ -46,8 +45,9 @@ public:
 	void mortgage(std::string property);
 	void unmortage(std::string property);
 	int ownsProperty(std::string property);
-	
 
+	//Player in jail
+	bool playerInJail() const;
 	void goTimsJail();
 	bool leaveTimsJail(bool f);
 	void OSAPcol();
