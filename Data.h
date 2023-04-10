@@ -13,6 +13,8 @@ class Data {
 	int curPlayer;
 	bool rolled;
 	Player *bank;
+	//Need to add to the 
+	int numOfTimsCups;
 	std::vector<Player*> players;
 	std::map<BoardTiles*, int> board;
 	//std::vector<Player*> dropout;
@@ -25,6 +27,10 @@ public:
 
 	//destructors
 	~Data();
+
+	//set and save board
+	void loadOldGame(std::istream& is);
+	//void saveGame(std::ostream& os);
 
 	void printBlock();
 
@@ -45,6 +51,8 @@ public:
 	void goTimsJail();
 	bool leaveTimsJail(bool f);
 	void OSAPcol();
+	//void SLC();
+	//void NH();
 
 	//set Players
 	void setCurPlayer(int i);
@@ -70,8 +78,7 @@ public:
 	void CoopFee();
 	
 	void GoToJail();
-	void SLC();
-	void NH();*/
+	*/
 	
 };
 

@@ -1,5 +1,6 @@
 #ifndef _BOARD_H
 #define _BOARD_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,6 +12,7 @@ class BoardTiles{
 	int purchaseCost;
 	bool purchasable;
 	std::string owner;
+	bool mortgage;
 
 public:
 
@@ -34,6 +36,8 @@ public:
 	int getPurcahseCost();
 	std::string getBlock();
 	bool isPurchasable();
+	bool getMortgage();
+	void changeMortage();
 
 	virtual int getTuition() = 0;
 };
@@ -60,12 +64,10 @@ public:
 	~AcademicBuilding() override;
 
 	int getImpLevel();
-	bool getMortgage();
 
 	int getTuition() override;
 	void improve();
 	void unimprove();
-	void changeMortage();
 	int getImpCost();
 };
 

@@ -8,6 +8,27 @@ Commands::~Commands(){
     delete data;
 }
 
+void Commands::initializeGame(std::string fileName){
+    std::ifstream file(fileName);
+	if(!file) {
+		std::cerr << "Failed to open file: " << fileName << '\n';
+		return;
+	}
+    data->loadOldGame(file);
+    data->setCurPlayer(player);
+    data->getPlayerNames();
+}
+
+void Commands::saveGame(){
+    std::string fileName;
+    std::cin >> fileName;
+    std::ofstream file(fileName);
+    /*if(!file){
+        std::cerr << "Failed to save to file"
+    }*/
+    //data->saveGame(file);
+}
+
 void Commands::initializePlayers(int a){
     std::string name = "";
     char piece = 'a';
@@ -19,6 +40,7 @@ void Commands::initializePlayers(int a){
     }
     data->setCurPlayer(player);
     data->getPlayerNames();
+    std::cout << "Switched Players." << std::endl;
 }
 
 void Commands::roll(int i){
@@ -77,8 +99,16 @@ void Commands::next(){
     data->setCurPlayer(player);
 }
 
-void Commands::trade(std::string name, std::string give, std::string receive){
-    
+void Commands::trade(){
+    /*if ( (valid_property(bString[2], properties) && valid_property(bString[3], properties)) || (isDigit(bString[2]) && valid_property[3]) || (isDigit(bString[3]) && isDigit(bString[2]))) {
+		for (int i = 0; i < player.size(); i++) {
+			if(get_name(i) == bString[1]) {
+				trade(bString[1], bString[2], bString[3]);
+				break;
+		    }
+		}
+    }*/
+
 }
 
 void Commands::improve(){

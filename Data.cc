@@ -46,7 +46,7 @@ Data::Data()
 		new AcademicBuilding{"DC", "Math", 400, true, 200, {50, 200, 600, 1400, 1700, 2000}}}{}
 
 Data::~Data(){
-	for (int i = 0; i < 40; ++i){
+	for (int i = 0; i < Tiles.size(); ++i){
 		delete Tiles[i];
 	}
 	for(int i = 0; i < players.size(); ++i){
@@ -60,6 +60,65 @@ void Data::printBlock(){
 		std::cout << Tiles[i]->getName() << std::endl;
 	}
 }
+
+void Data::loadOldGame(std::istream& is){
+	int numPlayers;
+	is >> numPlayers;
+	for (int i = 0; i < numPlayers; ++i) {
+		std::string name;
+		char piece;
+		int timsCups;
+		int money;
+		int position;
+		is >> name >> piece >> timsCups >> money >> position;
+		bool inJail = false;
+		int jailTurns = 0;
+		if(position == 10){
+			is >> inJail;
+			if(inJail == 1){
+				is >> jailTurns;
+			}
+		}
+		players.push_back(new Player{name, piece, position, money, timsCups, inJail, jailTurns});
+	}
+	/*for(int i = 0; i < players.size(); ++i){
+		setCurPlayer(i);
+		std::cout << current->get_name() << " " << current->get_piece() << " " << current->get_timsCups() << " " << current->get_balance() << " " << current->get_posn() << " ";
+		if(current->get_posn() == 10){
+			if(current->isInJail()){
+				std::cout << current->isInJail() << " " << current->jailRollsCount();
+			}else{
+				std::cout << current->isInJail();	
+			}
+		}
+		std::cout << std::endl;
+	}*/
+	for(int i = 0; i < Tiles.size(); ++i){
+		std::string name;
+		std::string owner;
+		int improve;
+		is >> name >> owner >> improve;
+		if(Tiles[i]->getName() == name){
+			Tiles[i]->setOwner(owner);
+			if(improve < 0){
+				Tiles[i]->changeMortage();
+			}else if(improve > 0){
+				AcademicBuilding *t = dynamic_cast<AcademicBuilding*>(Tiles[i]);
+				for(int i; i < improve; ++i){
+					t->improve();
+				}
+			}
+		}
+	}
+}
+/*
+void Data::saveGame(std::ostream& os){
+	os << players.size() << "\n";
+	int i;
+	for(int i = 0; i < players.size(); ++i){
+		players[i]
+	}
+}*/
 
 bool Data::playerInJail() const{
 	return current->isInJail();
@@ -94,7 +153,7 @@ void Data::checkTile(int i){
 		} 
 
 	}else{
-		std::cout << "not purchasable tile" << std::endl;
+		std::cout << "Not purchasable tile." << std::endl;
 		if(Tiles[current->get_posn()]->getName() == "GO TO TIMS"){
 			std::cout << "going to jail" << std::endl;
 			goTimsJail();
@@ -105,9 +164,9 @@ void Data::checkTile(int i){
 		}else if(Tiles[current->get_posn()]->getName() == "COOP FEE"){
 
 		}else if(Tiles[current->get_posn()]->getName() == "SLC"){
-
+			//SLC();
 		}else if(Tiles[current->get_posn()]->getName() == "NEEDLES HALL"){
-
+			
 		}
 	}
 }
@@ -124,6 +183,10 @@ bool Data::buy(){
 }
 
 void Data::improve(std::string property){
+	if((Tiles[current->get_posn()]->getBlock() == "Gyms") || (Tiles[current->get_posn()]->getBlock() == "Residences")){
+		std::cout << "This tile is not upgradable." << std::endl;
+		return;
+	}
 	int index = ownsProperty(property);
 	if (index >= 0){
 		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
@@ -138,6 +201,10 @@ void Data::improve(std::string property){
 }
 
 void Data::unimprove(std::string property){
+	if((Tiles[current->get_posn()]->getBlock() == "Gyms") || (Tiles[current->get_posn()]->getBlock() == "Residences")){
+		std::cout << "This tile can't be downgraded." << std::endl;
+		return;
+	}
 	int index = ownsProperty(property);
 	if (index >= 0){
 		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
@@ -154,12 +221,15 @@ void Data::unimprove(std::string property){
 void Data::mortgage(std::string property){
 	int index = ownsProperty(property);
 	if(index >= 0){
-		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
-		if(tmp->getMortgage() != true){
-			if(tmp->getImpLevel() > 0){
-				std::cout << "There are " << tmp->getImpLevel() << " improvements. Unimprove before mortgaging " << tmp->getName() << "." << std::endl;
+		BoardTiles *tmp = Tiles[index];
+		if((tmp->getBlock() != "Gyms") &&(tmp->getBlock() != "Residences")){
+			AcademicBuilding *t = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+			if(t->getImpLevel() > 0){
+				std::cout << "There are " << t->getImpLevel() << " improvements. Unimprove before mortgaging " << tmp->getName() << "." << std::endl;
 				return;
 			}
+		}
+		if(tmp->getMortgage() != true){
 			tmp->changeMortage();
 			std::cout << current->get_balance() << std::endl;
 			current->addMoney(tmp->getPurcahseCost()/2);
@@ -173,7 +243,7 @@ void Data::mortgage(std::string property){
 void Data::unmortage(std::string property){
 	int index = ownsProperty(property);
 	if(index >= 0){
-		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
+		BoardTiles *tmp = Tiles[index];
 		if(tmp->getMortgage() != false){
 			if(current->get_balance() < (tmp->getPurcahseCost()/0.6)){
 				std::cout << "Don't have enough money. Need " << tmp->getPurcahseCost()/0.6 << std::endl;
@@ -229,85 +299,6 @@ void Data::OSAPcol() {
 	std::cout << "Passed go. " << current->get_balance() << " is the new balance." << std::endl;
 }
 /*
-void Data::getRent(int i) const{
-
-}
-
-bool Data::auction(int i) const{
-	std::vector<std::string> playersInAuction;
-	std::vector<std::string> dropped;
-	for(int i = 0; i < players.size(); ++i){
-		playersInAuction.push_back(players[i]->get_name());
-	}
-	std::cout << Tiles[i]->getName() << "is up for auction. Highest bidder wins." << std::endl;
-	std::cout << "Enter your amount when your player piece shows up. Amount must be higher than " << Tiles[i]->getPurcahseCost() << "." << std::endl;
-	std::cout << "If you chose to withdraw. "
-	return false;
-}*/
-
-void Data::setCurPlayer(int i){
-	current = players[i];
-	curPlayer = i;
-	std::cout << players[i] << std::endl;
-}
-
-void Data::setPlayers(std::string name, char piece){
-	players.push_back(new Player{name, piece});
-}
-
-void Data::getPlayerNames(){
-	for(int i = 0; i < players.size(); ++i){
-		std::cout << "Player Names: " << players[i]->get_name() << ", Piece:" << players[i]->get_piece() << std::endl;
-	}
-}
-
-/*
-//nested accessors
-std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }
-char Data::get_piecePlayer(int i) { return *(players[i]).get_piece(); }
-*/
-int Data::get_posPlayer(int i) {
-	return players[i]->get_posn();
-}
-
-/*
-//other methods
-int Data::get_NetWorth() {
-	int total_val = (*current).get_balance();		// current cash balance of player
-	for (const auto& property : owned_properties) {		// going through list of owned properites
-		int tileNo = property.second;			//sets tileno to be that being looked at
-		total_val += (board[tileNo].first).NetVal();	// adds netval of that property
-	}
-	return total_val;
-}*/
-
-
-/*
-//non-purchasable tile methods
-void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
-								// to pay 300 or 10% of netval	
-	if ( (*current).get_posn() == 24) {
-		if (Pay300 == true) {
-			(*current).change_balance(-300);
-		} else {
-			int net = get_NetWorth();
-			(*current).change_balance(net);
-		}
-	}
-}
-
-void Data::CoopFee() {
-	if ( (*current).get_posn() == 18) {
-		(*current).change_balance(-150);
-	}
-}
-
-void Data::GoToJail() {
-	if ( (*current).get_posn() == 10) {
-		(*current).JumpTo_posn(30);
-	}
-};
-
 void Data::SLC() {
 	if ( ( (*current).get_posn() == 13) || ( (*current).get_posn() == 13) ){
 		std::random_device rd;
@@ -374,6 +365,84 @@ void Data::NH() {
 				(*current).change_balance(200);
 				break;
 		}
+	}
+}*/
+/*
+void Data::getRent(int i) const{
+
+}
+
+bool Data::auction(int i) const{
+	std::vector<std::string> playersInAuction;
+	std::vector<std::string> dropped;
+	for(int i = 0; i < players.size(); ++i){
+		playersInAuction.push_back(players[i]->get_name());
+	}
+	std::cout << Tiles[i]->getName() << "is up for auction. Highest bidder wins." << std::endl;
+	std::cout << "Enter your amount when your player piece shows up. Amount must be higher than " << Tiles[i]->getPurcahseCost() << "." << std::endl;
+	std::cout << "If you chose to withdraw. "
+	return false;
+}*/
+
+void Data::setCurPlayer(int i){
+	current = players[i];
+	curPlayer = i;
+}
+
+void Data::setPlayers(std::string name, char piece){
+	players.push_back(new Player{name, piece});
+}
+
+void Data::getPlayerNames(){
+	for(int i = 0; i < players.size(); ++i){
+		std::cout << "Player Names: " << players[i]->get_name() << ", Piece:" << players[i]->get_piece() << std::endl;
+	}
+}
+
+/*
+//nested accessors
+std::string Data::get_namePlayer(int i) { return *(players[i]).get_name(); }
+char Data::get_piecePlayer(int i) { return *(players[i]).get_piece(); }
+*/
+int Data::get_posPlayer(int i) {
+	return players[i]->get_posn();
+}
+
+/*
+//other methods
+int Data::get_NetWorth() {
+	int total_val = (*current).get_balance();		// current cash balance of player
+	for (const auto& property : owned_properties) {		// going through list of owned properites
+		int tileNo = property.second;			//sets tileno to be that being looked at
+		total_val += (board[tileNo].first).NetVal();	// adds netval of that property
+	}
+	return total_val;
+}*/
+
+
+/*
+//non-purchasable tile methods
+void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
+								// to pay 300 or 10% of netval	
+	if ( (*current).get_posn() == 24) {
+		if (Pay300 == true) {
+			(*current).change_balance(-300);
+		} else {
+			int net = get_NetWorth();
+			(*current).change_balance(net);
+		}
+	}
+}
+
+void Data::CoopFee() {
+	if ( (*current).get_posn() == 18) {
+		(*current).change_balance(-150);
+	}
+}
+
+void Data::GoToJail() {
+	if ( (*current).get_posn() == 10) {
+		(*current).JumpTo_posn(30);
 	}
 }
 */

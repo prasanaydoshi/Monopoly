@@ -4,6 +4,9 @@
 Player::Player(std::string name, char piece): name{name}, piece{piece},
         posn{0}, balance{1500}, timsCups{0}, inJail{false}, jailRolls{1}{}
 
+Player::Player(std::string name, char piece, int posn, int balance, int timsCups, bool inJail, int jailRolls)
+        :name{name}, piece{piece}, posn{posn}, balance{balance}, timsCups{timsCups}, inJail{inJail}, jailRolls{jailRolls}{}
+
 //acessors
 std::string Player::get_name() const{
         return name;

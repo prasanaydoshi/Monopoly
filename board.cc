@@ -1,7 +1,7 @@
 #include "board.h"
 
 BoardTiles::BoardTiles(std::string name, std::string block, int purchaseCost, bool purchasable)
-    : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}, owner{"Bank"}{
+    : name{name}, block{block}, purchaseCost{purchaseCost}, purchasable{purchasable}, owner{"BANK"}, mortgage{mortgage}{
 } 
 
 BoardTiles::~BoardTiles(){}
@@ -30,6 +30,18 @@ bool BoardTiles::isPurchasable(){
     return purchasable;
 }
 
+bool BoardTiles::getMortgage(){
+    return mortgage;
+}
+
+void BoardTiles::changeMortage(){
+    if(mortgage == false){
+        mortgage = true;
+        return;
+    }
+    mortgage = false;
+}
+
 AcademicBuilding::AcademicBuilding(std::string name, std::string block, int purchaseCost, bool purchasable, int impCost, std::vector<int> tuitionCost)
     :BoardTiles{name, block, purchaseCost, purchasable}, impCost{impCost}, tuitionCost{tuitionCost}, mortgage{false}, impLevel{0}{
 
@@ -43,10 +55,6 @@ int AcademicBuilding::getImpLevel(){
     return impLevel;
 }
 
-bool AcademicBuilding::getMortgage(){
-    return mortgage;
-}
-
 int AcademicBuilding::getTuition(){
     return tuitionCost[impLevel];
 }
@@ -57,14 +65,6 @@ void AcademicBuilding::improve(){
 
 void AcademicBuilding::unimprove(){
     --impLevel;
-}
-
-void AcademicBuilding::changeMortage(){
-    if(mortgage == false){
-        mortgage = true;
-        return;
-    }
-    mortgage = false;
 }
 
 int AcademicBuilding::getImpCost(){

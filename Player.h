@@ -20,6 +20,7 @@ public:
 	// constructor
 	Player(std::string name, char piece);      // player name, piece are entered during player construction
 					// at start, posn = 0, balance = 1500, timsCups = 0;
+	Player(std::string name, char piece, int posn, int balance, int timscups, bool inJail, int jailRolls);
 	
 	// accessors
 	std::string get_name() const;

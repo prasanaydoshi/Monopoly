@@ -1,17 +1,13 @@
-Test: main.o board.o Data.o Player.o commands.o
-	g++ main.o board.o Data.o Player.o commands.o -g -o Test
+CXX = g++
+CXXFLAGS = -std=c++14 -g -Wall -MMD -Werror=vla
+OBJECTS = Data.o commands.o Player.o board.o main.o
+DEPENDS = ${OBJECTS:.o=.d}
+EXEC = WatopolyA5
 
-main.o: main.cc board.h
-	g++ -std=c++14 -c main.cc
+${EXEC} : ${OBJECTS}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
 
-board.o: board.cc board.h
-	g++ -std=c++14 -c board.cc
-	
-Data.o: Data.cc Data.h
-	g++ -std=c++14 -c Data.cc
+clean :
+	rm ${DEPENDS} ${OBJECTS} ${EXEC}
 
-Player.o: Player.cc Player.h
-	g++ -std=c++14 -c Player.cc
-
-commands.o: commands.cc commands.h
-	g++ -std=c++14 -c commands.cc
+-include ${DEPENDS} # reads the .d files and reruns dependencies

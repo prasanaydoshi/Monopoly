@@ -1,9 +1,10 @@
-#ifndef COMMANDS_H
-#define COMMANDS_H
+#ifndef _COMMANDS_H
+#define _COMMANDS_H
 
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "Data.h"
 
 class Commands{
@@ -14,10 +15,12 @@ class Commands{
  public:
 	Commands();
 	~Commands();
+	void initializeGame(std::string fileName);
+	void saveGame();
 	void initializePlayers(int a);
 	void roll(int i);
 	 void next();
-	 void trade (std::string name, std::string give, std::string receive);
+	 void trade ();
 	 //note name refers to another player...whats your way of finding the right player?not sure if string is the right data type maybe we should passs a player??
 
 	 void improve();
