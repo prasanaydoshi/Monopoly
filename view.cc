@@ -4,11 +4,10 @@
 #include <cstdlib>
 #include <vector>
 #include <cstring>
-#include "Player.h"
-#include "Data.h"
-#include "TextView.h"
+//#include "Player.h"
+//#include "Data.h"
 #include "view.h"
-using namespace std;
+//using namespace std;
 int getNoPlay() {
 	return 6;
 }
@@ -27,7 +26,7 @@ void add_spaces(std::vector <std::string>& coord_spaces) {
 	}
 }
 void join(int start, int end, std::vector <std::string> coord_join) {
-	string joint = "";
+	std::string joint = "";
 	if (start > end) {
 		for (int i = start; i >= end; i--) {
 			joint.append(coord_join[i]);
@@ -36,7 +35,7 @@ void join(int start, int end, std::vector <std::string> coord_join) {
 		joint.append(coord_join[i]);
 	}
 	}
-	cout << joint << "|" << endl;
+	std::cout << joint << "|" << std::endl;
 }
 void semi_main() {
 	std::vector <std::string> properties = {"AL","ML","ECH","PAS","HH","RCH","DWE","CPH","LHI","BMH","OPT","EV1","EV2","EV3","PHYS","B1","B2","EIT","ESC","C2","MC","DC"};
@@ -49,10 +48,12 @@ void semi_main() {
 	//std::vector <char> get_char {'G','B','D','P','S','$'};
 
 	for(int i = 0; i < noPlay; i++) {
-		string tmp_char;
-		int pos = getPosPlayer(i); //function called get_posPlayer(i); 
+		std::string tmp_char;
+		//int pos = getPosPlayer(i); function called get_posPlayer(i); 
+		int pos = get_pos[i];
 		//which return position given a int
-		tmp_char = getPiecePlayer(i); //should be get_piecePlayer(i);
+		//tmp_char = getPiecePlayer(i); //should be get_piecePlayer(i);
+		tmp_char = charRep(i);
 		coord[pos].append(tmp_char);
 	}
 	for(int i = 0; i < properties.size(); i++) {
@@ -71,64 +72,64 @@ void semi_main() {
 	}
 	add_spaces(coord);
 	add_spaces(imp_coord);
-	cout << "_________________________________________________________________________________________" << endl;
-	cout << "|Goose  "<< imp_coord[11] << "|NEEDLES" << imp_coord[12] << imp_coord[13] << "|V1     " << imp_coord[14] << imp_coord[15] << "|CIF    " << imp_coord[16] << "|GO TO  |" << endl;
-	cout << "|Nesting|-------|HALL   |-------|-------|       |-------|-------|       |-------|TIMS   |" << endl;
-	cout << "|       |EV1    |       |EV2    |EV3    |       |PHYS   |B1     |       |B2     |       |" << endl;
+	std::cout << "_________________________________________________________________________________________" << std::endl;
+	std::cout << "|Goose  "<< imp_coord[11] << "|NEEDLES" << imp_coord[12] << imp_coord[13] << "|V1     " << imp_coord[14] << imp_coord[15] << "|CIF    " << imp_coord[16] << "|GO TO  |" << std::endl;
+	std::cout << "|Nesting|-------|HALL   |-------|-------|       |-------|-------|       |-------|TIMS   |" << std::endl;
+	std::cout << "|       |EV1    |       |EV2    |EV3    |       |PHYS   |B1     |       |B2     |       |" << std::endl;
 	join(20,30, coord);
-	cout << "|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|" << endl;
-	cout  <<imp_coord[10]<< "|" << "                                                                       " << imp_coord[17] << "|" << endl;
-	cout << "|-------|                                                                       |-------|" << endl;
-	cout << "|OPT    |                                                                       |EIT    |" << endl;
-	cout << ""<< coord[19]<< "|" << "                                                                       " << coord[31] << "|" << endl;
-	cout << "|_______|                                                                       |_______|" << endl;
-	cout << "" << imp_coord[9]<< "|" << "                                                                       " << imp_coord[18] << "|" << endl;
-	cout << "|-------|                                                                       |-------|" << endl;
-	cout << "|BMH    |                                                                       |ESC    |" << endl;
-	cout << coord[18]<< "|" << "                                                                       " << coord[32] << "|" << endl;
-	cout << "|_______|                                                                       |_______|" << endl;
-	cout << "|SLC    |                                                                       |SLC    |" << endl;
-	cout <<  coord[17]<< "|" << "                                                                       " << coord[33] << "|" << endl;
-	cout << "|       |                                                                       |       |" << endl;
-	cout << "|       |                                                                       |       |" << endl;
-	cout << "|_______|                                                                       |_______|" << endl;
-	cout << imp_coord[8]<< "|" << "                                                                       " << imp_coord[19] << "|" << endl;
-	cout << "|-------|                                                                       |-------|" << endl;
-	cout << "|LHI    |                                                                       |C2     |" << endl;
-	cout <<  coord[16]<< "|" << "             _____________________________________________             " << coord[34] << "|" << endl;
-	cout << "|_______|            |                                             |            |_______|" << endl;
-	cout << "|UWP    |            | #   #   ##  #####  ###   ###   ###  # #   # |            |REV    |" << endl;
-	cout <<  coord[15]<< "|" << "            | #   #  #  #   #   #   #  #  # #   # # #   # |            " << coord[35] << "|" << endl;
-	cout << "|       |            | # # #  ####   #   #   #  ###  #   # #  # #  |            |       |" << endl;
-	cout << "|       |            | # # #  #  #   #   #   #  #    #   # #   #   |            |       |" << endl;
-	cout << "|_______|            | #####  #  #   #    ###   #     ###  ### #   |            |_______|" << endl;
-	cout << imp_coord[7]<< "|" << "            |_____________________________________________|            " << "|NEEDLES|" << endl;
-	cout << "|-------|                                                                       |HALL   |" << endl;
-	cout << "|CPH    |                                                                       |       |" << endl;
-	cout << coord[14]<< "|" << "                                                                       " << coord[36] << "|" << endl;
-	cout << "|_______|                                                                       |_______|" << endl;
-	cout <<  imp_coord[6]<< "|" << "                                                                       " << imp_coord[20] << "|" << endl;
-	cout << "|-------|                                                                       |-------|" << endl;
-	cout << "|DWE    |                                                                       |MC     |" << endl;
-	cout <<  coord[13]<< "|" << "                                                                       " << coord[37] << "|" << endl;
-	cout << "|_______|                                                                       |_______|" << endl;
-	cout << "|PAC    |                                                                       |COOP   |" << endl;
-	cout << "|       |                                                                       |FEE    |" << endl;
-	cout << "|       |                                                                       |       |" << endl;
-	cout << coord[12]<< "|" << "                                                                       " << coord[38] << "|" << endl;
-	cout << "|_______|                                                                       |_______|" << endl;
-	cout << imp_coord[5]<< "|" << "                                                                       " << imp_coord[21] << "|" << endl;
-	cout << "|-------|                                                                       |-------|" << endl;
-	cout << "|RCH    |                                                                       |DC     |" << endl;
-	cout << coord[11]<< "|" << "                                                                       " << coord[39] << "|" << endl;
-	cout << "|_______|_______________________________________________________________________|_______|" << endl;
-	cout << "|DC TIMS"<< imp_coord[4] << imp_coord[3] << "|NEEDLES" << imp_coord[2] << "|MKV    |TUTION " << imp_coord[1] <<"|SLC    " << imp_coord[0] << "|COLLECT|" << endl;
-	cout << "|Line   |-------|-------|HALL   |-------|       |       |-------|       |-------|OSAP   |" << endl;
-	cout << "|       |HH     |PAS    |       |ECH    |       |       |ML     |       |AL     |       |" << endl;
+	std::cout << "|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|" << std::endl;
+	std::cout  <<imp_coord[10]<< "|" << "                                                                       " << imp_coord[17] << "|" << std::endl;
+	std::cout << "|-------|                                                                       |-------|" << std::endl;
+	std::cout << "|OPT    |                                                                       |EIT    |" << std::endl;
+	std::cout << ""<< coord[19]<< "|" << "                                                                       " << coord[31] << "|" << std::endl;
+	std::cout << "|_______|                                                                       |_______|" << std::endl;
+	std::cout << "" << imp_coord[9]<< "|" << "                                                                       " << imp_coord[18] << "|" << std::endl;
+	std::cout << "|-------|                                                                       |-------|" << std::endl;
+	std::cout << "|BMH    |                                                                       |ESC    |" << std::endl;
+	std::cout << coord[18]<< "|" << "                                                                       " << coord[32] << "|" << std::endl;
+	std::cout << "|_______|                                                                       |_______|" << std::endl;
+	std::cout << "|SLC    |                                                                       |SLC    |" << std::endl;
+	std::cout <<  coord[17]<< "|" << "                                                                       " << coord[33] << "|" << std::endl;
+	std::cout << "|       |                                                                       |       |" << std::endl;
+	std::cout << "|       |                                                                       |       |" << std::endl;
+	std::cout << "|_______|                                                                       |_______|" << std::endl;
+	std::cout << imp_coord[8]<< "|" << "                                                                       " << imp_coord[19] << "|" << std::endl;
+	std::cout << "|-------|                                                                       |-------|" << std::endl;
+	std::cout << "|LHI    |                                                                       |C2     |" << std::endl;
+	std::cout <<  coord[16]<< "|" << "             _____________________________________________             " << coord[34] << "|" << std::endl;
+	std::cout << "|_______|            |                                             |            |_______|" << std::endl;
+	std::cout << "|UWP    |            | #   #   ##  #####  ###   ###   ###  # #   # |            |REV    |" << std::endl;
+	std::cout <<  coord[15]<< "|" << "            | #   #  #  #   #   #   #  #  # #   # # #   # |            " << coord[35] << "|" << std::endl;
+	std::cout << "|       |            | # # #  ####   #   #   #  ###  #   # #  # #  |            |       |" << std::endl;
+	std::cout << "|       |            | # # #  #  #   #   #   #  #    #   # #   #   |            |       |" << std::endl;
+	std::cout << "|_______|            | #####  #  #   #    ###   #     ###  ### #   |            |_______|" << std::endl;
+	std::cout << imp_coord[7]<< "|" << "            |_____________________________________________|            " << "|NEEDLES|" << std::endl;
+	std::cout << "|-------|                                                                       |HALL   |" << std::endl;
+	std::cout << "|CPH    |                                                                       |       |" << std::endl;
+	std::cout << coord[14]<< "|" << "                                                                       " << coord[36] << "|" << std::endl;
+	std::cout << "|_______|                                                                       |_______|" << std::endl;
+	std::cout <<  imp_coord[6]<< "|" << "                                                                       " << imp_coord[20] << "|" << std::endl;
+	std::cout << "|-------|                                                                       |-------|" << std::endl;
+	std::cout << "|DWE    |                                                                       |MC     |" << std::endl;
+	std::cout <<  coord[13]<< "|" << "                                                                       " << coord[37] << "|" << std::endl;
+	std::cout << "|_______|                                                                       |_______|" << std::endl;
+	std::cout << "|PAC    |                                                                       |COOP   |" << std::endl;
+	std::cout << "|       |                                                                       |FEE    |" << std::endl;
+	std::cout << "|       |                                                                       |       |" << std::endl;
+	std::cout << coord[12]<< "|" << "                                                                       " << coord[38] << "|" << std::endl;
+	std::cout << "|_______|                                                                       |_______|" << std::endl;
+	std::cout << imp_coord[5]<< "|" << "                                                                       " << imp_coord[21] << "|" << std::endl;
+	std::cout << "|-------|                                                                       |-------|" << std::endl;
+	std::cout << "|RCH    |                                                                       |DC     |" << std::endl;
+	std::cout << coord[11]<< "|" << "                                                                       " << coord[39] << "|" << std::endl;
+	std::cout << "|_______|_______________________________________________________________________|_______|" << std::endl;
+	std::cout << "|DC TIMS"<< imp_coord[4] << imp_coord[3] << "|NEEDLES" << imp_coord[2] << "|MKV    |TUTION " << imp_coord[1] <<"|SLC    " << imp_coord[0] << "|COLLECT|" << std::endl;
+	std::cout << "|Line   |-------|-------|HALL   |-------|       |       |-------|       |-------|OSAP   |" << std::endl;
+	std::cout << "|       |HH     |PAS    |       |ECH    |       |       |ML     |       |AL     |       |" << std::endl;
 	join(10,0, coord);
-	cout << "|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|" << endl;
+	std::cout << "|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|" << std::endl;
 }
-ostream& TextView::commands(ostream& os) {
+std::ostream& commands(std::ostream& os) {
 	os << "\nThe possible commands a Player can make include:\n";
 	os << "	roll\n";
 	os << "		roll : rolls two dice and moves player by their sum\n\n";
@@ -161,25 +162,25 @@ ostream& TextView::commands(ostream& os) {
 void PrintBoard() {
 	semi_main();
 }
-std::ostream& DisplayNames(ostream& os) {
+std::ostream& DisplayNames(std::ostream& os) {
 	//for (int i = 0; i < get_noPlayers(); i++) {
 	// os << get_namePlayer(i) << endl;
 	//}
 	return os;
 }
-std::ostream& ShowInfo(ostream& os) {
+std::ostream& ShowInfo(std::ostream& os) {
 	//for (int i = 0; i < get_noPlayer(); i ++) {
 	//os << "Player name: " << get_namePlayer(i) << " Player piece: " << get_piecePlayer(i) << " Position: " << get_posPlayer(i) << " Owned Properties: " << owned_assets(i) << " Balance: " << get_balPlayer(i)<< " No of tims cups: " << get_timscups(i) << " Is playe in jail?: " << get_inJail(i) << endl;
 	//
 	return os;
 }
-std::ostream& prog_messages(ostream& os) {
+std::ostream& prog_messages(std::ostream& os) {
 	return os;
 }
-std::ostream& menu(ostream& os) {
+std::ostream& menu(std::ostream& os) {
 	return os;
 }
-std::ostream& MakeAction(ostream& os) {
+std::ostream& MakeAction(std::ostream& os) {
 	return os;
 }
 std::ostream& cur_assets(std::ostream& os) {
