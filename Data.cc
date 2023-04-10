@@ -91,8 +91,6 @@ void Data::checkTile(int i){
 
 		}else{
 
-			//rent function
-
 		} 
 
 	}else{
@@ -182,9 +180,7 @@ void Data::unmortage(std::string property){
 				return;
 			}
 			tmp->changeMortage();
-			std::cout << current->get_balance() << std::endl;
-			current->subMoney(tmp->getPurcahseCost()/0.6);
-			std::cout << current->get_balance() << std::endl;
+			current->subMoney(tmp->getPurcahseCost()*0.6);
 			std::cout << tmp->getName() << " unmortgaged." << " New balance is " << current->get_balance() << "." << std::endl;
 			}else{
 				std::cout << tmp->getName() << " already unmortgaged." << std::endl;
