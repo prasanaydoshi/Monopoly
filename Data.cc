@@ -206,10 +206,10 @@ void Data::unimprove(std::string property){
 
 
 //nested accessors
-std::string Data::get_namePlayer(int i) { return players[i]->get_name(); }
+std::string Data::get_namePlayer(int i) { return players[i]->getName(); }
 void Data::getPlayerNames(){
 	for(int i = 0; i < players.size(); ++i){
-		std::cout << "Player Names: " << players[i]->get_name() << ", Piece:" << players[i]->get_piece() << std::endl;
+		std::cout << "Player Names: " << players[i]->getName() << ", Piece:" << players[i]->getPiece() << std::endl;
 	}
 }
 
