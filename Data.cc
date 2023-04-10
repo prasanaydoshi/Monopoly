@@ -47,6 +47,7 @@ Data::Data()
 
 int Data::getNoPlayers() { return static_cast<int>(players.size()); } 	//
 
+std::string Data::getName() { return current->get_name(); }
 
 Data::~Data(){
 	for (int i = 0; i < 40; ++i){
@@ -126,7 +127,7 @@ void Data::loadOldGame(std::istream& is){
 		}
 		std::cout << std::endl;
 	}*/
-	for(int i = 0; i < 40; ++i){
+	for(int i = 0; i < Tiles.size(); ++i){
 		std::string name;
 		std::string owner;
 		int improve;
@@ -229,9 +230,13 @@ bool Data::buy(){
 		std::cout << "Balance to low. Can't buy." << std::endl;
 		return false;
 	}
+	std::cout << "Buying" << std::endl;
 	Tiles[current->get_posn()]->setOwner(current->get_name());
 	current->subMoney(Tiles[current->get_posn()]->getPurcahseCost());
+
 	current->addProperty(current->get_posn());
+
+	std::vector<int> prop = current->getProperties();
 	return true;
 }
 
@@ -242,6 +247,10 @@ void Data::improve(std::string property){
 	}
 	int index = ownsProperty(property);
 	if (index >= 0){
+		if(checksMonopoly(property) == false){
+			std::cout << "You don't have a Monopoly on the set of " << Tiles[index]->getBlock() << ". Please buy all the properties in that Monopoly block before improving." << std::endl;
+			return;
+		}
 		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
 		if((tmp->getImpLevel() < 5) && ((current->get_balance()-tmp->getImpCost()) > 0)){
 			tmp->improve();
@@ -251,6 +260,7 @@ void Data::improve(std::string property){
 			std::cout << tmp->getName() << " currently at improve level " << tmp->getImpLevel() << ". Can't improve it, either maxed out or not enough funds." << std::endl;
 		}
 	}
+	printBoard();
 }
 
 void Data::unimprove(std::string property){
@@ -269,10 +279,27 @@ void Data::unimprove(std::string property){
 			std::cout << tmp->getName() << " currently at improve level " << tmp->getImpLevel() << ". Can't unimprove it anymore." << std::endl;
 		}
 	}
+	printBoard();
 }
 
 void Data::mortgage(std::string property){
 	int index = ownsProperty(property);
+	if(index == -1){
+		return;
+	}
+	if(Tiles[index]->getBlock() != "Gyms" && Tiles[index]->getBlock() != "Residences"){
+		if(checksMonopoly(property)){
+			std::vector<int> tmp = propertiesOnMonopoly(Tiles[index]->getBlock());
+			for(int i = 0; i < tmp.size(); ++i){
+				AcademicBuilding *t = dynamic_cast<AcademicBuilding*>(Tiles[tmp[i]]);
+				if(t->getImpLevel() > 0){
+					std::cout << "Unimprove the properties on the block " << t->getBlock() << "." << std::endl;
+					std::cout << "Following that action, you can mortgage " << Tiles[index]->getName() << "." << std::endl;
+					return;
+				}
+			}
+		}
+	}
 	if(index >= 0){
 		BoardTiles *tmp = Tiles[index];
 		if((tmp->getBlock() != "Gyms") &&(tmp->getBlock() != "Residences")){
@@ -291,6 +318,7 @@ void Data::mortgage(std::string property){
 			std::cout << tmp->getName() << " already mortgaged." << std::endl;
 		}
 	}
+	printBoard();
 }
 
 void Data::unmortage(std::string property){
@@ -305,10 +333,11 @@ void Data::unmortage(std::string property){
 			tmp->changeMortage();
 			current->subMoney(tmp->getPurcahseCost()*0.6);
 			std::cout << tmp->getName() << " unmortgaged." << " New balance is " << current->get_balance() << "." << std::endl;
-			}else{
-				std::cout << tmp->getName() << " already unmortgaged." << std::endl;
-			}
+		}else{
+			std::cout << tmp->getName() << " already unmortgaged." << std::endl;
+		}
 	}
+	printBoard();
 }
 
 int Data::ownsProperty(std::string property){
@@ -321,6 +350,70 @@ int Data::ownsProperty(std::string property){
 	}
 	std::cout << "You don't own this property." << std::endl;
 	return -1;
+}
+
+bool Data::checksMonopoly(std::string property){
+	int index = getPropertyIndex(property);
+	if(index <= 0){
+		std::cout << "Not a property." << std::endl;
+		return false;
+	}
+	std::string block = Tiles[index]->getBlock();
+	std::string	owner = Tiles[index]->getOwner();
+	int numInMonopoly = 0;
+	int numOwned = 0;
+	for(int i = 0; i < Tiles.size(); ++i){
+		if(Tiles[i]->getBlock() == block){
+			++numInMonopoly;
+			if(Tiles[i]->getOwner() == owner){
+				++numOwned;
+			}
+		}
+	}
+
+	if(numOwned == numInMonopoly){
+		return true;
+	}
+	return false;
+}
+
+int Data::getPropertyIndex(std::string property){
+	for(int i = 0; i < Tiles.size(); ++i){
+		if(Tiles[i]->getName() == property){
+			return i;
+		}
+	}
+	std::cout << "Ran into error." << std::endl;
+	return 0;
+}
+
+std::vector<int> Data::propertiesOnMonopoly(std::string block){
+	std::vector<int> tmp;
+	for(int i = 0; i < Tiles.size(); ++i){
+		if(Tiles[i]->getBlock() == block){
+			tmp.push_back(i);
+		}
+	}
+	return tmp;
+}
+
+void Data::assets(){
+	std::cout << current->get_name() << " " << current->get_piece() << " " << current->get_timsCups() << " " << current->get_balance() << " " << current->get_posn() << " ";
+	if(current->get_posn() == 10){
+		if(current->isInJail()){
+			std::cout << current->isInJail() << " " << current->jailRollsCount();
+		}else{
+			std::cout << current->isInJail();	
+		}
+	}
+	std::cout << std::endl;
+	std::vector<int> tmpProp = current->getProperties();
+	for(int i = 0; i < 0; ++i){
+		std::cout << tmpProp[i] << std:: endl;
+	}
+	for(int i = 0; i < tmpProp.size(); ++i){
+		std::cout << Tiles[tmpProp[i]]->getName() << " " << Tiles[tmpProp[i]]->getBlock() << std::endl	;
+	}
 }
 
 bool Data::playerInJail() const{

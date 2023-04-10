@@ -7,6 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 	Commands *commands = new Commands;
+	bool testing = false; 		// use later, for implementing -testing command line arg
 
 	if(argc > 1){
 		cout << "Loading Game!" << std::endl;
@@ -29,7 +30,7 @@ int main(int argc, char* argv[]){
 		if(input == "quit") {			//quits from game
 			break;
 		} else if(input == "roll"){		//rolls dice
-			commands->roll(1);
+			commands->roll(testing, 1);
 			//cout << "Rolled a " << i << "." << endl;
 		}else if(input == "next"){		//ends current players turn,swaps to next Player
 			commands->next();
@@ -41,9 +42,11 @@ int main(int argc, char* argv[]){
 			commands->mortage();
 		}else if(input == "unmortgage"){	//unmortgage owned property
 			commands->unmortage();
-		}else if(input == "bankrupt"){		//declare bankruptcy
+		}else if(input == "bankrupt"){
+			commands->bankrupt();
+		}else if(input == "assets"){
 			commands->assets();
-		}else if(input == "assets"){		//show all assets
+		}else if(input == "all"){
 			commands->all();
 		}else if(input == "save"){		//saves gamestate
 			commands->save();

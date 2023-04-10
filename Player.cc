@@ -89,13 +89,12 @@ void Player::nextposn() {
 
 std::string Player::printPlayer() {      //
 	std::string info = get_name() + " " + piece + " ";
-//	info += piece + " ";
         info += std::to_string(get_timsCups()) + " ";
 	info += std::to_string(get_balance()) + " ";
         info += std::to_string(get_posn());
 	if (get_posn() == 10) {
 		if (inJail == true) {
-			info += "1 " + std::to_string(jailRolls);
+			info += " 1 " + std::to_string(jailRolls);
 		} else {
 			info += "0";
 		}

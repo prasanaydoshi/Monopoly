@@ -47,6 +47,10 @@ public:
 	void mortgage(std::string property);
 	void unmortage(std::string property);
 	int ownsProperty(std::string property);
+	bool checksMonopoly(std::string property);
+	int getPropertyIndex(std::string property);
+	std::vector<int> propertiesOnMonopoly(std::string block);
+	void assets();
 
 	//Player in jail
 	bool playerInJail() const;
@@ -65,7 +69,7 @@ public:
 	//Player *curPlayer();
 
 	//nested accessors
-	//std::string get_namePlayer(int i);
+	std::string getName();
 	//char get_piecePlayer(int i);
 	int get_posPlayer(int i);
 
