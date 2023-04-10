@@ -131,9 +131,7 @@ void Data::improve(std::string property){
 		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
 		if((tmp->getImpLevel() < 5) && ((current->get_balance()-tmp->getImpCost()) > 0)){
 			tmp->improve();
-			std::cout << current->get_balance() << std::endl;
 			current->subMoney(tmp->getImpCost());
-			std::cout << current->get_balance() << std::endl;
 			std::cout << tmp->getName() << " has " << tmp->getImpLevel() << " improvements." << std::endl;
 		}else{
 			std::cout << tmp->getName() << " currently at improve level " << tmp->getImpLevel() << ". Can't improve it, either maxed out or not enough funds." << std::endl;
@@ -147,9 +145,7 @@ void Data::unimprove(std::string property){
 		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[index]);
 		if(tmp->getImpLevel() != 0){
 			tmp->unimprove();
-			std::cout << current->get_balance() << std::endl;
 			current->addMoney(tmp->getImpCost()/2);
-			std::cout << current->get_balance() << std::endl;
 			std::cout << tmp->getName() << " has " << tmp->getImpLevel() << " improvements." << std::endl;
 		}else{
 			std::cout << tmp->getName() << " currently at improve level " << tmp->getImpLevel() << ". Can't unimprove it anymore." << std::endl;
