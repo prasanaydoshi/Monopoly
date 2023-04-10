@@ -2,7 +2,7 @@
 
 // constructor
 Player::Player(std::string name, char piece): name{name}, piece{piece},
-        posn{0}, balance{150}, timsCups{0}, inJail{false}, jailRolls{1}{}
+        posn{0}, balance{1500}, timsCups{0}, inJail{false}, jailRolls{1}{}
 
 //acessors
 std::string Player::get_name() const{
@@ -25,11 +25,8 @@ int Player::get_timsCups() const{
         return timsCups;
 }
 
-void Player::get_properties() const{
-        for(int i = 0; i < owned.size(); ++i){
-                std::cout << owned[i] << std::endl;
-        }
-        std::cout << std::endl;
+std::vector<int> Player::getProperties() const{
+        return owned;
 }
 
 bool Player::isInJail() const{

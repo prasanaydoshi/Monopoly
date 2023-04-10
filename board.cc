@@ -39,20 +39,20 @@ AcademicBuilding::~AcademicBuilding(){
 
 }
 
+int AcademicBuilding::getImpLevel(){
+    return impLevel;
+}
+
 int AcademicBuilding::getTuition(){
     return tuitionCost[impLevel];
 }
 
 void AcademicBuilding::improve(){
-    if(impLevel <= 5){
-        ++impLevel;
-    }
+    ++impLevel;
 }
 
 void AcademicBuilding::unimprove(){
-    if(impLevel >= 0){
-        --impLevel;
-    }
+    --impLevel;
 }
 
 bool AcademicBuilding::changeMortage(){
@@ -64,8 +64,8 @@ bool AcademicBuilding::changeMortage(){
     return mortgage;
 }
 
-int AcademicBuilding::getImprovements(){
-    return impLevel;
+int AcademicBuilding::getImpCost(){
+    return impCost;
 }
 
 Gym::Gym(std::string name, std::string block, int purchaseCost, bool purchasable)

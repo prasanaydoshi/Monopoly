@@ -81,8 +81,23 @@ void Commands::trade(std::string name, std::string give, std::string receive){
     
 }
 
-void Commands::improve(std::string property, bool buy){
-
+void Commands::improve(){
+    std::string property;
+    std::cin >> property;
+    std::string buy;
+    std::cin >> buy;
+    if(buy == "buy"){
+        data->improve(property);
+    }else if(buy == "sell"){
+        data->unimprove(property);
+    }/*
+    std::cout << property << std::endl;
+    int t = data->ownsProperty(property);
+    std::cout << t << std::endl;
+    /*
+    if( >= 0){
+        std::cout << "You do own it" << std::endl;
+    }*/
 }
 
 void Commands::mortage(std::string property){

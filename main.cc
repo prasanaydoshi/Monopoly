@@ -20,6 +20,8 @@ int main(){
 			//cout << "Rolled a " << i << "." << endl;
 		}else if(com == "next"){
 			commands->next();
+		}else if(com == "improve"){
+			commands->improve();
 		}
 	}
 	delete commands;

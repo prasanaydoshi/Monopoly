@@ -35,6 +35,9 @@ public:
 	bool buy();
 	/*bool auction(int i);
 	void getRent(int i) const;*/
+	void improve(std::string property);
+	void unimprove(std::string property);
+	int ownsProperty(std::string property);
 
 	void goTimsJail();
 	bool leaveTimsJail(bool f);

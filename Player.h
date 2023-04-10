@@ -11,7 +11,7 @@ class Player {
 	int posn;			// current posn of player
 	int balance;			// money owned by player
 	int timsCups;			// no. of tims cups player owns
-	std::map<std::string, int> owned_properties;   // subject to change
+	//std::map<std::string, int> owned_properties;   // subject to change
 	std::vector<int> owned;
 	bool inJail;
 	int jailRolls;
@@ -27,7 +27,7 @@ public:
 	int get_posn() const;
 	int get_balance() const;
 	int get_timsCups() const;
-	void get_properties() const;
+	std::vector<int> getProperties() const;
 	bool isInJail() const;
 	int jailRollsCount() const;
 

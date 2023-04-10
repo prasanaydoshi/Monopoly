@@ -59,11 +59,13 @@ public:
 	//destructors
 	~AcademicBuilding() override;
 
+	int getImpLevel();
+
 	int getTuition() override;
 	void improve();
 	void unimprove();
 	bool changeMortage();
-	int getImprovements();
+	int getImpCost();
 };
 
 class Gym : public BoardTiles{
