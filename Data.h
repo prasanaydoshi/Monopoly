@@ -55,6 +55,7 @@ public:
 	std::vector<int> propertiesOnMonopoly(std::string block);
 	void assets();
 
+	bool forcePay(int i);
 	//void bankrupt(std::string owed);
 	void findOwedP(std::string owedP);
 

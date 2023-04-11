@@ -244,35 +244,62 @@ void Data::payRent(){
 	findOwedP(Tiles[current->get_posn()]->getOwner());
 	std::cout << "You got to pay rent to " << owedPlayer->get_name() << "!"<< std::endl;
 	int numOfProp = getNumProp(Tiles[current->get_posn()]->getBlock());
+	std::cout << owedPlayer->get_name() << ": " << owedPlayer->get_balance() << std::endl;
+	std::cout << current->get_name() << ": " << current->get_balance() <<std::endl;
+	
 	if((Tiles[current->get_posn()]->getBlock() == "Residences") || (Tiles[current->get_posn()]->getBlock() == "Gyms")){
 		
 		if(current->get_balance() >= Tiles[current->get_posn()]->getTuition(numOfProp)){
-			//std::cout << numOfProp << std::endl;
-			std::cout << owedPlayer->get_name() << ": " << owedPlayer->get_balance() << std::endl;
-			std::cout << current->get_name() << ": " << current->get_balance() <<std::endl;
+
 			current->subMoney(Tiles[current->get_posn()]->getTuition(numOfProp));
 			owedPlayer->addMoney(Tiles[current->get_posn()]->getTuition(numOfProp));
-
-			std::cout << "New Balances:" << std::endl;
-			std::cout << owedPlayer->get_name() << ": " << owedPlayer->get_balance() << std::endl;
-			std::cout << current->get_name() << ": " << current->get_balance() << std::endl;
+		}else{
+			bool t = forcePay(Tiles[current->get_posn()]->getTuition(numOfProp));\
+			if(t == false){
+				return;
+			}
 		}
 	}else if(checksMonopoly(Tiles[current->get_posn()]->getName())){
 
 		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[current->get_posn()]);
-		
+		std::cout << "Being called" << std::endl;
 		if(tmp->getImpLevel() == 0){
-			current->subMoney(tmp->getTuition(0)*2);
-			owedPlayer->addMoney(tmp->getTuition(0)*2);
+			if(current->get_balance() >= tmp->getTuition(0)*2 ){
+				current->subMoney(tmp->getTuition(0)*2);
+				owedPlayer->addMoney(tmp->getTuition(0)*2);
+			}else{
+				bool t = forcePay(tmp->getTuition(0)*2);
+				if(t == false){
+					return;
+				}
+			}
 		}else{
-			current->subMoney(tmp->getTuition(0));
-			owedPlayer->addMoney(tmp->getTuition(0));
+			if(current->get_balance() >= tmp->getTuition(0) ){
+				current->subMoney(tmp->getTuition(0));
+				owedPlayer->addMoney(tmp->getTuition(0));
+			}else{
+				bool t = forcePay(tmp->getTuition(0));
+				if(t == false){
+					return;
+				}
+			}
 		}
 
 	}else{
-		current->subMoney(Tiles[current->get_posn()]->getTuition(0));
-		owedPlayer->addMoney(Tiles[current->get_posn()]->getTuition(0));
+		if(current->get_balance() >= Tiles[current->get_posn()]->getTuition(0)){
+			current->subMoney(Tiles[current->get_posn()]->getTuition(0));
+			owedPlayer->addMoney(Tiles[current->get_posn()]->getTuition(0));
+		}else{
+			bool t = forcePay(Tiles[current->get_posn()]->getTuition(0));
+			if(t == true){
+				return;
+			}
+		}
 	}
+
+	std::cout << "New Balances:" << std::endl;
+	std::cout << owedPlayer->get_name() << ": " << owedPlayer->get_balance() << std::endl;
+	std::cout << current->get_name() << ": " << current->get_balance() << std::endl;
 }
 
 int Data::getNumProp(std::string type){
@@ -465,6 +492,45 @@ void Data::assets(){
 	for(int i = 0; i < tmpProp.size(); ++i){
 		std::cout << Tiles[tmpProp[i]]->getName() << " " << Tiles[tmpProp[i]]->getBlock() << std::endl	;
 	}
+}
+
+bool Data::forcePay(int i){
+	std::vector<int> tmp = current->getProperties();
+	while(current->get_balance() < i){
+		bool mort = false;
+		for(int i = 0; i < tmp.size(); ++i){
+			if(Tiles[i]->getMortgage()){
+				mort = true;
+			}
+		}
+		if(mort){
+			std::cout << "Please mortgage and unimprove your properties to pay the debt. You can also decare bankruptcy." << std::endl;
+			std::cout << "You commands are: " << std::endl;
+			std::cout << "mortgage <property>" << std::endl;
+			std::cout << "unimprove <property>" << std::endl;
+			std::cout << "bankruptcy" << std::endl;
+		}else{
+			std::cout << "You have nothing else to raise to funds. The issuer of the credit will posses you are remaining assets." << std::endl;
+			//bankrupt();
+			return false;
+		}
+		std::string command;
+		std::cin >> command;
+		if(command == "mortgage"){
+			std::cin >> command;
+			mortgage(command);
+		}else if(command == "unimprove"){
+			unimprove(command);
+		}else if(command == "bankruptcy"){
+			//bankrupt()
+			std::cout << "You have nothing else to raise to funds. The issuer of the credit will posses you are remaining assets." << std::endl;
+			return false;
+		}else{
+			std::cout << "Invalid command. Must pay issuer." << std::endl;
+		}
+
+	}
+	return true;
 }
 /*
 void Data::bankrupt(std::string owedP){
