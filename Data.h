@@ -14,6 +14,7 @@ class Data {
 	int curPlayer;
 	bool rolled;
 	Player *bank;
+	Player *owedPlayer;
 	//Need to add to the 
 	int numOfTimsCups;
 	std::vector<Player*> players;
@@ -40,8 +41,10 @@ public:
 
 	void checkTile(int i);
 	bool buy();
+	void payRent();
+	int getNumProp(std::string type);
 	/*bool auction(int i);
-	void getRent(int i) const;*/
+	*/
 	void improve(std::string property);
 	void unimprove(std::string property);
 	void mortgage(std::string property);
@@ -51,6 +54,9 @@ public:
 	int getPropertyIndex(std::string property);
 	std::vector<int> propertiesOnMonopoly(std::string block);
 	void assets();
+
+	//void bankrupt(std::string owed);
+	void findOwedP(std::string owedP);
 
 	//Player in jail
 	bool playerInJail() const;

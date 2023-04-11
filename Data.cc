@@ -2,7 +2,7 @@
 
 //constructor
 Data::Data() 
-	:current{nullptr}, bank{nullptr},
+	:current{nullptr}, bank{nullptr}, owedPlayer{},
 	Tiles{
 		new Notpurchasable{"COLLECT OSAP", "Collect OSAP", 0, false},
 		new AcademicBuilding{"AL", "Arts1", 40, true, 50, {2, 10, 30, 90, 160, 250}},
@@ -202,7 +202,7 @@ void Data::checkTile(int i){
 			}
 
 		}else{
-
+			payRent();
 		} 
 
 	}else{
@@ -238,6 +238,57 @@ bool Data::buy(){
 
 	std::vector<int> prop = current->getProperties();
 	return true;
+}
+
+void Data::payRent(){
+	findOwedP(Tiles[current->get_posn()]->getOwner());
+	std::cout << "You got to pay rent to " << owedPlayer->get_name() << "!"<< std::endl;
+	int numOfProp = getNumProp(Tiles[current->get_posn()]->getBlock());
+	if((Tiles[current->get_posn()]->getBlock() == "Residences") || (Tiles[current->get_posn()]->getBlock() == "Gyms")){
+		
+		if(current->get_balance() >= Tiles[current->get_posn()]->getTuition(numOfProp)){
+			//std::cout << numOfProp << std::endl;
+			std::cout << owedPlayer->get_name() << ": " << owedPlayer->get_balance() << std::endl;
+			std::cout << current->get_name() << ": " << current->get_balance() <<std::endl;
+			current->subMoney(Tiles[current->get_posn()]->getTuition(numOfProp));
+			owedPlayer->addMoney(Tiles[current->get_posn()]->getTuition(numOfProp));
+
+			std::cout << "New Balances:" << std::endl;
+			std::cout << owedPlayer->get_name() << ": " << owedPlayer->get_balance() << std::endl;
+			std::cout << current->get_name() << ": " << current->get_balance() << std::endl;
+		}
+	}else if(checksMonopoly(Tiles[current->get_posn()]->getName())){
+
+		AcademicBuilding *tmp = dynamic_cast<AcademicBuilding*>(Tiles[current->get_posn()]);
+		
+		if(tmp->getImpLevel() == 0){
+			current->subMoney(tmp->getTuition(0)*2);
+			owedPlayer->addMoney(tmp->getTuition(0)*2);
+		}else{
+			current->subMoney(tmp->getTuition(0));
+			owedPlayer->addMoney(tmp->getTuition(0));
+		}
+
+	}else{
+		current->subMoney(Tiles[current->get_posn()]->getTuition(0));
+		owedPlayer->addMoney(Tiles[current->get_posn()]->getTuition(0));
+	}
+}
+
+int Data::getNumProp(std::string type){
+	std::string block = Tiles[current->get_posn()]->getBlock();
+	std::string	owner = Tiles[current->get_posn()]->getOwner();
+	int numInMonopoly = 0;
+	int numOwned = 0;
+	for(int i = 0; i < Tiles.size(); ++i){
+		if(Tiles[i]->getBlock() == block){
+			++numInMonopoly;
+			if(Tiles[i]->getOwner() == owner){
+				++numOwned;
+			}
+		}
+	}
+	return numOwned;
 }
 
 void Data::improve(std::string property){
@@ -413,6 +464,44 @@ void Data::assets(){
 	}
 	for(int i = 0; i < tmpProp.size(); ++i){
 		std::cout << Tiles[tmpProp[i]]->getName() << " " << Tiles[tmpProp[i]]->getBlock() << std::endl	;
+	}
+}
+/*
+void Data::bankrupt(std::string owedP){
+	int mortPay = 0;
+	std::vector<int> tmpProp = current->getProperties();
+	if(owedP == "BANK"){
+		for(int i = 0; i < tmpProb.size(); ++i){
+			if(Tiles[tmpProp[i]]->getMortgage()){
+				Tiles[tmpProp[i]]->changeMortage();
+			}
+			Tiles[tmpProp[i]]->setOwner() = "BANK";
+		}
+
+	}else{
+		findOwedP(owedP);
+		for(int i = 0; i < tmpProp.size(); ++i){
+			owedPlayer->addProperty(tmpProp[i]);
+			if(Tiles[tmpProp[i]->getMortgage()]){
+				mortPay += (Tiles[tmpProp[i]]->getPurcahseCost()*0.1);
+			}
+			owedPlayer->addMoney(current->get_balance());
+			if(owedPlayer->get_balance() - mortPay > 0){
+				owedPlayer->subMoney(current->get_balance());
+			}else{
+				std::cout << "Not enough to funds to pay for mortgage." << std::endl;
+			}
+		}
+	}
+	current->subMoney(current->get_balance());
+	owedP = nullptr;
+}*/
+
+void Data::findOwedP(std::string owedP){
+	for(int i = 0; i < players.size(); ++i){
+		if(owedP == players[i]->get_name()){
+			owedPlayer = players[i];
+		}
 	}
 }
 

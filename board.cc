@@ -57,7 +57,7 @@ int AcademicBuilding::getImpLevel(){
     return impLevel;
 }
 
-int AcademicBuilding::getTuition(){
+int AcademicBuilding::getTuition(int i){
     return tuitionCost[impLevel];
 }
 
@@ -78,8 +78,12 @@ Gym::Gym(std::string name, std::string block, int purchaseCost, bool purchasable
 
 Gym::~Gym(){}
 
-int Gym::getTuition(){
-    return 10;
+int Gym::getTuition(int i){
+    if(i > 1){
+        return 6;
+    }else if(i > 0){
+        return 4;
+    }
 }
 
 Residence::Residence(std::string name, std::string block, int purchaseCost, bool purchasable)
@@ -87,8 +91,8 @@ Residence::Residence(std::string name, std::string block, int purchaseCost, bool
 
 Residence::~Residence(){}
 
-int Residence::getTuition(){
-    return 5;
+int Residence::getTuition(int i){
+    return i * 50;
 }
 
 Notpurchasable::Notpurchasable(std::string name, std::string block, int purchaseCost, bool purchasable)
@@ -96,6 +100,6 @@ Notpurchasable::Notpurchasable(std::string name, std::string block, int purchase
 
 Notpurchasable::~Notpurchasable(){}
 
-int Notpurchasable::getTuition(){
-    return 11;
+int Notpurchasable::getTuition(int i){
+    return -100;
 }

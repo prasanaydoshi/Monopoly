@@ -6,7 +6,7 @@
 #include <vector>
 
 class BoardTiles{
-private:					//
+private:
 	std::string name;
 	std::string block;
 	int purchaseCost;
@@ -39,7 +39,7 @@ public:
 	bool getMortgage();
 	void changeMortage();
 
-	virtual int getTuition() = 0;
+	virtual int getTuition(int i) = 0;
 };
  
 class AcademicBuilding : public BoardTiles{
@@ -65,7 +65,7 @@ public:
 
 	int getImpLevel();
 
-	int getTuition() override;
+	int getTuition(int i) override;
 	void improve();
 	void unimprove();
 	int getImpCost();
@@ -75,21 +75,21 @@ class Gym : public BoardTiles{
 public:
 	Gym(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
 	~Gym() override;
-	int getTuition() override;
+	int getTuition(int i) override;
 };
 
 class Residence : public BoardTiles{
 public:
 	Residence(std::string name, std::string block, int purchaseCost = 0, bool purchasable = true);
 	~Residence() override;
-	int getTuition() override;
+	int getTuition(int i) override;
 };
 
 class Notpurchasable : public BoardTiles{
 public:
 	Notpurchasable(std::string name, std::string block, int purchaseCost = 0, bool purchasable = false);
 	~Notpurchasable() override;
-	int getTuition();
+	int getTuition(int i) override;
 };
 
 #endif

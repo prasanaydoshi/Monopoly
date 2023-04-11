@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 	Commands *commands = new Commands;
-	bool testing = false; 		// use later, for implementing -testing command line arg
+	bool testing = true; 		// use later, for implementing -testing command line arg
 
 	if(argc > 1){
 		cout << "Loading Game!" << std::endl;
