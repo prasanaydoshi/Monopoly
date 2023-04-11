@@ -78,8 +78,20 @@ Gym::Gym(std::string name, std::string block, int purchaseCost, bool purchasable
 
 Gym::~Gym(){}
 
-int Gym::getTuition(){
-    return 10;
+int Gym::getTuition(int i){
+	std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(1, 6);
+
+        // Generate a random number between 1 and 6
+        int d1 = dis(gen);
+	int d2 = dis(gen);
+
+	if (i = 1) {
+		return (4 * (d1 + d2));
+	} else if (i = 2) {
+		return (10 * (d1 + d2));
+	}
 }
 
 Residence::Residence(std::string name, std::string block, int purchaseCost, bool purchasable)
