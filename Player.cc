@@ -78,6 +78,12 @@ bool Player::setJailRolls(){
         return false;
 }
 
+void Player::addCup() {
+	if (timsCups < 4) {
+		timsCups += 1;
+	}
+}
+
 //other methods
 void Player::nextposn() {
 	if (posn < 39) {

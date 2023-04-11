@@ -57,8 +57,8 @@ public:
 	void goTimsJail();
 	bool leaveTimsJail(bool f);
 	void OSAPcol();
-	//void SLC();
-	//void NH();
+	void SLC();
+	void NH();
 
 	//set Players
 	void setCurPlayer(int i);
@@ -76,16 +76,15 @@ public:
 	//additional methods
 	//int get_NetWorth();
 
-	/*
-	
+
+/*	
 	//non-purchasable tile methods
 	void TuitionPay();
 	void OSAPcollect();
 	void CoopFee();
 	
 	void GoToJail();
-	*/
-	
+*/	
 };
 
 #endif

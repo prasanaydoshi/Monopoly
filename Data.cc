@@ -217,9 +217,9 @@ void Data::checkTile(int i){
 		}else if(Tiles[current->get_posn()]->getName() == "COOP FEE"){
 
 		}else if(Tiles[current->get_posn()]->getName() == "SLC"){
-			//SLC();
+			SLC();
 		}else if(Tiles[current->get_posn()]->getName() == "NEEDLES HALL"){
-			
+			NH();	
 		}
 	}
 	printBoard();
@@ -359,7 +359,7 @@ bool Data::checksMonopoly(std::string property){
 		return false;
 	}
 	std::string block = Tiles[index]->getBlock();
-	std::string	owner = Tiles[index]->getOwner();
+	std::string owner = Tiles[index]->getOwner();
 	int numInMonopoly = 0;
 	int numOwned = 0;
 	for(int i = 0; i < Tiles.size(); ++i){
@@ -448,75 +448,81 @@ void Data::OSAPcol() {
 	(*current).addMoney(200);
 	std::cout << "Passed go. " << current->get_balance() << " is the new balance." << std::endl;
 }
-/*
+
 void Data::SLC() {
-	if ( ( (*current).get_posn() == 13) || ( (*current).get_posn() == 13) ){
+	if ( ( (*current).get_posn() == 2) || ( (*current).get_posn() == 17) 
+		|| ( (*current).get_posn() == 33) ) {
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::discrete_distribution<> d({1.0 / 8, 1.0 / 6, 1.0 / 6, 1.0 / 8,
-			       	1.0 / 6, 1.0 / 6, 1.0 / 24, 1.0 /24});
+			       	1.0 / 6, 1.0 / 6, 1.0 / 24, 1.0 / 24, 1.0 / 100});
 		int num_pick = d(gen);			// REQUIRES RANDOM PICKING WITH %CHANCE
 		switch(num_pick) {
 			case 0:
-				(*current).MovePosn_by(-3);		// back3
+				(*current).MovePosn_By(-3);		// back3
 				break;
 			case 1:
-				(*current).MovePosn_by(-2);		// back2
+				(*current).MovePosn_By(-2);		// back2
 				break;
 			case 2:
-				(*current).MovePosn_by(-1);		// back1
+				(*current).MovePosn_By(-1);		// back1
 				break;
 			case 3: 
-				(*current).MovePosn_by(1);		// foreward1
+				(*current).MovePosn_By(1);		// foreward1
 				break;
 			case 4: 
-				(*current).MovePosn_by(2);		// foreward2
+				(*current).MovePosn_By(2);		// foreward2
 				break;
 			case 5: 
-				(*current).MovePosn_by(3);		// foreward3
+				(*current).MovePosn_By(3);		// foreward3
 				break;
 			case 6: 
-				(*current).JumpTo_posn(30);		// DC Tims Line
+				(*current).JumpTo_posn(10);		// DC Tims Line
 				break;
 			case 7: 
-				(*current).MovePosn_by(20);		// Collect OSAP
+				(*current).JumpTo_posn(0);		// Collect OSAP
 				break;
+			case 8:
+				(*current).addCup();
 		}
 	}
 }
 
 void Data::NH() {
-	if (( (*current).get_posn() == 2) || ( (*current).get_posn() == 16) ){
+	if (( (*current).get_posn() == 7) || ( (*current).get_posn() == 22) ||
+	  ( (*current).get_posn() == 36 ) ){
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::discrete_distribution<> d({1.0 / 18, 1.0 / 9, 1.0 / 6, 1.0 / 3,
-			       	1.0 / 6, 1.0 / 9, 1.0 / 18});
+			       	1.0 / 6, 1.0 / 9, 1.0 / 18 , 1.0 / 100});
 		int num_pick = d(gen);
 		switch(num_pick) {
 			case 0:
-				(*current).change_balance(-200);	 
+				(*current).subMoney(200);	 
 				break;
 			case 1:
-				(*current).change_balance(-100);
+				(*current).subMoney(100);
 				break;
 			case 2:
-				(*current).change_balance(-50);
+				(*current).subMoney(50);
 				break;
 			case 3:
-				(*current).change_balance(25);	
+				(*current).addMoney(25);	
 				break;
 			case 4: 
-				(*current).change_balance(50);
+				(*current).addMoney(50);
 				break;
 			case 5: 
-				(*current).change_balance(100);		
+				(*current).addMoney(100);		
 				break;
 			case 6: 
-				(*current).change_balance(200);
+				(*current).addMoney(200);
 				break;
+			case 7: 
+				(*current).addCup();
 		}
 	}
-}*/
+}
 /*
 void Data::getRent(int i) const{
 
@@ -576,17 +582,17 @@ void Data::TuitionPay(bool Pay300) {				// view will ask player if they want
 								// to pay 300 or 10% of netval	
 	if ( (*current).get_posn() == 24) {
 		if (Pay300 == true) {
-			(*current).change_balance(-300);
+			(*current).subMoney(300);
 		} else {
 			int net = get_NetWorth();
-			(*current).change_balance(net);
+			(*current).add(Moneynet);
 		}
 	}
 }
 
 void Data::CoopFee() {
 	if ( (*current).get_posn() == 18) {
-		(*current).change_balance(-150);
+		(*current).subMoney(150);
 	}
 }
 

@@ -40,6 +40,7 @@ public:
 	void addProperty(int a);
 	void setInJail();
 	bool setJailRolls();
+	void addCup();
 	
 	//methods
 	std::string printPlayer();	//
